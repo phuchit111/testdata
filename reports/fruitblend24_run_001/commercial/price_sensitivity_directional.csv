@@ -1,0 +1,6 @@
+﻿sku,price_points,min_observed_price_thb,max_observed_price_thb,price_cv,pairwise_midpoint_elasticity_median,pairwise_comparisons,interpretation
+Guava,4,39.2,49.0,0.08341321169595159,-1.8079764065525898,3,"Directional only; price is confounded with promotions, time, kitchen, platform, and season."
+MixedBerryPremium,4,71.2,89.0,0.08341321169595158,-6.68765031893757,3,"Directional only; price is confounded with promotions, time, kitchen, platform, and season."
+PassionFruit,4,52.0,65.0,0.0834132116959516,-6.452315039535216,3,"Directional only; price is confounded with promotions, time, kitchen, platform, and season."
+Pineapple,4,39.2,49.0,0.08341321169595159,-4.190710873643404,3,"Directional only; price is confounded with promotions, time, kitchen, platform, and season."
+Watermelon,4,36.0,45.0,0.08341321169595159,-3.9376832451883192,3,"Directional only; price is confounded with promotions, time, kitchen, platform, and season."

@@ -1,0 +1,8 @@
+{
+  "agent_id": "A4",
+  "status": "ready_for_review",
+  "input_versions": {"data_version": "fruitblend24_v1_c2869ce419bf", "metric_version": "metric_contract_v1", "assumption_version": "assumption_ledger_v1"},
+  "artifacts": ["pnl_monthly_kitchen.csv", "pnl_monthly_sku.csv", "pnl_monthly_company.csv", "pnl_monthly_company_vs_budget.csv", "portfolio_summary.csv", "finance_metrics.json"],
+  "checks": ["Historical revenue reconciles to 31,146,932.57 THB", "Overhead is charged once per kitchen-month", "Budget GP boundary remains open and is labelled"],
+  "next_owner": "A5"
+}

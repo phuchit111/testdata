@@ -1,0 +1,5 @@
+﻿gap_or_opportunity,thb,basis,status
+Revenue shortfall vs budget,-1253067.4299999997,Actual revenue minus budget revenue; not a profit recovery estimate,Observed vs budget
+Promo matched-cell recovery,110213.76333333334,"Matched promotion screening only; association, before waste, not a guaranteed saving",Screening scenario
+Waste-to-company-average recovery,347810.5861490799,Holding waste cost/cup constant; planning sensitivity only,Planning scenario
+Combined screened recovery,458024.34948241326,Sum of the two sensitivities; interaction effects not measured,Illustrative scenario

@@ -1,0 +1,371 @@
+﻿date,hour,day_of_week,kitchen,item_name_raw,price_thb,units_sold,gross_revenue_thb,rate_code,source_row_id,duplicate_key,exception_reason
+2025-11-15,22,5,BKK_Ladprao,แก้วเปล่า,59.0,1,59.0,GB-RC000,369,2489344410217454765,non_menu_or_unmapped_name
+2026-04-22,1,2,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,824,14567804310158790049,non_menu_or_unmapped_name
+2025-11-05,16,2,BKK_Ladprao,แก้วเปล่า,35.0,1,35.0,GB-RC000,1014,6361440770232534084,non_menu_or_unmapped_name
+2025-10-23,18,3,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,2,70.0,LM-RC000,1221,10062413921288155942,non_menu_or_unmapped_name
+2025-09-24,3,2,Pattaya_Beach,แก้วเปล่า,0.0,3,0.0,LM-RC000,1502,9801334852773845413,non_menu_or_unmapped_name
+2026-05-08,13,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,LM-RC000,1763,15136603291766098773,non_menu_or_unmapped_name
+2026-02-17,17,1,Pattaya_Beach,แก้วเปล่า,59.0,1,59.0,GB-RC000,2031,3900986834438207390,non_menu_or_unmapped_name
+2026-05-29,1,4,BKK_Ladprao,แก้วเปล่า,99.0,2,198.0,GB-RC000,2651,2491457131059637131,non_menu_or_unmapped_name
+2025-12-08,23,0,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,3716,4848158806890823450,non_menu_or_unmapped_name
+2026-02-05,7,3,Pattaya_Beach,Combo Set A (2 แก้ว),59.0,1,59.0,GB-RC000,3770,4654886249655633872,non_menu_or_unmapped_name
+2026-03-18,11,2,Pattaya_Central,Combo Set A (2 แก้ว),59.0,2,118.0,GB-RC000,3828,12191335540777813211,non_menu_or_unmapped_name
+2026-02-24,17,1,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,4009,6775376073953042642,non_menu_or_unmapped_name
+2026-06-21,12,6,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,3,105.0,GB-RC000,4231,3742732740042292160,non_menu_or_unmapped_name
+2026-07-24,13,4,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,4569,13640965925695326040,non_menu_or_unmapped_name
+2026-08-10,5,0,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,GB-RC000,5438,546805394244103342,non_menu_or_unmapped_name
+2025-12-24,20,2,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,5472,10493363135297261003,non_menu_or_unmapped_name
+2026-03-14,21,5,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,5624,4452699073641125901,non_menu_or_unmapped_name
+2025-10-18,20,5,Pattaya_Central,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,6165,1879529195803262028,non_menu_or_unmapped_name
+2026-08-15,15,5,Pattaya_Central,แก้วเปล่า,59.0,1,59.0,GB-RC000,6201,11237472395284944865,non_menu_or_unmapped_name
+2025-11-03,18,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,3,105.0,GB-RC000,6281,15483984153486972450,non_menu_or_unmapped_name
+2025-10-17,14,4,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,6468,10920220552684224339,non_menu_or_unmapped_name
+2026-07-15,15,2,Pattaya_Central,Combo Set A (2 แก้ว),59.0,2,118.0,GB-RC000,6472,981154421483336956,non_menu_or_unmapped_name
+2026-06-27,12,5,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,LM-RC000,7419,3318983023899167670,non_menu_or_unmapped_name
+2026-08-05,22,2,Pattaya_Central,แก้วเปล่า,0.0,3,0.0,LM-RC000,7541,6428320659376774901,non_menu_or_unmapped_name
+2025-11-03,0,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,2,118.0,LM-RC000,7645,15528241180071027850,non_menu_or_unmapped_name
+2026-07-15,9,2,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,8591,15408266503953170552,non_menu_or_unmapped_name
+2026-03-01,4,6,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,1,59.0,GB-RC000,8621,6188550497956545160,non_menu_or_unmapped_name
+2026-05-26,2,1,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,LM-RC000,10041,7381595300745752445,non_menu_or_unmapped_name
+2026-05-13,13,2,Pattaya_Central,แก้วเปล่า,99.0,3,297.0,LM-RC000,10261,12050504483680027559,non_menu_or_unmapped_name
+2026-03-06,7,4,BKK_Ladprao,แก้วเปล่า,35.0,3,105.0,LM-RC000,10442,13196693463403690060,non_menu_or_unmapped_name
+2026-01-09,13,4,Pattaya_Beach,แก้วเปล่า,59.0,3,177.0,LM-RC000,11775,2559018902636890637,non_menu_or_unmapped_name
+2025-10-26,14,6,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,12692,6426085755182320697,non_menu_or_unmapped_name
+2025-11-16,7,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,LM-RC000,12784,8962798278421149327,non_menu_or_unmapped_name
+2026-01-03,14,5,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,13094,7640110456281467081,non_menu_or_unmapped_name
+2026-04-18,3,5,Pattaya_Central,Combo Set A (2 แก้ว),59.0,1,59.0,LM-RC000,13320,6556175672099809797,non_menu_or_unmapped_name
+2026-07-02,17,3,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,GB-RC000,13522,3693591803643000022,non_menu_or_unmapped_name
+2026-06-21,23,6,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,13951,10949388791390865674,non_menu_or_unmapped_name
+2026-03-03,15,1,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,14148,17215280843425966190,non_menu_or_unmapped_name
+2025-12-02,1,1,BKK_Sukhumvit,แก้วเปล่า,35.0,2,70.0,GB-RC000,14596,7439306918219037020,non_menu_or_unmapped_name
+2026-03-23,17,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,GB-RC000,14673,14455651001579615768,non_menu_or_unmapped_name
+2026-06-24,0,2,BKK_Ladprao,แก้วเปล่า,99.0,1,99.0,LM-RC000,15457,18443749791013733579,non_menu_or_unmapped_name
+2026-06-23,16,1,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,1,99.0,LM-RC000,15526,12651445888798605218,non_menu_or_unmapped_name
+2026-06-07,10,6,Pattaya_Central,Combo Set A (2 แก้ว),99.0,2,198.0,LM-RC000,15650,3324363489964279474,non_menu_or_unmapped_name
+2026-06-21,11,6,Pattaya_Central,แก้วเปล่า,35.0,1,35.0,GB-RC000,15847,13631456526080838942,non_menu_or_unmapped_name
+2025-09-07,6,6,BKK_Ladprao,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,16825,16671425933285247234,non_menu_or_unmapped_name
+2025-11-06,19,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,LM-RC000,16884,4250897960872381828,non_menu_or_unmapped_name
+2026-04-20,7,0,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,17522,9285720299627359070,non_menu_or_unmapped_name
+2026-03-30,6,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,17946,14547020955268987165,non_menu_or_unmapped_name
+2025-11-27,22,3,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,18051,4150660817236756019,non_menu_or_unmapped_name
+2026-07-12,14,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,LM-RC000,18346,2774985795179646190,non_menu_or_unmapped_name
+2025-09-19,16,4,Pattaya_Central,แก้วเปล่า,59.0,2,118.0,LM-RC000,18813,13967988792184280921,non_menu_or_unmapped_name
+2026-08-22,17,5,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,GB-RC000,19370,1708498426601158632,non_menu_or_unmapped_name
+2025-10-11,19,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,LM-RC000,19479,3540442081770797626,non_menu_or_unmapped_name
+2026-08-25,2,1,Pattaya_Central,Combo Set A (2 แก้ว),35.0,2,70.0,GB-RC000,20014,5796760004354897036,non_menu_or_unmapped_name
+2025-11-06,12,3,BKK_Ladprao,Combo Set A (2 แก้ว),0.0,1,0.0,LM-RC000,20914,14779778198484927970,non_menu_or_unmapped_name
+2026-02-01,22,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,LM-RC000,21344,7334320199800208488,non_menu_or_unmapped_name
+2026-08-07,11,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,LM-RC000,21595,14060621423369510757,non_menu_or_unmapped_name
+2026-03-06,23,4,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,LM-RC000,21928,17243159926198164349,non_menu_or_unmapped_name
+2026-02-24,23,1,BKK_Sukhumvit,แก้วเปล่า,35.0,3,105.0,GB-RC000,22320,16996391144024861391,non_menu_or_unmapped_name
+2025-11-06,17,3,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,22329,2781247301661373686,non_menu_or_unmapped_name
+2026-02-07,19,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,GB-RC000,22414,17596785166800170062,non_menu_or_unmapped_name
+2025-11-13,11,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,LM-RC000,22441,17787148247456131075,non_menu_or_unmapped_name
+2026-05-06,18,2,BKK_Sukhumvit,แก้วเปล่า,99.0,2,198.0,GB-RC000,22909,13680559084523338185,non_menu_or_unmapped_name
+2026-08-10,23,0,Pattaya_Central,Combo Set A (2 แก้ว),59.0,2,118.0,LM-RC000,23679,17768957216227872786,non_menu_or_unmapped_name
+2025-10-29,2,2,BKK_Sukhumvit,แก้วเปล่า,59.0,3,177.0,GB-RC000,23759,10141783609033853995,non_menu_or_unmapped_name
+2025-10-25,8,5,BKK_Ladprao,Combo Set A (2 แก้ว),59.0,3,177.0,LM-RC000,24128,17217492039962255091,non_menu_or_unmapped_name
+2026-04-30,23,3,Pattaya_Central,แก้วเปล่า,59.0,3,177.0,LM-RC000,24491,3260151091630247110,non_menu_or_unmapped_name
+2025-09-06,15,5,Pattaya_Central,แก้วเปล่า,0.0,1,0.0,LM-RC000,24607,4422651117122982012,non_menu_or_unmapped_name
+2025-09-01,23,0,Pattaya_Central,แก้วเปล่า,0.0,3,0.0,GB-RC000,25164,12221076546129555481,non_menu_or_unmapped_name
+2026-03-14,1,5,BKK_Ladprao,แก้วเปล่า,0.0,2,0.0,LM-RC000,25392,18375289788381438066,non_menu_or_unmapped_name
+2025-10-11,12,5,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,1,0.0,LM-RC000,25585,5175065196220369794,non_menu_or_unmapped_name
+2026-03-28,10,5,Pattaya_Central,แก้วเปล่า,0.0,3,0.0,GB-RC000,25979,11619281159595227000,non_menu_or_unmapped_name
+2026-06-26,11,4,BKK_Ladprao,แก้วเปล่า,99.0,1,99.0,GB-RC000,26060,1233083250303711959,non_menu_or_unmapped_name
+2026-08-14,12,4,BKK_Ladprao,แก้วเปล่า,99.0,3,297.0,GB-RC000,26206,3485776431364243456,non_menu_or_unmapped_name
+2026-05-21,21,3,BKK_Sukhumvit,แก้วเปล่า,0.0,3,0.0,GB-RC000,26566,12661812856397529811,non_menu_or_unmapped_name
+2026-06-01,12,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,GB-RC000,26788,2724690466729459769,non_menu_or_unmapped_name
+2026-07-20,0,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,GB-RC000,26995,3239755734523094197,non_menu_or_unmapped_name
+2026-04-16,19,3,BKK_Sukhumvit,แก้วเปล่า,99.0,3,297.0,GB-RC000,27073,14354534868258023112,non_menu_or_unmapped_name
+2026-05-25,12,0,Pattaya_Central,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,27358,17944502795238500077,non_menu_or_unmapped_name
+2025-09-15,11,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,GB-RC000,27360,12901781697032961382,non_menu_or_unmapped_name
+2026-05-30,2,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,LM-RC000,27536,14070730609310921836,non_menu_or_unmapped_name
+2026-01-10,16,5,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,29127,2814811682791861635,non_menu_or_unmapped_name
+2025-10-31,22,4,Pattaya_Beach,แก้วเปล่า,59.0,3,177.0,LM-RC000,29601,456600314069729563,non_menu_or_unmapped_name
+2025-12-27,12,5,Pattaya_Central,แก้วเปล่า,0.0,3,0.0,LM-RC000,29679,4269064957577227642,non_menu_or_unmapped_name
+2025-11-16,23,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,LM-RC000,30016,18398333814154357764,non_menu_or_unmapped_name
+2025-09-23,21,1,Pattaya_Central,Combo Set A (2 แก้ว),35.0,2,70.0,LM-RC000,30243,4663298790039741837,non_menu_or_unmapped_name
+2026-01-25,2,6,Pattaya_Beach,แก้วเปล่า,0.0,2,0.0,LM-RC000,30404,10948339114170054955,non_menu_or_unmapped_name
+2025-10-09,20,3,BKK_Ladprao,แก้วเปล่า,99.0,2,198.0,GB-RC000,31344,15869090392259935281,non_menu_or_unmapped_name
+2025-11-18,3,1,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,31810,9030007442957508019,non_menu_or_unmapped_name
+2025-11-12,20,2,BKK_Sukhumvit,แก้วเปล่า,35.0,3,105.0,LM-RC000,32425,16481994119340713717,non_menu_or_unmapped_name
+2025-10-05,9,6,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,2,0.0,GB-RC000,32621,1228693399057374466,non_menu_or_unmapped_name
+2026-07-19,23,6,Pattaya_Beach,Combo Set A (2 แก้ว),59.0,1,59.0,LM-RC000,32814,14257518598347828601,non_menu_or_unmapped_name
+2025-11-19,15,2,Pattaya_Beach,แก้วเปล่า,0.0,3,0.0,GB-RC000,33082,5296129604906836983,non_menu_or_unmapped_name
+2025-10-14,9,1,Pattaya_Central,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,33380,8581383549589479165,non_menu_or_unmapped_name
+2025-11-09,23,6,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,LM-RC000,33391,5153750238293772244,non_menu_or_unmapped_name
+2026-05-19,21,1,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,GB-RC000,33407,14385148776456253760,non_menu_or_unmapped_name
+2026-01-21,22,2,BKK_Sukhumvit,แก้วเปล่า,99.0,3,297.0,GB-RC000,33455,447239694701266209,non_menu_or_unmapped_name
+2026-08-28,7,4,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,2,0.0,GB-RC000,33522,7028413418289081798,non_menu_or_unmapped_name
+2026-06-02,13,1,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,GB-RC000,33623,14040829946961919645,non_menu_or_unmapped_name
+2026-03-02,15,0,BKK_Ladprao,แก้วเปล่า,59.0,3,177.0,GB-RC000,34017,10484145368397534893,non_menu_or_unmapped_name
+2026-07-30,18,3,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,3,177.0,GB-RC000,34316,14344704411952685475,non_menu_or_unmapped_name
+2026-05-01,4,4,BKK_Sukhumvit,แก้วเปล่า,59.0,2,118.0,GB-RC000,34390,12843700237652804778,non_menu_or_unmapped_name
+2025-09-21,13,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,LM-RC000,35151,6872130292782132024,non_menu_or_unmapped_name
+2026-04-04,16,5,BKK_Ladprao,Combo Set A (2 แก้ว),35.0,3,105.0,GB-RC000,35649,15012611145155458117,non_menu_or_unmapped_name
+2026-08-31,22,0,Pattaya_Beach,แก้วเปล่า,35.0,1,35.0,LM-RC000,35795,17824190996695753248,non_menu_or_unmapped_name
+2026-03-15,23,6,Pattaya_Central,แก้วเปล่า,35.0,3,105.0,LM-RC000,36017,5038777599268660858,non_menu_or_unmapped_name
+2026-08-14,7,4,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,36052,15132661623916874295,non_menu_or_unmapped_name
+2026-05-01,1,4,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,LM-RC000,36080,5618129486026634993,non_menu_or_unmapped_name
+2026-05-28,11,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,36126,9782543464788601503,non_menu_or_unmapped_name
+2026-06-21,11,6,Pattaya_Central,Combo Set A (2 แก้ว),59.0,1,59.0,GB-RC000,36201,10104849828263085572,non_menu_or_unmapped_name
+2026-04-10,20,4,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,LM-RC000,37005,13557321809709188292,non_menu_or_unmapped_name
+2026-08-12,23,2,Pattaya_Central,แก้วเปล่า,99.0,2,198.0,GB-RC000,37276,17323513215429775768,non_menu_or_unmapped_name
+2025-10-16,1,3,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,37320,5200996237650930285,non_menu_or_unmapped_name
+2026-07-19,6,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,LM-RC000,37914,3208744272405440312,non_menu_or_unmapped_name
+2026-01-24,1,5,Pattaya_Central,แก้วเปล่า,59.0,3,177.0,LM-RC000,37984,16812872440202955872,non_menu_or_unmapped_name
+2025-10-08,6,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,GB-RC000,38097,17202741436483582837,non_menu_or_unmapped_name
+2025-11-30,5,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,38324,17392800517664015440,non_menu_or_unmapped_name
+2025-12-06,11,5,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,GB-RC000,38529,15381212869096833837,non_menu_or_unmapped_name
+2026-06-06,20,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,39660,10887082542254400450,non_menu_or_unmapped_name
+2025-09-20,11,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,LM-RC000,40460,16628853520605170651,non_menu_or_unmapped_name
+2025-11-27,13,3,BKK_Ladprao,แก้วเปล่า,99.0,1,99.0,GB-RC000,40709,16511249576465834091,non_menu_or_unmapped_name
+2026-08-21,9,4,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,3,105.0,GB-RC000,40739,969636982056857808,non_menu_or_unmapped_name
+2025-10-30,12,3,Pattaya_Beach,แก้วเปล่า,0.0,3,0.0,GB-RC000,42104,16044282419815440825,non_menu_or_unmapped_name
+2025-09-24,9,2,Pattaya_Central,Combo Set A (2 แก้ว),0.0,3,0.0,LM-RC000,42663,14649210205382809906,non_menu_or_unmapped_name
+2025-12-22,9,0,Pattaya_Beach,แก้วเปล่า,35.0,2,70.0,LM-RC000,43256,9416577727436439913,non_menu_or_unmapped_name
+2026-04-28,13,1,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,43340,314760924273644409,non_menu_or_unmapped_name
+2026-04-16,15,3,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,GB-RC000,43767,287892132110094401,non_menu_or_unmapped_name
+2026-06-12,2,4,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,44772,4403118515002276380,non_menu_or_unmapped_name
+2026-08-06,17,3,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,2,118.0,GB-RC000,44999,14188150483267236070,non_menu_or_unmapped_name
+2026-07-03,22,4,Pattaya_Beach,แก้วเปล่า,0.0,2,0.0,GB-RC000,45081,14569730753154421562,non_menu_or_unmapped_name
+2026-07-09,22,3,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,LM-RC000,45129,6199826899240111512,non_menu_or_unmapped_name
+2026-06-27,18,5,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,GB-RC000,45219,14055719833120107668,non_menu_or_unmapped_name
+2026-08-06,18,3,BKK_Ladprao,แก้วเปล่า,0.0,3,0.0,LM-RC000,45538,15705729061783307017,non_menu_or_unmapped_name
+2026-05-25,16,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,45660,7087639299077131505,non_menu_or_unmapped_name
+2025-12-02,1,1,BKK_Sukhumvit,แก้วเปล่า,99.0,3,297.0,LM-RC000,45759,17813489297287421224,non_menu_or_unmapped_name
+2026-01-02,19,4,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,LM-RC000,46035,8860882252190326215,non_menu_or_unmapped_name
+2026-08-26,3,2,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,1,0.0,LM-RC000,46062,4084840237636500741,non_menu_or_unmapped_name
+2026-05-06,3,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,GB-RC000,46815,2878731028132114185,non_menu_or_unmapped_name
+2026-04-19,15,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,GB-RC000,46879,7810509578012259508,non_menu_or_unmapped_name
+2025-12-06,14,5,Pattaya_Central,แก้วเปล่า,35.0,3,105.0,LM-RC000,46931,1421570312653272901,non_menu_or_unmapped_name
+2026-06-23,20,1,BKK_Sukhumvit,แก้วเปล่า,0.0,1,0.0,GB-RC000,47152,1595475628267209443,non_menu_or_unmapped_name
+2025-10-22,16,2,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,GB-RC000,47431,15821911151678326514,non_menu_or_unmapped_name
+2026-04-28,7,1,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,1,99.0,LM-RC000,47584,8174410910288785663,non_menu_or_unmapped_name
+2026-04-13,22,0,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,2,70.0,LM-RC000,48954,9230155415428586914,non_menu_or_unmapped_name
+2026-03-22,19,6,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,LM-RC000,48980,6110330514007294842,non_menu_or_unmapped_name
+2025-12-25,14,3,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,GB-RC000,49150,4173665079073867489,non_menu_or_unmapped_name
+2026-02-25,7,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,49189,6647756852728552038,non_menu_or_unmapped_name
+2026-06-16,22,1,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,49941,10987309644250191149,non_menu_or_unmapped_name
+2026-01-30,22,4,BKK_Ladprao,แก้วเปล่า,59.0,3,177.0,GB-RC000,50667,1681990279179324666,non_menu_or_unmapped_name
+2026-08-24,15,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,2,118.0,LM-RC000,51200,9083245965650749676,non_menu_or_unmapped_name
+2026-05-29,21,4,Pattaya_Central,แก้วเปล่า,99.0,1,99.0,GB-RC000,51281,2329137243618606321,non_menu_or_unmapped_name
+2025-10-25,0,5,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,51309,2272957506696068615,non_menu_or_unmapped_name
+2026-06-24,11,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,51513,5093608055847068131,non_menu_or_unmapped_name
+2025-10-18,7,5,BKK_Ladprao,แก้วเปล่า,99.0,1,99.0,LM-RC000,51544,7934930751458216046,non_menu_or_unmapped_name
+2026-02-08,13,6,BKK_Ladprao,แก้วเปล่า,59.0,3,177.0,LM-RC000,51931,4009431845387392048,non_menu_or_unmapped_name
+2025-09-26,9,4,BKK_Sukhumvit,แก้วเปล่า,59.0,3,177.0,LM-RC000,51956,4022267785570168163,non_menu_or_unmapped_name
+2026-05-25,8,0,BKK_Ladprao,Combo Set A (2 แก้ว),59.0,1,59.0,GB-RC000,52116,10385027566728839696,non_menu_or_unmapped_name
+2026-04-18,22,5,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,2,198.0,LM-RC000,52261,5817186596369887317,non_menu_or_unmapped_name
+2026-04-17,17,4,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,1,35.0,LM-RC000,52680,16222561636645800827,non_menu_or_unmapped_name
+2026-08-31,22,0,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,LM-RC000,52877,2392532369095048363,non_menu_or_unmapped_name
+2025-10-27,11,0,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,LM-RC000,52995,12719108113977397279,non_menu_or_unmapped_name
+2025-10-22,7,2,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,1,99.0,GB-RC000,53945,351675268758843638,non_menu_or_unmapped_name
+2026-05-11,15,0,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,54064,5048336043855940032,non_menu_or_unmapped_name
+2025-11-07,13,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,55105,8061613282740611907,non_menu_or_unmapped_name
+2026-05-23,8,5,Pattaya_Central,Combo Set A (2 แก้ว),59.0,2,118.0,GB-RC000,55109,17474579160896149037,non_menu_or_unmapped_name
+2025-10-21,6,1,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,2,0.0,GB-RC000,55390,6393117033452792315,non_menu_or_unmapped_name
+2025-09-14,20,6,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,3,0.0,LM-RC000,55891,4413357783046391850,non_menu_or_unmapped_name
+2026-06-09,21,1,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,GB-RC000,55897,16061842282844049975,non_menu_or_unmapped_name
+2026-02-28,9,5,Pattaya_Central,แก้วเปล่า,35.0,2,70.0,GB-RC000,56049,4287790644914476408,non_menu_or_unmapped_name
+2026-01-31,21,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,56064,12702077782734316873,non_menu_or_unmapped_name
+2026-04-17,20,4,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,GB-RC000,56369,8778747093084928365,non_menu_or_unmapped_name
+2026-04-11,5,5,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,1,99.0,GB-RC000,56452,3251621647447090602,non_menu_or_unmapped_name
+2025-11-12,6,2,Pattaya_Central,แก้วเปล่า,99.0,3,297.0,LM-RC000,56614,8074440671909524155,non_menu_or_unmapped_name
+2026-04-21,14,1,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,LM-RC000,56996,11624825655213413594,non_menu_or_unmapped_name
+2026-04-14,22,1,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),0.0,2,0.0,LM-RC000,57134,15461899892002206245,non_menu_or_unmapped_name
+2026-03-30,1,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,LM-RC000,57143,11093315242546313881,non_menu_or_unmapped_name
+2026-07-06,6,0,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,58491,5665326592291910531,non_menu_or_unmapped_name
+2026-04-14,23,1,BKK_Ladprao,Combo Set A (2 แก้ว),59.0,2,118.0,LM-RC000,58534,3254203360127773070,non_menu_or_unmapped_name
+2026-08-06,17,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,GB-RC000,58733,11109867015648730313,non_menu_or_unmapped_name
+2026-04-28,9,1,BKK_Ladprao,แก้วเปล่า,59.0,3,177.0,GB-RC000,59656,15199971478236147823,non_menu_or_unmapped_name
+2026-05-03,22,6,Pattaya_Central,Combo Set A (2 แก้ว),35.0,1,35.0,GB-RC000,59716,8808260250073725816,non_menu_or_unmapped_name
+2025-12-01,8,0,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,59848,2364228657264494750,non_menu_or_unmapped_name
+2025-12-06,17,5,Pattaya_Beach,แก้วเปล่า,0.0,2,0.0,GB-RC000,60443,13288710844958371292,non_menu_or_unmapped_name
+2026-07-08,13,2,Pattaya_Central,แก้วเปล่า,99.0,1,99.0,LM-RC000,60667,12565213805985708570,non_menu_or_unmapped_name
+2026-05-27,0,2,BKK_Ladprao,แก้วเปล่า,99.0,2,198.0,LM-RC000,60730,18391841894755214251,non_menu_or_unmapped_name
+2025-12-24,6,2,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,3,105.0,LM-RC000,60765,12838449683973186805,non_menu_or_unmapped_name
+2025-10-06,20,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,61078,16983982804708747448,non_menu_or_unmapped_name
+2025-12-24,11,2,Pattaya_Central,Combo Set A (2 แก้ว),0.0,3,0.0,LM-RC000,61215,541091184416411804,non_menu_or_unmapped_name
+2026-08-25,8,1,Pattaya_Central,แก้วเปล่า,59.0,1,59.0,GB-RC000,61926,2861678858777217591,non_menu_or_unmapped_name
+2026-04-21,14,1,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,62142,3828832127955057475,non_menu_or_unmapped_name
+2025-10-27,21,0,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,GB-RC000,62340,10079710029977370390,non_menu_or_unmapped_name
+2026-07-24,22,4,Pattaya_Central,Combo Set A (2 แก้ว),35.0,1,35.0,LM-RC000,62897,3970745578861763310,non_menu_or_unmapped_name
+2026-05-05,10,1,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,1,35.0,GB-RC000,62924,12905218189918291141,non_menu_or_unmapped_name
+2025-10-17,19,4,BKK_Ladprao,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,63448,11401219718656901245,non_menu_or_unmapped_name
+2026-05-14,9,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,63517,6311774244932788908,non_menu_or_unmapped_name
+2026-04-11,23,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,GB-RC000,64101,552720331380036028,non_menu_or_unmapped_name
+2026-05-05,12,1,BKK_Ladprao,Combo Set A (2 แก้ว),35.0,1,35.0,GB-RC000,64365,13432039062379419043,non_menu_or_unmapped_name
+2025-11-02,16,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,GB-RC000,64733,13571493343258707426,non_menu_or_unmapped_name
+2026-07-15,11,2,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,GB-RC000,65208,8958448763388431256,non_menu_or_unmapped_name
+2025-09-30,16,1,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,1,59.0,GB-RC000,65995,10653320617060542835,non_menu_or_unmapped_name
+2025-10-04,5,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,66217,6514271025317686068,non_menu_or_unmapped_name
+2026-02-20,8,4,BKK_Sukhumvit,แก้วเปล่า,59.0,1,59.0,LM-RC000,66233,1626934054472614572,non_menu_or_unmapped_name
+2025-10-17,5,4,Pattaya_Beach,Combo Set A (2 แก้ว),59.0,1,59.0,LM-RC000,66326,8268953876320359136,non_menu_or_unmapped_name
+2025-11-04,2,1,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,1,0.0,LM-RC000,66716,10158770321691779323,non_menu_or_unmapped_name
+2026-03-02,3,0,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,GB-RC000,67052,10025488133915575246,non_menu_or_unmapped_name
+2025-09-01,19,0,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,67067,3181914334261027611,non_menu_or_unmapped_name
+2026-05-17,18,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,LM-RC000,67706,3061350554959592663,non_menu_or_unmapped_name
+2025-11-28,16,4,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,68156,14753013043835749976,non_menu_or_unmapped_name
+2026-05-07,20,3,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,2,118.0,GB-RC000,68277,6182369713321678443,non_menu_or_unmapped_name
+2026-04-07,23,1,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,68525,16274951825576233309,non_menu_or_unmapped_name
+2025-12-03,21,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,GB-RC000,68769,17932082075551132226,non_menu_or_unmapped_name
+2026-02-18,3,2,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,1,99.0,LM-RC000,69000,12304087154173399698,non_menu_or_unmapped_name
+2025-10-31,12,4,Pattaya_Central,Combo Set A (2 แก้ว),0.0,2,0.0,GB-RC000,69144,11487373485516535373,non_menu_or_unmapped_name
+2025-09-22,11,0,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),0.0,2,0.0,LM-RC000,69149,16073471052553975757,non_menu_or_unmapped_name
+2025-11-18,3,1,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,69897,6717080475012897077,non_menu_or_unmapped_name
+2025-11-25,7,1,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,GB-RC000,69989,2461168447644633782,non_menu_or_unmapped_name
+2026-02-18,14,2,Pattaya_Beach,Combo Set A (2 แก้ว),59.0,1,59.0,LM-RC000,69991,13306893242719845421,non_menu_or_unmapped_name
+2026-03-26,10,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,GB-RC000,70082,4276251004469096946,non_menu_or_unmapped_name
+2026-04-29,15,2,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,3,177.0,LM-RC000,70443,15009593504482406633,non_menu_or_unmapped_name
+2026-02-14,12,5,BKK_Ladprao,แก้วเปล่า,0.0,3,0.0,LM-RC000,70446,14277308837185769805,non_menu_or_unmapped_name
+2026-05-29,10,4,BKK_Ladprao,Combo Set A (2 แก้ว),99.0,3,297.0,LM-RC000,70462,1333292617583410725,non_menu_or_unmapped_name
+2025-10-10,9,4,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,2,70.0,GB-RC000,72910,955548389251495956,non_menu_or_unmapped_name
+2025-12-12,7,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,72979,1281437202263546018,non_menu_or_unmapped_name
+2026-02-16,18,0,BKK_Ladprao,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,73660,10207673160053417410,non_menu_or_unmapped_name
+2026-08-31,11,0,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,73977,17977699887910882024,non_menu_or_unmapped_name
+2026-08-21,17,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,GB-RC000,74149,3546588054955334692,non_menu_or_unmapped_name
+2026-02-20,8,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,GB-RC000,74310,14947784206017167492,non_menu_or_unmapped_name
+2026-06-18,18,3,Pattaya_Beach,แก้วเปล่า,99.0,1,99.0,GB-RC000,74837,3379798677215794961,non_menu_or_unmapped_name
+2026-06-04,19,3,Pattaya_Central,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,75839,5945252559377191788,non_menu_or_unmapped_name
+2026-05-04,7,0,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,76138,16317086097176042253,non_menu_or_unmapped_name
+2026-06-15,4,0,BKK_Ladprao,Combo Set A (2 แก้ว),0.0,3,0.0,LM-RC000,76754,14692593427876326765,non_menu_or_unmapped_name
+2025-12-11,14,3,Pattaya_Central,แก้วเปล่า,35.0,2,70.0,LM-RC000,77642,14039013897450987298,non_menu_or_unmapped_name
+2026-03-09,15,0,BKK_Sukhumvit,แก้วเปล่า,59.0,1,59.0,LM-RC000,77886,8995994880558618089,non_menu_or_unmapped_name
+2025-12-30,23,1,BKK_Sukhumvit,แก้วเปล่า,59.0,2,118.0,LM-RC000,78144,6934063789735670816,non_menu_or_unmapped_name
+2026-03-08,17,6,BKK_Ladprao,แก้วเปล่า,99.0,2,198.0,LM-RC000,78621,12280326792181821568,non_menu_or_unmapped_name
+2026-06-30,21,1,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,GB-RC000,78647,8230492548009862919,non_menu_or_unmapped_name
+2025-09-19,22,4,BKK_Ladprao,แก้วเปล่า,59.0,2,118.0,LM-RC000,78744,10307028067732307806,non_menu_or_unmapped_name
+2026-02-21,1,5,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,78967,16614502689203851037,non_menu_or_unmapped_name
+2026-04-03,0,4,Pattaya_Central,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,79125,6115511038683712884,non_menu_or_unmapped_name
+2025-12-16,9,1,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,LM-RC000,79173,10451630770187729337,non_menu_or_unmapped_name
+2026-07-27,16,0,BKK_Sukhumvit,แก้วเปล่า,0.0,3,0.0,LM-RC000,79379,9015286888844677541,non_menu_or_unmapped_name
+2026-03-02,7,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,79677,6386568257605678462,non_menu_or_unmapped_name
+2026-08-18,16,1,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,LM-RC000,79738,14566069450738523380,non_menu_or_unmapped_name
+2025-10-10,11,4,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,GB-RC000,80053,11393895015863123351,non_menu_or_unmapped_name
+2026-08-03,11,0,Pattaya_Central,แก้วเปล่า,59.0,2,118.0,LM-RC000,80161,16726756047704009494,non_menu_or_unmapped_name
+2026-06-27,20,5,Pattaya_Central,Combo Set A (2 แก้ว),99.0,3,297.0,LM-RC000,80606,11410441559170540855,non_menu_or_unmapped_name
+2026-07-26,7,6,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,80791,7521515499072607268,non_menu_or_unmapped_name
+2026-03-06,10,4,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,82012,6576877271923359730,non_menu_or_unmapped_name
+2026-04-26,17,6,Pattaya_Beach,แก้วเปล่า,0.0,1,0.0,GB-RC000,82533,6425003017375821219,non_menu_or_unmapped_name
+2026-06-11,0,3,Pattaya_Central,แก้วเปล่า,0.0,3,0.0,GB-RC000,83316,7830015403297735450,non_menu_or_unmapped_name
+2026-02-05,12,3,Pattaya_Central,แก้วเปล่า,35.0,1,35.0,GB-RC000,84556,14123368823903533854,non_menu_or_unmapped_name
+2025-10-26,0,6,Pattaya_Central,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,85016,11199095267919017386,non_menu_or_unmapped_name
+2026-06-22,20,0,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,GB-RC000,85312,6840012123605618192,non_menu_or_unmapped_name
+2026-04-05,18,6,Pattaya_Central,แก้วเปล่า,35.0,1,35.0,LM-RC000,85417,10423802062229061107,non_menu_or_unmapped_name
+2026-01-17,11,5,Pattaya_Central,แก้วเปล่า,35.0,3,105.0,GB-RC000,85797,6827422785361483960,non_menu_or_unmapped_name
+2026-02-21,20,5,Pattaya_Central,แก้วเปล่า,99.0,1,99.0,GB-RC000,85815,3840451631525842319,non_menu_or_unmapped_name
+2025-09-23,8,1,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,3,105.0,GB-RC000,85924,10072010209329075696,non_menu_or_unmapped_name
+2026-07-12,20,6,BKK_Ladprao,แก้วเปล่า,0.0,3,0.0,LM-RC000,86183,12893386896537476465,non_menu_or_unmapped_name
+2026-02-11,15,2,Pattaya_Central,แก้วเปล่า,59.0,2,118.0,GB-RC000,86272,9301038130396399677,non_menu_or_unmapped_name
+2026-08-05,18,2,Pattaya_Central,แก้วเปล่า,59.0,3,177.0,GB-RC000,86605,4753149001328637740,non_menu_or_unmapped_name
+2026-05-25,10,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,1,0.0,LM-RC000,87526,17534975702389451074,non_menu_or_unmapped_name
+2026-03-13,23,4,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,87554,16680805924333826312,non_menu_or_unmapped_name
+2026-01-03,23,5,Pattaya_Central,แก้วเปล่า,35.0,3,105.0,GB-RC000,87614,17368885852793585680,non_menu_or_unmapped_name
+2025-10-08,12,2,Pattaya_Beach,แก้วเปล่า,35.0,3,105.0,GB-RC000,87911,226843485021938546,non_menu_or_unmapped_name
+2026-03-21,14,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,GB-RC000,88151,15013202287053927977,non_menu_or_unmapped_name
+2026-06-20,11,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,LM-RC000,88867,2572420261126461669,non_menu_or_unmapped_name
+2026-05-30,23,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,89008,14513519769648599504,non_menu_or_unmapped_name
+2026-08-02,0,6,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,3,177.0,GB-RC000,89158,1878666118881443165,non_menu_or_unmapped_name
+2025-12-15,17,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,3,105.0,LM-RC000,89254,14749035644044796704,non_menu_or_unmapped_name
+2026-03-24,12,1,BKK_Ladprao,แก้วเปล่า,59.0,1,59.0,LM-RC000,89834,12861373300248420968,non_menu_or_unmapped_name
+2026-05-10,19,6,Pattaya_Central,แก้วเปล่า,0.0,2,0.0,LM-RC000,89947,3954181257785747775,non_menu_or_unmapped_name
+2026-01-18,16,6,BKK_Ladprao,แก้วเปล่า,59.0,3,177.0,GB-RC000,90063,7728132893039736821,non_menu_or_unmapped_name
+2026-07-01,19,2,Pattaya_Central,Combo Set A (2 แก้ว),99.0,1,99.0,GB-RC000,90512,17958561492008977672,non_menu_or_unmapped_name
+2026-05-05,21,1,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,91179,3332413617056408786,non_menu_or_unmapped_name
+2026-03-16,17,0,Pattaya_Central,Combo Set A (2 แก้ว),59.0,1,59.0,LM-RC000,91346,1122262022289442862,non_menu_or_unmapped_name
+2026-04-17,18,4,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,3,105.0,GB-RC000,91450,16957742458929719295,non_menu_or_unmapped_name
+2026-08-22,9,5,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,3,105.0,LM-RC000,91592,8606657314402118419,non_menu_or_unmapped_name
+2025-11-22,5,5,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,3,105.0,LM-RC000,91859,7952257350124399314,non_menu_or_unmapped_name
+2026-01-27,16,1,BKK_Ladprao,Combo Set A (2 แก้ว),35.0,2,70.0,GB-RC000,92070,16451451181647121691,non_menu_or_unmapped_name
+2025-12-09,23,1,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,92240,15871325923336315336,non_menu_or_unmapped_name
+2025-12-01,23,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,2,118.0,LM-RC000,93358,10583358559675970417,non_menu_or_unmapped_name
+2025-09-17,12,2,Pattaya_Central,แก้วเปล่า,0.0,2,0.0,LM-RC000,93673,13162266299755017392,non_menu_or_unmapped_name
+2026-02-03,18,1,BKK_Ladprao,แก้วเปล่า,0.0,2,0.0,GB-RC000,93829,18251197846065138651,non_menu_or_unmapped_name
+2026-01-13,20,1,BKK_Ladprao,Combo Set A (2 แก้ว),35.0,2,70.0,GB-RC000,94674,4092289152283079691,non_menu_or_unmapped_name
+2026-01-12,4,0,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,94710,11596564315425988881,non_menu_or_unmapped_name
+2026-01-04,12,6,Pattaya_Central,แก้วเปล่า,99.0,3,297.0,GB-RC000,94788,16558338473187404712,non_menu_or_unmapped_name
+2026-08-31,18,0,BKK_Ladprao,Combo Set A (2 แก้ว),0.0,1,0.0,LM-RC000,94979,9291915818805706457,non_menu_or_unmapped_name
+2026-01-14,22,2,Pattaya_Beach,แก้วเปล่า,0.0,1,0.0,GB-RC000,95423,15937715688349954985,non_menu_or_unmapped_name
+2026-05-08,12,4,BKK_Ladprao,แก้วเปล่า,59.0,2,118.0,LM-RC000,95495,9320425913808826098,non_menu_or_unmapped_name
+2026-03-28,18,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,GB-RC000,95908,17836428724908491181,non_menu_or_unmapped_name
+2026-05-18,3,0,BKK_Ladprao,Combo Set A (2 แก้ว),35.0,3,105.0,LM-RC000,95917,6307956538554363236,non_menu_or_unmapped_name
+2026-06-15,18,0,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,GB-RC000,96048,16475570958845344021,non_menu_or_unmapped_name
+2026-07-25,16,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,LM-RC000,96092,17435711224620395631,non_menu_or_unmapped_name
+2025-10-14,8,1,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,GB-RC000,96111,3954054988190214941,non_menu_or_unmapped_name
+2026-08-30,12,6,Pattaya_Beach,แก้วเปล่า,99.0,3,297.0,LM-RC000,96241,6540204206220773409,non_menu_or_unmapped_name
+2025-09-08,11,0,Pattaya_Central,Combo Set A (2 แก้ว),0.0,1,0.0,GB-RC000,96800,10834581066754608059,non_menu_or_unmapped_name
+2026-06-16,11,1,Pattaya_Beach,แก้วเปล่า,59.0,1,59.0,GB-RC000,96818,14027997240105293861,non_menu_or_unmapped_name
+2025-11-16,17,6,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,3,105.0,LM-RC000,97019,12108088572634935489,non_menu_or_unmapped_name
+2025-09-13,2,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,GB-RC000,97032,9205784266721925129,non_menu_or_unmapped_name
+2026-05-11,16,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,97086,5558343706532304185,non_menu_or_unmapped_name
+2026-08-02,7,6,Pattaya_Central,แก้วเปล่า,99.0,2,198.0,LM-RC000,97556,223154648729438490,non_menu_or_unmapped_name
+2026-07-03,15,4,BKK_Ladprao,แก้วเปล่า,99.0,3,297.0,GB-RC000,97600,17407065733524446797,non_menu_or_unmapped_name
+2025-12-13,2,5,BKK_Sukhumvit,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,98130,1316079099773860058,non_menu_or_unmapped_name
+2026-02-06,1,4,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,LM-RC000,99173,1204138270035976728,non_menu_or_unmapped_name
+2025-10-14,11,1,BKK_Sukhumvit,Combo Set A (2 แก้ว),59.0,2,118.0,GB-RC000,99227,4772956124357579107,non_menu_or_unmapped_name
+2026-02-06,17,4,Pattaya_Central,แก้วเปล่า,59.0,3,177.0,GB-RC000,99659,4475457760575816667,non_menu_or_unmapped_name
+2026-05-31,10,6,Pattaya_Beach,แก้วเปล่า,35.0,1,35.0,LM-RC000,99963,5714587820644208617,non_menu_or_unmapped_name
+2026-06-08,4,0,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,1,99.0,LM-RC000,100225,12049384325991943267,non_menu_or_unmapped_name
+2026-04-27,8,0,BKK_Ladprao,แก้วเปล่า,59.0,2,118.0,GB-RC000,100818,16362959202357208820,non_menu_or_unmapped_name
+2026-08-13,13,3,BKK_Ladprao,Combo Set A (2 แก้ว),0.0,2,0.0,LM-RC000,102318,17223386221602546899,non_menu_or_unmapped_name
+2026-07-22,14,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,GB-RC000,102704,207848640886669971,non_menu_or_unmapped_name
+2026-08-25,13,1,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,2,0.0,GB-RC000,103223,7307178082510787171,non_menu_or_unmapped_name
+2025-11-27,7,3,Pattaya_Beach,แก้วเปล่า,0.0,2,0.0,LM-RC000,103907,16030262982278617022,non_menu_or_unmapped_name
+2026-08-08,8,5,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,104468,8837975217926380801,non_menu_or_unmapped_name
+2026-08-25,23,1,Pattaya_Central,แก้วเปล่า,59.0,1,59.0,LM-RC000,105167,5073195927219278478,non_menu_or_unmapped_name
+2025-11-02,10,6,BKK_Ladprao,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,105375,9138912498674630295,non_menu_or_unmapped_name
+2026-05-23,9,5,Pattaya_Beach,แก้วเปล่า,59.0,2,118.0,GB-RC000,105625,16395428063174625118,non_menu_or_unmapped_name
+2025-11-21,10,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,GB-RC000,105649,6880477075072925900,non_menu_or_unmapped_name
+2026-02-01,19,6,Pattaya_Central,แก้วเปล่า,99.0,2,198.0,LM-RC000,105653,11526368349371244323,non_menu_or_unmapped_name
+2026-04-29,9,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,GB-RC000,105825,1063792705513463977,non_menu_or_unmapped_name
+2026-08-15,20,5,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,GB-RC000,106051,14770408258526279815,non_menu_or_unmapped_name
+2025-10-08,17,2,Pattaya_Central,Combo Set A (2 แก้ว),59.0,3,177.0,LM-RC000,106057,18279885480673277761,non_menu_or_unmapped_name
+2025-11-27,21,3,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,LM-RC000,106178,10760702800648824610,non_menu_or_unmapped_name
+2026-01-28,13,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),35.0,2,70.0,LM-RC000,107215,3708690290724959210,non_menu_or_unmapped_name
+2026-06-20,20,5,BKK_Ladprao,Combo Set A (2 แก้ว),35.0,1,35.0,GB-RC000,107291,10261061148110084076,non_menu_or_unmapped_name
+2026-07-17,8,4,Pattaya_Central,แก้วเปล่า,35.0,2,70.0,GB-RC000,107665,10740755750906126148,non_menu_or_unmapped_name
+2026-03-24,23,1,Pattaya_Central,แก้วเปล่า,59.0,1,59.0,GB-RC000,107710,6463660217665204692,non_menu_or_unmapped_name
+2026-04-06,9,0,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,3,0.0,GB-RC000,107796,989471769136564566,non_menu_or_unmapped_name
+2025-11-05,15,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,GB-RC000,108459,12585182533042550858,non_menu_or_unmapped_name
+2026-01-31,10,5,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,1,35.0,GB-RC000,108982,17221439342347311699,non_menu_or_unmapped_name
+2026-04-02,12,3,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,GB-RC000,109035,18347750547598968224,non_menu_or_unmapped_name
+2025-12-25,23,3,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,109177,7900963951772834949,non_menu_or_unmapped_name
+2026-04-04,17,5,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,GB-RC000,109270,15358310019215983355,non_menu_or_unmapped_name
+2026-08-10,17,0,BKK_Ladprao,Combo Set A (2 แก้ว),99.0,2,198.0,LM-RC000,110293,2051030059932946643,non_menu_or_unmapped_name
+2026-01-27,19,1,BKK_Sukhumvit,Combo Set A (2 แก้ว),35.0,2,70.0,GB-RC000,110361,10855180629731905178,non_menu_or_unmapped_name
+2025-10-07,1,1,BKK_Sukhumvit,แก้วเปล่า,59.0,2,118.0,LM-RC000,110403,8018243441793389211,non_menu_or_unmapped_name
+2026-03-08,16,6,Pattaya_Beach,แก้วเปล่า,99.0,2,198.0,GB-RC000,110583,11195314807214631450,non_menu_or_unmapped_name
+2026-07-30,9,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,GB-RC000,111124,9676061752862577329,non_menu_or_unmapped_name
+2026-08-21,19,4,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,LM-RC000,111266,6626979650260363094,non_menu_or_unmapped_name
+2026-02-26,11,3,BKK_Sukhumvit,แก้วเปล่า,99.0,2,198.0,LM-RC000,111848,2773469260352835128,non_menu_or_unmapped_name
+2026-04-03,9,4,Pattaya_Beach,แก้วเปล่า,59.0,2,118.0,GB-RC000,113346,12885913672789748710,non_menu_or_unmapped_name
+2025-09-21,8,6,BKK_Ladprao,Combo Set A (2 แก้ว),35.0,2,70.0,LM-RC000,113586,2090607882266415780,non_menu_or_unmapped_name
+2026-08-21,11,4,Pattaya_Beach,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,113658,10847497265926236316,non_menu_or_unmapped_name
+2026-06-03,2,2,BKK_Ladprao,แก้วเปล่า,0.0,3,0.0,GB-RC000,113808,16157174519290941826,non_menu_or_unmapped_name
+2026-06-14,11,6,Pattaya_Central,Combo Set A (2 แก้ว),0.0,1,0.0,LM-RC000,114424,15147961026225866153,non_menu_or_unmapped_name
+2025-11-30,9,6,Pattaya_Central,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,114742,1725639793938573816,non_menu_or_unmapped_name
+2025-12-11,6,3,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),0.0,3,0.0,GB-RC000,114808,15735377589226781155,non_menu_or_unmapped_name
+2026-02-14,10,5,Pattaya_Central,Combo Set A (2 แก้ว),35.0,1,35.0,GB-RC000,114837,16941434178203936768,non_menu_or_unmapped_name
+2026-08-15,10,5,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),35.0,1,35.0,GB-RC000,115416,5812994456415993477,non_menu_or_unmapped_name
+2026-07-13,15,0,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,GB-RC000,115854,1914864393288639472,non_menu_or_unmapped_name
+2025-10-28,3,1,Pattaya_Beach,Combo Set A (2 แก้ว),59.0,3,177.0,GB-RC000,116367,7221129697984248134,non_menu_or_unmapped_name
+2026-01-18,22,6,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),59.0,2,118.0,GB-RC000,116890,10846959250272203179,non_menu_or_unmapped_name
+2026-03-08,6,6,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),0.0,1,0.0,LM-RC000,117238,428808131679952758,non_menu_or_unmapped_name
+2025-09-28,3,6,Pattaya_Beach,แก้วเปล่า,99.0,3,297.0,LM-RC000,117921,1757268772099439561,non_menu_or_unmapped_name
+2025-12-23,2,1,Pattaya_Central,Combo Set A (2 แก้ว),99.0,1,99.0,LM-RC000,118561,13647289674041992147,non_menu_or_unmapped_name
+2026-07-08,16,2,Pattaya_Beach,Combo Set A (2 แก้ว),35.0,3,105.0,GB-RC000,119288,13979203445674015813,non_menu_or_unmapped_name
+2025-09-10,14,2,Pattaya_Beach,แก้วเปล่า,35.0,2,70.0,LM-RC000,119635,7865616381982710282,non_menu_or_unmapped_name
+2026-04-12,13,6,BKK_Ladprao,แก้วเปล่า,0.0,1,0.0,GB-RC000,119929,16378132363475417143,non_menu_or_unmapped_name
+2025-11-09,10,6,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,1,99.0,LM-RC000,120658,4426949364852363884,non_menu_or_unmapped_name
+2026-08-07,19,4,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),35.0,3,105.0,LM-RC000,120846,7113451450753193433,non_menu_or_unmapped_name
+2026-08-16,13,6,Pattaya_Beach,Combo Set A (2 แก้ว),0.0,3,0.0,GB-RC000,121194,8974649555541469305,non_menu_or_unmapped_name
+2026-05-14,18,3,Pattaya_Central,แก้วเปล่า,99.0,3,297.0,LM-RC000,121276,15894539400279417835,non_menu_or_unmapped_name
+2026-08-19,10,2,BKK_Sukhumvit,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,LM-RC000,121507,17134103664711997095,non_menu_or_unmapped_name
+2026-02-11,13,2,BKK_Ladprao,Combo Set A (2 แก้ว),99.0,2,198.0,GB-RC000,121676,5344682687233205527,non_menu_or_unmapped_name
+2025-12-12,19,4,BKK_Sukhumvit,Combo Set A (2 แก้ว),99.0,3,297.0,GB-RC000,121795,13304480899874747486,non_menu_or_unmapped_name
+2026-07-25,6,5,Pattaya_Beach,แก้วเปล่า,59.0,3,177.0,LM-RC000,122442,11056114499524280902,non_menu_or_unmapped_name
+2025-09-18,15,3,BKK_Ladprao,แก้วเปล่า,35.0,2,70.0,GB-RC000,123526,9228831145589135520,non_menu_or_unmapped_name
+2026-04-28,20,1,BKK_Sukhumvit,แก้วเปล่า,35.0,3,105.0,GB-RC000,123575,2529277082449565922,non_menu_or_unmapped_name
+2026-01-23,10,4,BKK_Ladprao,น้ำส้มปั่น (เมนูทดลอง),99.0,2,198.0,GB-RC000,123682,6708005968088465373,non_menu_or_unmapped_name
+2026-07-28,0,1,Pattaya_Beach,แก้วเปล่า,35.0,1,35.0,LM-RC000,124034,17868885981204655901,non_menu_or_unmapped_name

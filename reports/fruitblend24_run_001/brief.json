@@ -1,0 +1,43 @@
+{
+  "run_id": "fruitblend24_run_001",
+  "case": "FruitBlend24 Revenue Management / Data Analyst Intern Assessment",
+  "period_actual": {"start": "2025-09-01", "end": "2026-08-31"},
+  "period_forecast": {"start": "2026-09-01", "end": "2026-11-30"},
+  "decisions": [
+    "Which products, kitchens, prices and promotions should management change to increase contribution?",
+    "Which portfolio items need action after separating variable contribution from allocated overhead?",
+    "How should daily cup demand and recorded waste inform a three-month prep/replenishment plan?",
+    "Can the historical and projected P&L be reconciled to the source workbook and monthly budget?"
+  ],
+  "required_outputs": [
+    "Data quality issue log, source inventory, and released clean data version",
+    "Demand, pricing, promotion, portfolio, budget, and historical P&L evidence tables",
+    "Three-month cup-based forecast, backtest, waste scenarios, and projected P&L",
+    "Memo/presentation with 3-5 insights and at least 3 recommendations covering pricing, portfolio, and inventory",
+    "Reproducible code and a short tools/approach note"
+  ],
+  "acceptance_criteria": [
+    "Every headline metric traces to the released data version and metric contract",
+    "Raw row, unit, and revenue bridges reconcile within documented tolerance",
+    "Observed values are separated from proxy estimates and unresolved values are not silently zeroed",
+    "Forecast validation uses only data available before each backtest cutoff",
+    "Recommendations name action, owner, timing, KPI, evidence, and key limitation",
+    "Presentation numbers are linked to analysis artifacts rather than recalculated independently"
+  ],
+  "versions": {
+    "data_version": "fruitblend24_v1_c2869ce419bf",
+    "metric_version": "metric_contract_v1",
+    "assumption_version": "assumption_ledger_v1",
+    "source_sha256": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8"
+  },
+  "dependency_order": [
+    "A0 -> A1",
+    "A1 -> A2",
+    "A2 -> A6 data QA",
+    "A6 data QA -> A3 and A4 in parallel",
+    "A3 plus A4 baseline -> A5",
+    "A5 -> A4 projected P&L",
+    "A3/A4/A5 -> A6 final QA",
+    "A6 -> A7 memo and presentation -> A6/A0 final review"
+  ]
+}

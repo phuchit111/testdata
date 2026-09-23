@@ -1,0 +1,99 @@
+{
+  "run_id": "fruitblend24_run_001",
+  "source": "C:\\Users\\puchi\\Downloads\\dataintern\\data\\raw\\FruitBlend24_Intern_Case_Data.xlsx",
+  "source_sha256": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8",
+  "data_version": "fruitblend24_v1_c2869ce419bf",
+  "metric_version": "metric_contract_v1",
+  "assumption_version": "assumption_ledger_v1",
+  "files": [
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\cost_assumptions.csv",
+      "sha256": "98ae96913cab5dd9559f44a7c9e78691f8aedfb97e37ece245dba9fa2e54c9b0",
+      "bytes": 601
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\kitchen_overhead.csv",
+      "sha256": "0ce275764464af89863ef190646216b761fd21af785ee52fa5b2c370281520bc",
+      "bytes": 336
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\manifest.json",
+      "sha256": "61366ee67af344af2b5ec70e4c47d5d903c8c4e77475b5dd3a7a4699650322ce",
+      "bytes": 3322
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\metric_contract.json",
+      "sha256": "1212d83e432b0705abd3cad233862c9f4f26331a53d57f95eedf6841a138457c",
+      "bytes": 1092
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\monthly_budget.csv",
+      "sha256": "9be14772b42c00123aa2ad063c6cd956fc1982647e0ad77fda9e2041207d63d6",
+      "bytes": 2038
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\platform_commission_rate.csv",
+      "sha256": "da6317d8b291c2f58c069592dd41c3425faf22f4d41d8ff1883eff51e08f51db",
+      "bytes": 79
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\platform_dim.csv",
+      "sha256": "5bea43fb3c62e0537636680626572c01c5cfad3d90e538e48465d575066c4513",
+      "bytes": 54
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\rate_code_dim.csv",
+      "sha256": "f82ad667560ecbfb8bf3358f9315930391fbeef8d44020198f7eb008a56c55b3",
+      "bytes": 528
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\reconciliation.json",
+      "sha256": "5e5c70dc2e8c8bed5d5bf4c9c933adf5c4bb31b24b214d86e977be04442e2e0a",
+      "bytes": 548
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\sales_clean.csv",
+      "sha256": "e4ce670e3e22baa772b98d76a157a681cc86d05b9d98d635462772414e1fd537",
+      "bytes": 34058896
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\sales_daily.csv",
+      "sha256": "72e9372271778f563f250ce89b42e8cf1773c1e9af0577e330073e9b45efc7c7",
+      "bytes": 1230874
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\sku_code_dim.csv",
+      "sha256": "7a068e71c8f3b94f860e56ad1c1f3bb1f77af2e2355bf0a1956b86b4d9665292",
+      "bytes": 95
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\sku_cost_assumptions.csv",
+      "sha256": "81a8d60933d71e012030a7d9fa5b6668bad6eb89a24b5acf7ecfea63c6a96d05",
+      "bytes": 183
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\waste_clean.csv",
+      "sha256": "6e7960ad8aad53c91bbab2a80d1ccc5703aeb18bcc232efbcae7e58959260ab2",
+      "bytes": 730767
+    },
+    {
+      "path": "data\\processed\\fruitblend24_v1_c2869ce419bf\\weekly_fruit_cost.csv",
+      "sha256": "df125ce42823dd4c8c7c6c618529c6aa5a67ff354ccd204eb9af123cb136a02a",
+      "bytes": 6792
+    }
+  ],
+  "checks": {
+    "row_bridge_reconciles": true,
+    "unit_bridge_reconciles": true,
+    "revenue_bridge_reconciles": true,
+    "unknown_platform_codes": [],
+    "unknown_base_codes": [],
+    "sku_suffix_mismatch_rows": 0,
+    "missing_fruit_cost_raw_rows": 75,
+    "estimated_fruit_cost_rows": 75,
+    "unresolved_fruit_cost_rows": 0,
+    "missing_waste_cost_raw_rows": 4,
+    "estimated_waste_cost_rows": 4,
+    "unresolved_waste_cost_rows": 0
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "assumption_version": "assumption_ledger_v1",
+  "policies": [
+    {
+      "id": "DUP-001",
+      "decision": "Drop exact duplicate order rows after retaining the first source row and record all excess rows as exceptions.",
+      "reason": "The raw export contains 372 exact duplicate excess rows; counting them would overstate units and revenue."
+    },
+    {
+      "id": "SKU-001",
+      "decision": "Map 31 raw names to five canonical menu SKUs using the explicit alias mapping; exclude 370 deduplicated non-menu rows from menu analysis.",
+      "reason": "The three unmapped names are an experimental drink, a combo, and an empty cup. They must not be forced into a single-SKU analysis."
+    },
+    {
+      "id": "PRICE-001",
+      "decision": "Treat price_thb and gross_revenue_thb as post-discount realized selling values.",
+      "reason": "The dictionary states price reflects the applied rate code. Do not deduct discounts a second time."
+    },
+    {
+      "id": "COST-001",
+      "decision": "Use 33.69 THB/cup, the first observed MixedBerryPremium cost week beginning 2026-03-02, as a proxy only for launch date 2026-03-01.",
+      "reason": "The launch day has 75 sales rows without an exact-week cost. Keep raw missingness and report sensitivity."
+    },
+    {
+      "id": "WASTE-001",
+      "decision": "Estimate the four missing waste cost rows as units_wasted times proxy fruit cost plus packaging, and keep the estimate status visible.",
+      "reason": "The source defines waste cost as fruit plus packaging only; the four rows cover 96 cups."
+    },
+    {
+      "id": "WASTE-002",
+      "decision": "For the accounting schedule, a missing waste row at a sales daily key is treated as no recorded waste, not proof that no waste occurred.",
+      "reason": "The waste table is not a complete daily cube. Coverage must remain a limitation for planning."
+    },
+    {
+      "id": "GP-001",
+      "decision": "Report product margin, contribution before waste, contribution after waste, and modeled operating result separately. Do not label one as confirmed budget gross profit.",
+      "reason": "The monthly budget does not define its gross-profit cost boundary."
+    },
+    {
+      "id": "FORECAST-001",
+      "decision": "Use daily kitchen x SKU demand, seasonal-naive and trailing weekday baselines first, then select using rolling-origin backtest before the 2026-08-31 cutoff.",
+      "reason": "The workflow requires a simple leakage-safe baseline before adding complexity."
+    },
+    {
+      "id": "INVENTORY-001",
+      "decision": "Report cup-equivalent requirements and a replenishment policy; do not convert to kilograms or issue purchase orders.",
+      "reason": "BOM/yield, on-hand, inbound, lead time, shelf life, and stockout data are not provided."
+    }
+  ],
+  "open_questions": [
+    "What cost boundary does management mean by budget gross profit?",
+    "Are absent waste rows true zero waste or unrecorded waste?",
+    "What are lead times, shelf lives, on-hand balances, inbound orders, recipe yields, and stockout flags?",
+    "Is the MixedBerryPremium launch-day cost proxy acceptable for management reporting?"
+  ]
+}

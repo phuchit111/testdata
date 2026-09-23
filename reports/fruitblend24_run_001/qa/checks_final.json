@@ -1,0 +1,205 @@
+{
+  "agent_id": "A6",
+  "scope": "Cross-artifact QA after A3/A4/A5",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "historical company P&L has 12 months",
+      "result": "PASS",
+      "expected": 12,
+      "actual": 12,
+      "owner": "A4",
+      "impact": ""
+    },
+    {
+      "name": "historical revenue equals released retained sales",
+      "result": "PASS",
+      "expected": 31146932.57,
+      "actual": 31146932.57,
+      "owner": "A4",
+      "impact": ""
+    },
+    {
+      "name": "budget comparison retains 12 months",
+      "result": "PASS",
+      "expected": 12,
+      "actual": 12,
+      "owner": "A4",
+      "impact": ""
+    },
+    {
+      "name": "forecast horizon only after cutoff",
+      "result": "PASS",
+      "expected": "2026-09-01 to 2026-11-30",
+      "actual": "2026-09-01 to 2026-11-30",
+      "owner": "A5",
+      "impact": ""
+    },
+    {
+      "name": "backtest targets are after each cutoff",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "owner": "A5",
+      "impact": "Leakage would make forecast performance optimistic"
+    },
+    {
+      "name": "backtest benchmarks five methods",
+      "result": "PASS",
+      "expected": [
+        "naive_last_day",
+        "moving_avg_4w",
+        "exp_smoothing_4w",
+        "seasonal_naive_7d",
+        "weekday_median_8w"
+      ],
+      "actual": [
+        "exp_smoothing_4w",
+        "moving_avg_4w",
+        "naive_last_day",
+        "seasonal_naive_7d",
+        "weekday_median_8w"
+      ],
+      "owner": "A5",
+      "impact": ""
+    },
+    {
+      "name": "forecast uncertainty range is ordered",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "lower_le_base_le_upper": true
+      },
+      "owner": "A5",
+      "impact": "Range is a WAPE-based planning range, not a confidence interval"
+    },
+    {
+      "name": "inventory policy covers Kitchen x SKU cells",
+      "result": "PASS",
+      "expected": "20 cells",
+      "actual": {
+        "rows": 20,
+        "kitchens": 4,
+        "skus": 5
+      },
+      "owner": "A5",
+      "impact": ""
+    },
+    {
+      "name": "purchase quantity boundary remains explicit",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "all_not_calculable": true,
+        "limitations": [
+          "No on-hand",
+          "No inbound",
+          "No lead time",
+          "No shelf life",
+          "No BOM/yield",
+          "No stockout flags"
+        ]
+      },
+      "owner": "A5",
+      "impact": ""
+    },
+    {
+      "name": "fruit cost stress test declines operating result",
+      "result": "PASS",
+      "expected": "0/5/10/20% and monotonic decline",
+      "actual": {
+        "points": [
+          0.0,
+          5.0,
+          10.0,
+          20.0
+        ],
+        "declines": true
+      },
+      "owner": "A5",
+      "impact": ""
+    },
+    {
+      "name": "scenario daily formulas reconcile",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 4.547473508864641e-13,
+      "owner": "A5/A4",
+      "impact": ""
+    },
+    {
+      "name": "scenario monthly revenue rebuild",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 4.656612873077393e-10,
+      "owner": "A5/A4",
+      "impact": ""
+    },
+    {
+      "name": "scenario monthly contribution rebuild",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 5.820766091346741e-11,
+      "owner": "A5/A4",
+      "impact": ""
+    },
+    {
+      "name": "scenario overhead charged once per month",
+      "result": "PASS",
+      "expected": 670000,
+      "actual": [
+        670000.0
+      ],
+      "owner": "A4",
+      "impact": "Prevents overhead from being multiplied by SKU or daily rows"
+    },
+    {
+      "name": "promo summary contains standard and three promo families",
+      "result": "PASS",
+      "expected": [
+        "RC000",
+        "RC101",
+        "RC102",
+        "RC103"
+      ],
+      "actual": [
+        "RC000",
+        "RC101",
+        "RC102",
+        "RC103"
+      ],
+      "owner": "A3",
+      "impact": ""
+    },
+    {
+      "name": "MixedBerry after-waste contribution is visible",
+      "result": "PASS",
+      "expected": "<0",
+      "actual": -53860.02719999995,
+      "owner": "A4",
+      "impact": ""
+    },
+    {
+      "name": "memo exists",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "owner": "A7",
+      "impact": ""
+    },
+    {
+      "name": "memo includes three action sections",
+      "result": "PASS",
+      "expected": ">=3",
+      "actual": 4,
+      "owner": "A7",
+      "impact": ""
+    }
+  ],
+  "failed_count": 0,
+  "limitations": [
+    "Promo comparison is association only",
+    "Budget GP boundary is open",
+    "Inventory order quantity is not calculable from provided data"
+  ]
+}

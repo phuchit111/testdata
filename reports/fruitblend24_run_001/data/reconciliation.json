@@ -1,0 +1,17 @@
+{
+  "raw_rows": 124397,
+  "duplicate_excess_rows_removed": 372,
+  "non_menu_rows_excluded": 370,
+  "retained_menu_rows": 123655,
+  "raw_units": 620700.0,
+  "duplicate_units_removed": 1817.0,
+  "non_menu_units_excluded": 760.0,
+  "retained_menu_units": 618123.0,
+  "raw_revenue_thb": 31276898.6,
+  "duplicate_revenue_removed_thb": 91488.03,
+  "non_menu_revenue_excluded_thb": 38478.0,
+  "retained_menu_revenue_thb": 31146932.57,
+  "row_bridge_reconciles": true,
+  "unit_bridge_reconciles": true,
+  "revenue_bridge_reconciles": true
+}

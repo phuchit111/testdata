@@ -1,0 +1,8 @@
+{
+  "agent_id": "A3",
+  "status": "ready_for_review",
+  "input_versions": {"data_version": "fruitblend24_v1_c2869ce419bf", "metric_version": "metric_contract_v1", "assumption_version": "assumption_ledger_v1"},
+  "artifacts": ["sku_summary.csv", "kitchen_summary.csv", "platform_summary.csv", "monthly_demand_value.csv", "promo_summary.csv", "promo_comparator_by_stratum.csv", "price_floor.csv", "commercial_metrics.json"],
+  "checks": ["Promotion comparisons are matched associations, not causal uplift", "Price floor is contribution break-even, not elasticity", "All promo families have standard comparators in available strata"],
+  "next_owner": "A6"
+}

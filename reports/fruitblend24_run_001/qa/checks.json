@@ -1,0 +1,120 @@
+{
+  "agent_id": "A6",
+  "scope": "A2 data-release QA only",
+  "status": "passed",
+  "data_version": "fruitblend24_v1_c2869ce419bf",
+  "source_sha256": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8",
+  "checks": [
+    {
+      "name": "source hash matches manifest",
+      "result": "PASS",
+      "expected": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8",
+      "actual": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8",
+      "impact": ""
+    },
+    {
+      "name": "raw row bridge",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "impact": ""
+    },
+    {
+      "name": "raw unit bridge",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "impact": ""
+    },
+    {
+      "name": "raw revenue bridge",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "impact": ""
+    },
+    {
+      "name": "released sales source ids unique",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "impact": "Duplicate source ids would break traceability"
+    },
+    {
+      "name": "released sales retain expected rows",
+      "result": "PASS",
+      "expected": 123655,
+      "actual": 123655,
+      "impact": ""
+    },
+    {
+      "name": "released sales revenue identity",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "impact": ""
+    },
+    {
+      "name": "released sales daily grain unique",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "impact": ""
+    },
+    {
+      "name": "waste source grain unique",
+      "result": "PASS",
+      "expected": true,
+      "actual": true,
+      "impact": ""
+    },
+    {
+      "name": "no unresolved sales fruit cost",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "impact": ""
+    },
+    {
+      "name": "no unresolved waste cost",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "impact": ""
+    },
+    {
+      "name": "sales daily revenue reconciles",
+      "result": "PASS",
+      "expected": 31146932.57,
+      "actual": 31146932.57,
+      "impact": ""
+    },
+    {
+      "name": "sales daily units reconciles",
+      "result": "PASS",
+      "expected": 618123.0,
+      "actual": 618123.0,
+      "impact": ""
+    },
+    {
+      "name": "launch-day proxy count",
+      "result": "PASS",
+      "expected": 75,
+      "actual": 75,
+      "impact": ""
+    },
+    {
+      "name": "waste proxy count",
+      "result": "PASS",
+      "expected": 4,
+      "actual": 4,
+      "impact": ""
+    }
+  ],
+  "failed_count": 0,
+  "limitations_carried_forward": [
+    "Budget GP boundary remains unresolved.",
+    "Absent waste rows are not proof of zero waste.",
+    "Inventory data required for purchase quantities are absent."
+  ]
+}

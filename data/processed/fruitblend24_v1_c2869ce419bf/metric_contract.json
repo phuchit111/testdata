@@ -1,0 +1,14 @@
+{
+  "metric_version": "metric_contract_v1",
+  "revenue": "sum(gross_revenue_thb) where gross_revenue_thb = units_sold * observed_price_thb; observed price already includes discount",
+  "sold_fruit_cost": "sum(units_sold * fruit_cost_used_thb), with source status retained for proxies",
+  "sold_packaging_cost": "sum(units_sold * packaging_cost_per_cup_thb)",
+  "sold_labor_cost": "sum(units_sold * labor_cost_per_cup_thb)",
+  "commission": "sum(gross_revenue_thb * commission_rate)",
+  "product_margin": "revenue - sold_fruit_cost - sold_packaging_cost - sold_labor_cost",
+  "contribution_before_waste": "product_margin - commission",
+  "contribution_after_waste": "contribution_before_waste - waste_cost_thb",
+  "modeled_operating_result": "contribution_after_waste - kitchen_monthly_overhead",
+  "waste_rate": "units_wasted / (units_sold + units_wasted), disclosed as a planning denominator assumption",
+  "cost_boundary_note": "Budget gross profit boundary is not defined in source; show product margin and contribution separately, and label any GP bridge as an assumption."
+}

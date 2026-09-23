@@ -1,0 +1,30 @@
+{
+  "data_version": "fruitblend24_v1_c2869ce419bf",
+  "scope": "Task 3 promotion P&L, matched active-hour demand lift, break-even guardrails, and targeted segments",
+  "caution": "Promotion lift and efficiency are matched associations, not causal estimates. Allocation, customer identity, stockouts, and cannibalization are not observed.",
+  "revenue_definition": "net_revenue_thb equals observed gross_revenue_thb; observed revenue is already post-promotion, so discount is not deducted again.",
+  "discount_definition": "discount_cost_thb equals (base_price_thb - observed_price_thb) x units_sold, floored at zero after QA.",
+  "active_hour_definition": "unique observed date x hour within each SKU x kitchen x platform x weekday x month x hour x daypart stratum; missing export rows are not treated as zero demand.",
+  "match_definition": [
+    "sku",
+    "kitchen",
+    "platform_code",
+    "platform_name",
+    "day_of_week",
+    "month",
+    "hour",
+    "daypart"
+  ],
+  "matched_strata_count": 8248,
+  "promo_share_cups": 0.11041977082231207,
+  "discount_cost_total_thb": 585546.4299999999,
+  "unknown_base_codes": [],
+  "revenue_identity_mismatch_rows": 0,
+  "waste_boundary": "Waste is recorded daily by SKU and kitchen, not tagged to rate code; promo P&L is before waste. Company P&L separately subtracts recorded waste.",
+  "decision_rule": "Keep/scale selectively only when matched incremental contribution is positive and actual demand lift clears break-even lift; otherwise target, reduce, or pause blanket use.",
+  "code_decisions": {
+    "RC101": "OPTIMIZE / TARGET ONLY",
+    "RC102": "OPTIMIZE / TARGET ONLY",
+    "RC103": "OPTIMIZE / TARGET ONLY"
+  }
+}

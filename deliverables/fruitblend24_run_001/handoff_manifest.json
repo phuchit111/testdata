@@ -1,0 +1,15 @@
+{
+  "agent_id": "A7",
+  "status": "ready_for_submission_review",
+  "input_versions": {"data_version": "fruitblend24_v1_c2869ce419bf", "metric_version": "metric_contract_v1", "assumption_version": "assumption_ledger_v1"},
+  "primary_deliverable": "app.py (Streamlit)",
+  "artifacts": ["app.py", "requirements.txt", "memo.md", "README.md", "charts/01_revenue_vs_budget.svg", "charts/02_contribution_by_sku.svg", "charts/03_promo_contribution_per_cup.svg", "charts/04_forecast_scenarios.svg"],
+  "checks": [
+    {"name": "A6 final QA", "result": "PASS", "evidence": "reports/fruitblend24_run_001/qa/checks_final.json"},
+    {"name": "Streamlit AppTest", "result": "PASS", "evidence": "reports/fruitblend24_run_001/qa/streamlit_checks.json (17 checks)"},
+    {"name": "Live Streamlit health", "result": "PASS", "evidence": "HTTP 200 /_stcore/health"}
+  ],
+  "task_coverage": ["Task 1 Data Quality", "Task 2 Demand & Pricing", "Task 3 Promotions & Rate Codes", "Task 4 P&L, Portfolio & Budget", "Task 5 Forecast & Inventory", "Task 6 Insights, Recommendations & Assumptions"],
+  "recommendations": 3,
+  "limitations": ["Budget GP boundary", "Promo causality", "Inventory order inputs"]
+}

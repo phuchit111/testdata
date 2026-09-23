@@ -1,0 +1,31 @@
+{
+  "agent_id": "A1",
+  "status": "ready_for_review",
+  "source_sha256": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8",
+  "checks": {
+    "raw_order_rows": 124397,
+    "raw_distinct_product_names": 31,
+    "exact_duplicate_excess_rows": 372,
+    "deduped_unmapped_rows": 370,
+    "retained_candidate_menu_rows": 123655,
+    "missing_exact_week_sales_cost_rows": 75,
+    "missing_waste_cost_rows": 4,
+    "missing_waste_cost_units": 96,
+    "invalid_dates": 0,
+    "invalid_hours": 0,
+    "nonpositive_units": 0,
+    "revenue_identity_mismatch_rows_over_001_thb": 0,
+    "weekday_mismatch_rows": 0,
+    "invalid_rate_format_rows": 0,
+    "unknown_base_codes": [],
+    "sku_suffix_mismatch_rows": 0,
+    "duplicate_excess_at_date_hour_kitchen_sku": 0
+  },
+  "findings": [
+    {"id": "DQ-001", "severity": "high", "issue": "Exact duplicates", "impact": "Revenue and units overstatement if counted", "recommended_policy": "Drop excess exact duplicates and retain an exception table"},
+    {"id": "DQ-002", "severity": "medium", "issue": "Non-menu names", "impact": "Cannot attribute experimental drink, combo, or empty-cup records to a core SKU", "recommended_policy": "Exclude from core menu analysis and report their unit/revenue bridge"},
+    {"id": "DQ-003", "severity": "medium", "issue": "MixedBerry launch-day fruit cost gap", "impact": "75 retained sales rows have no exact-week fruit cost", "recommended_policy": "Use explicit first-available-week proxy with sensitivity and status flag"},
+    {"id": "DQ-004", "severity": "medium", "issue": "Missing waste estimates", "impact": "4 rows / 96 cups can understate waste cost if sum skips nulls", "recommended_policy": "Estimate fruit plus packaging under the same proxy policy and disclose"},
+    {"id": "DQ-005", "severity": "high", "issue": "Budget GP cost boundary undefined", "impact": "A budget variance can be mislabelled", "recommended_policy": "Show product margin and contribution layers separately; confirm boundary with management"}
+  ]
+}

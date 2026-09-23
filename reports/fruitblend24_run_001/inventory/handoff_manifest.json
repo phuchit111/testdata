@@ -1,0 +1,8 @@
+{
+  "agent_id": "A5",
+  "status": "ready_for_review",
+  "input_versions": {"data_version": "fruitblend24_v1_c2869ce419bf", "metric_version": "metric_contract_v1", "assumption_version": "assumption_ledger_v1"},
+  "artifacts": ["backtest_detail.csv", "backtest_summary.csv", "forecast_daily.csv", "scenario_daily_finance_inputs.csv", "scenario_monthly_pnl.csv", "cup_requirements.csv", "forecast_metrics.json"],
+  "checks": ["Seasonal-naive 7-day selected by rolling backtest", "Forecast horizon is after 2026-08-31 cutoff", "Purchase quantities intentionally not calculable from missing inventory controls"],
+  "next_owner": "A6"
+}

@@ -1,0 +1,5 @@
+﻿scenario,modeled_operating_result_thb,delta_vs_current_thb,basis,status
+Current actual modeled result,-403231.0227999997,0.0,Observed released sales and recorded costs,Observed model
+Promo matched cells revert to standard,-293017.2594666664,110213.76333333334,"Matched promotion screening only; association, before waste, not a guaranteed saving",Screening scenario
+Waste rate moves toward company average,-55420.436650919786,347810.5861490799,Holding cell waste cost/cup constant; planning sensitivity only,Planning scenario
+Combined screening sensitivity,54793.32668241352,458024.34948241326,Adds the two sensitivities; not a causal or budget bridge,Illustrative scenario

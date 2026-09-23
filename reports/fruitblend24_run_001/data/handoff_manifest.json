@@ -1,0 +1,35 @@
+{
+  "run_id": "fruitblend24_run_001",
+  "agent_id": "A2",
+  "status": "ready_for_review",
+  "input_versions": {
+    "source_sha256": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8",
+    "data_version": "fruitblend24_v1_c2869ce419bf",
+    "metric_version": "metric_contract_v1",
+    "assumption_version": "assumption_ledger_v1"
+  },
+  "artifacts": [
+    "data/processed/fruitblend24_v1_c2869ce419bf/sales_clean.csv",
+    "data/processed/fruitblend24_v1_c2869ce419bf/sales_daily.csv",
+    "data/processed/fruitblend24_v1_c2869ce419bf/waste_clean.csv",
+    "data/processed/fruitblend24_v1_c2869ce419bf/metric_contract.json",
+    "data/processed/fruitblend24_v1_c2869ce419bf/reconciliation.json",
+    "data/processed/fruitblend24_v1_c2869ce419bf/manifest.json",
+    "reports/fruitblend24_run_001/data/exceptions_exact_duplicates.csv",
+    "reports/fruitblend24_run_001/data/exceptions_non_menu.csv"
+  ],
+  "checks": [
+    {"name": "row bridge", "result": "PASS", "evidence_path": "data/processed/fruitblend24_v1_c2869ce419bf/reconciliation.json"},
+    {"name": "unit bridge", "result": "PASS", "evidence_path": "data/processed/fruitblend24_v1_c2869ce419bf/reconciliation.json"},
+    {"name": "revenue bridge", "result": "PASS", "evidence_path": "data/processed/fruitblend24_v1_c2869ce419bf/reconciliation.json"},
+    {"name": "dimension joins", "result": "PASS", "evidence_path": "data/processed/fruitblend24_v1_c2869ce419bf/manifest.json"},
+    {"name": "missing cost visibility", "result": "PASS with explicit proxy", "evidence_path": "data/processed/fruitblend24_v1_c2869ce419bf/manifest.json"}
+  ],
+  "findings": [
+    "Retained menu sales are 123,655 rows, 618,123 cups, and 31,146,932.57 THB after exclusions.",
+    "All exact-week missing sales cost rows are the 2026-03-01 MixedBerryPremium launch-day gap and are estimated, not treated as observed.",
+    "The raw-to-retained row, unit, and revenue bridges reconcile."
+  ],
+  "open_issues": ["Budget GP boundary", "Inventory control inputs", "Whether absent waste rows mean zero or unrecorded waste"],
+  "next_owner": "A6"
+}

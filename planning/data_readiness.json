@@ -1,0 +1,167 @@
+{
+  "scope": "Read-only planning audit; candidate normalization is not a final cleaned data release or business analysis.",
+  "source": "C:\\Users\\puchi\\Downloads\\dataintern\\data\\raw\\FruitBlend24_Intern_Case_Data.xlsx",
+  "source_sha256": "c2869ce419bf796bf1351c46b6bdd813a4c35add7031c4e143630858a0a6c6f8",
+  "profile_script_sha256": "3b255f0ca900ba80fd3d9c7587bc741015b7bbc9d7813df0bda085c2bb461ea2",
+  "sheets": {
+    "README": {
+      "data_rows_including_internal_blanks": 28,
+      "columns": 1
+    },
+    "orders_hourly": {
+      "data_rows_including_internal_blanks": 124397,
+      "columns": 9
+    },
+    "weekly_fruit_cost": {
+      "data_rows_including_internal_blanks": 239,
+      "columns": 3
+    },
+    "platform_commission_rate": {
+      "data_rows_including_internal_blanks": 2,
+      "columns": 3
+    },
+    "waste_daily": {
+      "data_rows_including_internal_blanks": 6570,
+      "columns": 5
+    },
+    "cost_assumptions": {
+      "data_rows_including_internal_blanks": 12,
+      "columns": 4
+    },
+    "rate_code_dim": {
+      "data_rows_including_internal_blanks": 4,
+      "columns": 5
+    },
+    "platform_dim": {
+      "data_rows_including_internal_blanks": 2,
+      "columns": 2
+    },
+    "sku_code_dim": {
+      "data_rows_including_internal_blanks": 5,
+      "columns": 2
+    },
+    "monthly_budget": {
+      "data_rows_including_internal_blanks": 12,
+      "columns": 4
+    },
+    "data_dictionary": {
+      "data_rows_including_internal_blanks": 33,
+      "columns": 3
+    }
+  },
+  "raw_orders": {
+    "rows": 124397,
+    "period_start": "2025-09-01",
+    "period_end": "2026-08-31",
+    "distinct_raw_names": 31,
+    "exact_duplicate_excess_rows": 372,
+    "null_cells_by_column": {
+      "date": 0,
+      "hour": 0,
+      "day_of_week": 0,
+      "kitchen": 0,
+      "item_name_raw": 0,
+      "price_thb": 0,
+      "units_sold": 0,
+      "gross_revenue_thb": 0,
+      "rate_code": 0
+    },
+    "invalid_dates": 0,
+    "invalid_hours": 0,
+    "nonpositive_units": 0,
+    "revenue_identity_mismatch_rows_over_001_thb": 0,
+    "weekday_mismatch_rows": 0
+  },
+  "candidate_preparation": {
+    "rows_after_exact_dedup": 124025,
+    "unmapped_rows_after_dedup": 370,
+    "unmapped_names_after_dedup": {
+      "น้ำส้มปั่น (เมนูทดลอง)": 134,
+      "Combo Set A (2 แก้ว)": 122,
+      "แก้วเปล่า": 114
+    },
+    "retained_menu_rows": 123655,
+    "duplicate_excess_at_date_hour_kitchen_sku": 0,
+    "invalid_rate_format_rows": 0,
+    "unknown_base_codes": [],
+    "sku_suffix_mismatch_rows": 0,
+    "price_discount_formula_mismatch_rows_over_001_thb": 0,
+    "missing_exact_week_fruit_cost_rows": 75,
+    "missing_exact_week_fruit_cost_keys": [
+      {
+        "date": "2026-03-01",
+        "week_start": "2026-02-23",
+        "sku": "MixedBerryPremium"
+      }
+    ],
+    "sku_first_date": {
+      "Guava": "2025-09-01",
+      "MixedBerryPremium": "2026-03-01",
+      "PassionFruit": "2025-09-01",
+      "Pineapple": "2025-09-01",
+      "Watermelon": "2025-09-01"
+    },
+    "sku_last_date": {
+      "Guava": "2026-08-31",
+      "MixedBerryPremium": "2026-08-31",
+      "PassionFruit": "2026-08-31",
+      "Pineapple": "2026-08-31",
+      "Watermelon": "2026-08-31"
+    },
+    "candidate_alias_mapping": {
+      "Watermelon": [
+        "Watermelon Ice",
+        "Watermelon smoothy",
+        "Watermelon Smoothie",
+        "watermelon ice",
+        "แตงโมปั่นสด",
+        "แตงโมปั่น",
+        "แตงโมปั่น (ไซส์ M)"
+      ],
+      "Pineapple": [
+        "สับปะรดปั่น",
+        "Pineapple Ice",
+        "pineapple ice",
+        "สัปปะรดปั่น",
+        "Pineapple Smoothie",
+        "Pineapple smoothie "
+      ],
+      "Guava": [
+        "Guava Ice",
+        "Guava Smoothie",
+        "ฝรั่งปั่น (ใส่เกลือ)",
+        "guava ice",
+        "ฝรั่งปั่น"
+      ],
+      "PassionFruit": [
+        "Passion Fruit Smoothie",
+        "เสาวรสปั่น",
+        "Passion Fruit Ice",
+        "เสาวรสปั่นเข้มข้น",
+        "passionfruit ice"
+      ],
+      "MixedBerryPremium": [
+        "เบอร์รี่ปั่นพรีเมียม",
+        "berry premium smoothie",
+        "Mixed Berry (Premium)",
+        "เบอร์รี่รวมพรีเมียม",
+        "Mixed Berry Premium"
+      ]
+    }
+  },
+  "waste": {
+    "rows": 6570,
+    "missing_estimated_waste_cost_rows": 4,
+    "units_with_missing_estimated_waste_cost": 96,
+    "duplicate_excess_at_date_kitchen_sku": 0,
+    "missing_exact_week_fruit_cost_rows": 4,
+    "recomputed_waste_cost_mismatch_rows_over_001_thb_where_cost_available": 0
+  },
+  "limitations": [
+    "Positive sales observations do not prove that absent hourly rows are zero demand or that no stockouts occurred.",
+    "No customer/order IDs, ingredient recipes, stock balances, supplier lead times, shelf life, or purchase orders are present in the provided tables.",
+    "Monthly budget does not define the gross-profit cost boundary; confirm or disclose the adopted definition.",
+    "Observed selling prices already include the applied discount; do not deduct it again.",
+    "Waste estimate includes fruit and packaging only, as specified in data_dictionary."
+  ]
+}

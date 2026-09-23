@@ -1,0 +1,3 @@
+﻿platform_code,platform_name,units_sold,gross_revenue_thb,commission_thb,sold_fruit_cost_thb,sold_packaging_cost_thb,sold_labor_cost_thb,product_margin_thb,contribution_before_waste_thb,realized_price_thb,contribution_before_waste_per_cup_thb,revenue_share
+LM,LINE MAN,345122,17368795.6,5210638.68,3940733.09,2100858,1830875.5,9496329.01,4285690.33,50.32653844147867,12.417899554360487,0.5576406460239755
+GB,Grab,273001,13778136.97,3306752.8728,3148491.28,1663968,1447995.5,7517682.19,4210929.3172,50.469181321680146,15.424593013212407,0.4423593539760246

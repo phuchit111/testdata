@@ -1,0 +1,25 @@
+{
+  "data_version": "fruitblend24_v1_c2869ce419bf",
+  "status": "ready_for_review",
+  "artifacts": [
+    "promo_scorecard.csv",
+    "promo_matched_scorecard.csv",
+    "promo_efficiency_matrix.csv",
+    "promo_by_sku.csv",
+    "promo_by_kitchen.csv",
+    "promo_by_platform.csv",
+    "promo_by_daypart.csv",
+    "promo_by_hour.csv",
+    "promo_by_segment.csv",
+    "promo_dependency_by_sku.csv",
+    "promo_depth_breakeven.csv",
+    "promotion_depth_metrics.json"
+  ],
+  "checks": [
+    "Rate codes decoded from rate_code_dim; unknown codes surfaced.",
+    "Observed revenue retained as post-promotion net revenue; discount not double-counted.",
+    "Active-hour denominator used inside matched strata.",
+    "Demand lift and contribution lift labelled as association, not causal uplift.",
+    "Break-even demand lift is a contribution guardrail; promo P&L excludes rate-code-attributed waste."
+  ]
+}

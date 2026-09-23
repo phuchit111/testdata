@@ -1,0 +1,54 @@
+{
+  "status": "conditional management targets; not a guaranteed profit forecast",
+  "case_period": [
+    "2026-09-01",
+    "2026-11-30"
+  ],
+  "data_cutoff": "2026-08-31",
+  "baseline_result_thb": -777292.7226433158,
+  "released_optimized_result_thb": -597323.9311948128,
+  "proposed_target_result_thb": 354.26026234356686,
+  "final_month_core_growth_needed_for_3m_breakeven": 0.25433990155789815,
+  "final_month_extra_core_cups_needed_for_3m_breakeven": 8669,
+  "final_month_core_growth_needed_for_50000_buffer": 0.3475056489289008,
+  "november_growth_evidence": {
+    "historical_period": "2025-09 to 2025-11",
+    "historical_oct_to_nov_total_growth": 0.13461064867260997,
+    "historical_oct_to_nov_core_growth": 0.1280691248182051,
+    "conditional_target_oct_to_nov_total_growth": 0.08692333411345765,
+    "conditional_target_oct_to_nov_core_growth": 0.10410557184750702,
+    "limitation": "One historical autumn supports a seasonality hypothesis only; it cannot attribute uplift to seasonality rather than promotion, platform, price, or capacity changes."
+  },
+  "november_capacity_gate": {
+    "net_extra_cups_per_day": 212.18031392661283,
+    "extra_core_cups_per_day": 289.7064048917835,
+    "basis": "Candidate output versus the original forecast. Core capacity is higher than net capacity because MixedBerryPremium is paused in the candidate plan."
+  },
+  "extra_cost_capacity_before_3m_loss_thb": 354.26026234356686,
+  "total_implementation_budget_thb": 40000.0,
+  "checks": {
+    "base_operating_result_thb_max_error": 1.7462298274040222e-10,
+    "base_planned_prep_max_error": 7.275957614183426e-12,
+    "base_revenue_thb_max_error": 4.656612873077393e-10,
+    "base_waste_cost_thb_max_error": 8.731149137020111e-11,
+    "price_and_waste_action_operating_result_thb_max_error": 1.1641532182693481e-10,
+    "price_and_waste_action_planned_prep_max_error": 7.275957614183426e-12,
+    "price_and_waste_action_revenue_thb_max_error": 0.0,
+    "price_and_waste_action_waste_cost_thb_max_error": 8.003553375601768e-11
+  },
+  "checks_passed": true,
+  "constraints": [
+    "First month remains loss-making; target is non-negative cumulative 3-month operating result.",
+    "Growth is net achieved sales after pricing, promo changes and cannibalization; not elasticity prediction.",
+    "No substitution sales from MixedBerry pause are credited; sunk stock and disposal need verification.",
+    "Procurement targets refer to usable cost per cup at constant yield and quality, not just supplier price.",
+    "Variable labor, packaging, commission and waste are charged on every extra cup.",
+    "Overhead cuts must be realized expenses, not deferred bills or reclassified variable labor.",
+    "Overhead totals only are known; no evidence yet confirms individual savings or production capacity.",
+    "Implementation budget is an assumed cap; include ads, tests, extra shifts and transition stock losses.",
+    "Demand stress assumes prep adjusts; fixed prep and lost sales could produce worse losses.",
+    "Daily prep targets are averages for capacity planning; update from actual demand before producing.",
+    "No inventory on hand, inbound, lead time, shelf life, yield or stockouts; no purchase quantities.",
+    "Calendar is the original case horizon; for a later live start load intervening actuals and reforecast."
+  ]
+}

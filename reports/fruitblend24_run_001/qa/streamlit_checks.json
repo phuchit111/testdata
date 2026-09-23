@@ -1,0 +1,532 @@
+{
+  "app": "C:\\Users\\puchi\\Downloads\\dataintern\\deliverables\\fruitblend24_run_001\\app.py",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Streamlit AppTest has no exceptions",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "App exposes all six required task tabs",
+      "result": "PASS",
+      "expected": [
+        "ภาพรวมและแผนแก้ไข",
+        "สินค้า สาขา และผลเทียบงบ",
+        "โปรโมชั่นคุ้มไหม",
+        "ยอดขายและความเหมาะสมของราคา",
+        "แผน 3 เดือนและการเตรียมสินค้า",
+        "ที่มาข้อมูลและข้อจำกัด"
+      ],
+      "actual": [
+        "ภาพรวมและแผนแก้ไข",
+        "สินค้า สาขา และผลเทียบงบ",
+        "โปรโมชั่นคุ้มไหม",
+        "ยอดขายและความเหมาะสมของราคา",
+        "แผน 3 เดือนและการเตรียมสินค้า",
+        "ที่มาข้อมูลและข้อจำกัด"
+      ]
+    },
+    {
+      "name": "Deployment entrypoint has no exceptions",
+      "result": "PASS",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "name": "Deployment entrypoint exposes all six task tabs",
+      "result": "PASS",
+      "expected": [
+        "ภาพรวมและแผนแก้ไข",
+        "สินค้า สาขา และผลเทียบงบ",
+        "โปรโมชั่นคุ้มไหม",
+        "ยอดขายและความเหมาะสมของราคา",
+        "แผน 3 เดือนและการเตรียมสินค้า",
+        "ที่มาข้อมูลและข้อจำกัด"
+      ],
+      "actual": [
+        "ภาพรวมและแผนแก้ไข",
+        "สินค้า สาขา และผลเทียบงบ",
+        "โปรโมชั่นคุ้มไหม",
+        "ยอดขายและความเหมาะสมของราคา",
+        "แผน 3 เดือนและการเตรียมสินค้า",
+        "ที่มาข้อมูลและข้อจำกัด"
+      ]
+    },
+    {
+      "name": "App exposes required metric cards",
+      "result": "PASS",
+      "expected": [
+        "รายได้จากการขาย",
+        "ต่างจากเป้ารายได้",
+        "ผลดำเนินงานตามแบบจำลอง",
+        "แถวคำสั่งซื้อดิบ",
+        "แถวเมนูที่ใช้วิเคราะห์",
+        "ช่วงยอดขายรวมสูงสุด",
+        "ส่วนลด",
+        "Forecast เดิม (ฐาน)",
+        "เป้าเตรียมจาก Forecast เดิม"
+      ],
+      "actual": [
+        "รายได้จากการขาย",
+        "ต่างจากเป้ารายได้",
+        "ผลดำเนินงานตามแบบจำลอง",
+        "กรณีฐาน",
+        "กรณีปรับปรุง",
+        "กรณีแย่ลง",
+        "รายได้จากการขาย",
+        "ต่างจากเป้ารายได้",
+        "เงินเหลือก่อนของเสีย",
+        "ต้นทุนของเสีย",
+        "ผลดำเนินงานตามแบบจำลอง",
+        "ส่วนลด",
+        "สัดส่วนยอดขายทั้งหมด",
+        "ต้นทุนส่วนลด",
+        "เงินเหลือก่อนของเสีย/แก้ว",
+        "ยอดขายต่อชั่วโมง",
+        "ช่วงยอดขายรวมสูงสุด",
+        "วันที่ยอดขายสูงสุด",
+        "แพลตฟอร์มรายได้สูงสุด",
+        "ยอดขายย้อนหลัง",
+        "ราคาที่รับจริง",
+        "ส่วนต่างเหนือคุ้มทุนก่อนของเสีย",
+        "เงินเหลือหลังของเสียต่อแก้ว",
+        "Forecast เดิม (ฐาน)",
+        "ช่วงสำหรับวางแผน",
+        "เป้าเตรียมจาก Forecast เดิม",
+        "ของเสียที่คาด",
+        "ผล Forecast เดิม",
+        "แถวคำสั่งซื้อดิบ",
+        "แถวเมนูที่ใช้วิเคราะห์",
+        "รายได้หลังคัดกรอง"
+      ]
+    },
+    {
+      "name": "App includes readable decision sections for all six tasks",
+      "result": "PASS",
+      "expected": [
+        "5 ข้อค้นพบที่ควรใช้ตัดสินใจ",
+        "แผนลงมือทำ",
+        "จากข้อมูลดิบสู่ข้อมูลที่ใช้วิเคราะห์",
+        "ราคาปัจจุบันของแต่ละสินค้า",
+        "Scorecard: ลดราคาแล้วเหลือเงินเท่าไร?",
+        "ยอดขายเพิ่มพอคุ้มส่วนลดหรือไม่?",
+        "รายได้จริงเทียบงบรายเดือน",
+        "สินค้าไหนควรทำอะไร?",
+        "ครัวไหนควรเริ่มแก้ก่อน?",
+        "ยอดขายย้อนหลังต่อด้วยยอดขายคาดการณ์",
+        "หน้านี้มีตัวเลข 2 ชุด",
+        "เป้าสมจริงเพื่อคุ้มทุนสะสม",
+        "ผลดำเนินงานที่คาดใน 3 สถานการณ์",
+        "เป้าเตรียมเมื่อแผนยอดขายได้รับการยืนยัน",
+        "นโยบายเตรียมและเติมสินค้า",
+        "สูตรที่ใช้เมื่อมีข้อมูลสต็อกครบ"
+      ],
+      "actual": [
+        "5 ข้อค้นพบที่ควรใช้ตัดสินใจ",
+        "แผนลงมือทำ",
+        "จากข้อมูลดิบสู่ข้อมูลที่ใช้วิเคราะห์",
+        "ราคาปัจจุบันของแต่ละสินค้า",
+        "Scorecard: ลดราคาแล้วเหลือเงินเท่าไร?",
+        "ยอดขายเพิ่มพอคุ้มส่วนลดหรือไม่?",
+        "รายได้จริงเทียบงบรายเดือน",
+        "สินค้าไหนควรทำอะไร?",
+        "ครัวไหนควรเริ่มแก้ก่อน?",
+        "ยอดขายย้อนหลังต่อด้วยยอดขายคาดการณ์",
+        "หน้านี้มีตัวเลข 2 ชุด",
+        "เป้าสมจริงเพื่อคุ้มทุนสะสม",
+        "ผลดำเนินงานที่คาดใน 3 สถานการณ์",
+        "เป้าเตรียมเมื่อแผนยอดขายได้รับการยืนยัน",
+        "นโยบายเตรียมและเติมสินค้า",
+        "สูตรที่ใช้เมื่อมีข้อมูลสต็อกครบ"
+      ]
+    },
+    {
+      "name": "App keeps every assessment task traceable",
+      "result": "PASS",
+      "expected": [
+        "Task 1 · Data quality",
+        "Task 2 · Demand & pricing",
+        "Task 3 · Promotions & rate codes",
+        "Task 4 · Portfolio & budget performance",
+        "Task 5 · Inventory & 3-month outlook",
+        "Task 6 · สรุปเพื่อการตัดสินใจ"
+      ],
+      "actual": [
+        "Task 1 · Data quality",
+        "Task 2 · Demand & pricing",
+        "Task 3 · Promotions & rate codes",
+        "Task 4 · Portfolio & budget performance",
+        "Task 5 · Inventory & 3-month outlook",
+        "Task 6 · สรุปเพื่อการตัดสินใจ"
+      ]
+    },
+    {
+      "name": "Issue log is valid CSV",
+      "result": "PASS",
+      "expected": 6,
+      "actual": 6
+    },
+    {
+      "name": "Price ladder covers all five SKUs",
+      "result": "PASS",
+      "expected": 5,
+      "actual": 5
+    },
+    {
+      "name": "Price simulation covers five SKUs and six price scenarios",
+      "result": "PASS",
+      "expected": "30 rows / 5 SKUs",
+      "actual": "30 rows / 5 SKUs"
+    },
+    {
+      "name": "Price simulation labels non-causal assumption",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "fallback_elasticity_assumption": -0.3,
+        "caution": "Effective price is observed post-promotion price. Historical price variation is not randomized; directional sensitivity is not causal elasticity."
+      }
+    },
+    {
+      "name": "Promotion P&L scorecard covers standard plus three promo codes",
+      "result": "PASS",
+      "expected": [
+        "RC000",
+        "RC101",
+        "RC102",
+        "RC103"
+      ],
+      "actual": [
+        "RC000",
+        "RC101",
+        "RC102",
+        "RC103"
+      ]
+    },
+    {
+      "name": "Matched promotion scorecard covers three promo codes",
+      "result": "PASS",
+      "expected": [
+        "RC101",
+        "RC102",
+        "RC103"
+      ],
+      "actual": [
+        "RC101",
+        "RC102",
+        "RC103"
+      ]
+    },
+    {
+      "name": "Promotion efficiency matrix includes lift, break-even, and decision",
+      "result": "PASS",
+      "expected": true,
+      "actual": [
+        "actual_demand_lift_pct",
+        "break_even_lift_pct",
+        "contribution_lift_pct",
+        "decision"
+      ]
+    },
+    {
+      "name": "Promotion dependency covers all five SKUs",
+      "result": "PASS",
+      "expected": 5,
+      "actual": 5
+    },
+    {
+      "name": "Promotion hour view covers all 24 hours",
+      "result": "PASS",
+      "expected": 24,
+      "actual": 24
+    },
+    {
+      "name": "Promotion depth guardrail covers five SKUs and six discount depths",
+      "result": "PASS",
+      "expected": "30 rows / 5 SKUs / 6 depths",
+      "actual": "30 rows / 5 SKUs / 6 depths"
+    },
+    {
+      "name": "Promotion mapping and revenue identity QA passed",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "unknown_base_codes": [],
+        "revenue_identity_mismatch_rows": 0
+      }
+    },
+    {
+      "name": "Finance metric contract discloses budget GP boundary",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "budget_gp_comparable": false,
+        "budget_gp_boundary_status": "OPEN: source does not define whether budget GP includes commission, waste, labor, or overhead"
+      }
+    },
+    {
+      "name": "Finance P&L waterfall reconciles to operating result",
+      "result": "PASS",
+      "expected": -403231.0228,
+      "actual": -403231.0227999997
+    },
+    {
+      "name": "Finance kitchen summary covers four kitchens and cost ratios",
+      "result": "PASS",
+      "expected": "4 kitchens + cost ratios",
+      "actual": {
+        "kitchens": 4,
+        "has_cost_ratios": true
+      }
+    },
+    {
+      "name": "Finance portfolio covers five SKUs with revenue/profit mix and quadrant",
+      "result": "PASS",
+      "expected": "5 SKUs + mix/margin/quadrant",
+      "actual": {
+        "skus": 5,
+        "has_required_columns": true
+      }
+    },
+    {
+      "name": "Finance waste heatmap covers kitchen x SKU cells",
+      "result": "PASS",
+      "expected": "4 kitchens x 5 SKUs",
+      "actual": {
+        "kitchens": 4,
+        "skus": 5
+      }
+    },
+    {
+      "name": "Finance fruit-cost trend covers all five SKUs",
+      "result": "PASS",
+      "expected": 5,
+      "actual": 5
+    },
+    {
+      "name": "Finance Pareto covers SKU x kitchen combinations",
+      "result": "PASS",
+      "expected": "20 combinations",
+      "actual": {
+        "rows": 20,
+        "has_cumulative_mix": true
+      }
+    },
+    {
+      "name": "Finance volume/price diagnostic reconciles",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "max_check_thb": 2.9103830456733704e-10,
+        "basis": "Month-on-month diagnostic; not a direct budget variance decomposition because budget has no cups or price plan"
+      }
+    },
+    {
+      "name": "Finance gap-closing scenario artifacts exist",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "scenario_count": 4,
+        "gap_plan_rows": 4
+      }
+    },
+    {
+      "name": "App contains expected artifact version",
+      "result": "PASS",
+      "expected": "fruitblend24_v1_c2869ce419bf",
+      "actual": "fruitblend24_v1_c2869ce419bf"
+    },
+    {
+      "name": "App revenue equals QA-passed artifact",
+      "result": "PASS",
+      "expected": 31146932.57,
+      "actual": 31146932.57
+    },
+    {
+      "name": "App revenue variance equals QA-passed artifact",
+      "result": "PASS",
+      "expected": -1253067.43,
+      "actual": -1253067.4300000016
+    },
+    {
+      "name": "App modeled operating result equals QA-passed artifact",
+      "result": "PASS",
+      "expected": -403231.0228,
+      "actual": -403231.0227999997
+    },
+    {
+      "name": "App surfaces negative MixedBerry contribution",
+      "result": "PASS",
+      "expected": "<0",
+      "actual": -53860.02719999995
+    },
+    {
+      "name": "App binds selected forecast method from artifact",
+      "result": "PASS",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "App bases outlook on released three-month scenario",
+      "result": "PASS",
+      "expected": 126835.74337566507,
+      "actual": 126835.74337566507
+    },
+    {
+      "name": "App discloses the remaining three-month profitability gap",
+      "result": "PASS",
+      "expected": {
+        "optimized_result_rounded": -597324,
+        "required_copy": [
+          "ยังขาดทุน",
+          "ช่องว่าง"
+        ]
+      },
+      "actual": {
+        "optimized_result": -597323.931194813,
+        "has_required_copy": true
+      }
+    },
+    {
+      "name": "Price page gives a test recommendation for every core SKU",
+      "result": "PASS",
+      "expected": "5 SKUs + test recommendation",
+      "actual": {
+        "sku_mentions": [
+          "Watermelon",
+          "Pineapple",
+          "Guava",
+          "PassionFruit",
+          "MixedBerryPremium"
+        ],
+        "has_test_label": true
+      }
+    },
+    {
+      "name": "Forecast benchmarks five methods with rolling-origin windows",
+      "result": "PASS",
+      "expected": "5 methods / 4 cutoffs",
+      "actual": {
+        "methods": [
+          "exp_smoothing_4w",
+          "moving_avg_4w",
+          "naive_last_day",
+          "seasonal_naive_7d",
+          "weekday_median_8w"
+        ],
+        "cutoffs": [
+          4
+        ]
+      }
+    },
+    {
+      "name": "Forecast uncertainty range is present and ordered",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "rows": 1820,
+        "range_ordered": true
+      }
+    },
+    {
+      "name": "Forecast is at Kitchen x SKU level",
+      "result": "PASS",
+      "expected": 20,
+      "actual": 20
+    },
+    {
+      "name": "Monthly SKU forecast covers three months and five SKUs",
+      "result": "PASS",
+      "expected": "3 months / 5 SKUs",
+      "actual": {
+        "months": 3,
+        "skus": 5
+      }
+    },
+    {
+      "name": "Conditional profit-recovery plan reconciles",
+      "result": "PASS",
+      "expected": "3 monthly rows + reconciled target",
+      "actual": {
+        "rows": 3,
+        "target": 354.26026234356686,
+        "checks_passed": true
+      }
+    },
+    {
+      "name": "Conditional prep plan covers all months, kitchens and SKUs",
+      "result": "PASS",
+      "expected": "60 rows / 3 months / 4 kitchens / 5 SKUs",
+      "actual": {
+        "rows": 60,
+        "months": 3,
+        "kitchens": 4,
+        "skus": 5,
+        "prep_ge_sales": true
+      }
+    },
+    {
+      "name": "Profit-recovery sensitivity and kitchen plan are present",
+      "result": "PASS",
+      "expected": "8 sensitivity / 9 bridge / 12 kitchen-month rows, including no-November-release case",
+      "actual": {
+        "sensitivity": 8,
+        "bridge": 9,
+        "kitchen_month": 12
+      }
+    },
+    {
+      "name": "November candidate target carries seasonal and capacity gates",
+      "result": "PASS",
+      "expected": "3-month autumn evidence + 4 kitchen capacity gates",
+      "actual": {
+        "historical_oct_to_nov_growth": 0.1346106486726099,
+        "conditional_oct_to_nov_growth": 0.0869233341134576,
+        "capacity_kitchens": 4,
+        "net_extra_cups_per_day": 212.18031392661283
+      }
+    },
+    {
+      "name": "Inventory policy covers 20 Kitchen x SKU cells with ABC/XYZ and safety stock",
+      "result": "PASS",
+      "expected": "20 cells + policy fields",
+      "actual": {
+        "rows": 20,
+        "has_policy_fields": true
+      }
+    },
+    {
+      "name": "Purchase-order boundary is explicitly preserved",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "all_not_calculable": true,
+        "limitations": [
+          "No on-hand",
+          "No inbound",
+          "No lead time",
+          "No shelf life",
+          "No BOM/yield",
+          "No stockout flags"
+        ]
+      }
+    },
+    {
+      "name": "Fruit-cost stress test covers 0/5/10/20 percent",
+      "result": "PASS",
+      "expected": "4 stress points / operating result declines",
+      "actual": {
+        "points": [
+          0.0,
+          5.0,
+          10.0,
+          20.0
+        ],
+        "declines": true
+      }
+    }
+  ],
+  "failed_count": 0
+}

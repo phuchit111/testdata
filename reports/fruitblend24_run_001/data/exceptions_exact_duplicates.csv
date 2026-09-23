@@ -1,0 +1,373 @@
+﻿date,hour,day_of_week,kitchen,item_name_raw,price_thb,units_sold,gross_revenue_thb,rate_code,source_row_id,duplicate_key,exception_reason
+2026-07-28,17,1,Pattaya_Central,Mixed Berry (Premium),89.0,1,89.0,LM-RC000,687,16922896315703914554,exact_duplicate
+2025-09-13,1,5,Pattaya_Central,Pineapple Ice,49.0,2,98.0,LM-RC000,8975,16223647646524662028,exact_duplicate
+2026-08-22,12,5,BKK_Ladprao,แตงโมปั่น (ไซส์ M),45.0,7,315.0,LM-RC000,11363,11934030944421837522,exact_duplicate
+2026-06-01,4,0,Pattaya_Central,ฝรั่งปั่น (ใส่เกลือ),49.0,1,49.0,GB-RC000,11554,8091412305242020411,exact_duplicate
+2026-01-12,17,0,Pattaya_Central,เสาวรสปั่นเข้มข้น,65.0,4,260.0,LM-RC000,13696,1581986325340106435,exact_duplicate
+2026-03-20,11,4,Pattaya_Central,Passion Fruit Smoothie,65.0,6,390.0,LM-RC000,15346,3545304415825230048,exact_duplicate
+2025-12-04,12,3,BKK_Ladprao,watermelon ice,45.0,5,225.0,GB-RC000,17620,3924522372989339106,exact_duplicate
+2026-04-16,19,3,Pattaya_Beach,แตงโมปั่น (ไซส์ M),45.0,22,990.0,GB-RC000,17685,2787407526396040217,exact_duplicate
+2026-08-09,0,6,Pattaya_Central,Guava Smoothie,49.0,4,196.0,LM-RC000,17691,5139847351568330558,exact_duplicate
+2026-08-15,12,5,Pattaya_Central,Watermelon Smoothie,45.0,13,585.0,GB-RC000,22389,7454405328682356810,exact_duplicate
+2026-04-06,8,0,Pattaya_Beach,Mixed Berry (Premium),89.0,2,178.0,LM-RC000,23202,16271566432426954806,exact_duplicate
+2026-03-06,18,4,Pattaya_Central,pineapple ice,49.0,7,343.0,LM-RC000,23389,12412425313023449333,exact_duplicate
+2026-01-03,22,5,Pattaya_Central,แตงโมปั่น,45.0,24,1080.0,GB-RC000,23541,1335596977183985409,exact_duplicate
+2026-06-03,14,2,BKK_Ladprao,เสาวรสปั่น,65.0,1,65.0,LM-RC000,23938,5274395897823934385,exact_duplicate
+2026-01-03,11,5,BKK_Ladprao,แตงโมปั่นสด,45.0,9,405.0,GB-RC000,24412,4214043038108550672,exact_duplicate
+2026-07-15,1,2,Pattaya_Central,สับปะรดปั่น,49.0,1,49.0,LM-RC000,24791,10537524127973787599,exact_duplicate
+2026-05-07,6,3,Pattaya_Central,สัปปะรดปั่น,49.0,1,49.0,GB-RC000,24913,14043160072361999034,exact_duplicate
+2025-09-15,14,0,Pattaya_Beach,Watermelon Smoothie,39.6,10,396.0,LM-RC103,27126,17038313764276979154,exact_duplicate
+2026-03-09,12,0,Pattaya_Beach,เสาวรสปั่น,65.0,9,585.0,LM-RC000,27424,2873255538504836251,exact_duplicate
+2026-05-05,14,1,BKK_Ladprao,เบอร์รี่ปั่นพรีเมียม,71.2,4,284.8,LM-RC102,28806,15222443697850765530,exact_duplicate
+2026-07-02,17,3,BKK_Ladprao,Passion Fruit Ice,65.0,1,65.0,LM-RC000,28915,9963498239984871764,exact_duplicate
+2026-02-03,11,1,Pattaya_Central,ฝรั่งปั่น,49.0,8,392.0,LM-RC000,28983,16736446317331591634,exact_duplicate
+2026-07-09,16,3,Pattaya_Beach,เสาวรสปั่นเข้มข้น,65.0,2,130.0,LM-RC000,29153,9935249216696066452,exact_duplicate
+2026-07-06,19,0,BKK_Sukhumvit,สัปปะรดปั่น,49.0,2,98.0,GB-RC000,29368,17459694772113266984,exact_duplicate
+2026-07-15,13,2,Pattaya_Beach,เบอร์รี่ปั่นพรีเมียม,89.0,4,356.0,GB-RC000,29663,9594156322670649602,exact_duplicate
+2026-08-29,14,5,Pattaya_Beach,guava ice,49.0,1,49.0,GB-RC000,30167,3266796346589284502,exact_duplicate
+2025-11-14,6,4,Pattaya_Beach,Guava Smoothie,49.0,2,98.0,LM-RC000,30264,15316975470897230840,exact_duplicate
+2026-05-28,15,3,BKK_Ladprao,เสาวรสปั่นเข้มข้น,65.0,2,130.0,LM-RC000,31222,8862151424778138000,exact_duplicate
+2026-01-24,13,5,BKK_Sukhumvit,สับปะรดปั่น,49.0,9,441.0,LM-RC000,31529,7422902684579301018,exact_duplicate
+2025-10-15,20,2,Pattaya_Central,watermelon ice,45.0,6,270.0,GB-RC000,31929,17252644997931950056,exact_duplicate
+2026-08-19,17,2,BKK_Ladprao,สัปปะรดปั่น,49.0,5,245.0,GB-RC000,32081,13018863153614554112,exact_duplicate
+2026-02-12,20,3,Pattaya_Beach,Watermelon smoothy,45.0,11,495.0,LM-RC000,34361,12792956873932100971,exact_duplicate
+2026-08-25,12,1,Pattaya_Central,Pineapple smoothie ,49.0,4,196.0,LM-RC000,35760,4356405956270910134,exact_duplicate
+2025-09-27,7,5,BKK_Ladprao,แตงโมปั่นสด,45.0,1,45.0,LM-RC000,36220,8730038580692221725,exact_duplicate
+2025-12-23,9,1,BKK_Sukhumvit,Watermelon Smoothie,45.0,2,90.0,GB-RC000,36550,2680156290768127815,exact_duplicate
+2025-12-03,12,2,BKK_Sukhumvit,Passion Fruit Ice,65.0,3,195.0,LM-RC000,36837,4448074518882320833,exact_duplicate
+2026-01-31,14,5,Pattaya_Beach,Passion Fruit Smoothie,65.0,4,260.0,GB-RC000,36917,2354775979627998147,exact_duplicate
+2025-11-24,0,0,BKK_Sukhumvit,แตงโมปั่น (ไซส์ M),45.0,3,135.0,LM-RC000,37064,2999665542674168764,exact_duplicate
+2025-09-07,12,6,BKK_Sukhumvit,pineapple ice,49.0,3,147.0,LM-RC000,37281,9072335512369146269,exact_duplicate
+2026-08-25,9,1,Pattaya_Beach,เสาวรสปั่น,65.0,1,65.0,LM-RC000,37336,5123447775502989779,exact_duplicate
+2026-08-16,23,6,Pattaya_Central,pineapple ice,49.0,14,686.0,GB-RC000,38280,7463558269777705299,exact_duplicate
+2025-11-19,23,2,Pattaya_Central,guava ice,49.0,4,196.0,LM-RC000,39598,1517573431604843585,exact_duplicate
+2026-07-06,13,0,BKK_Sukhumvit,Guava Smoothie,49.0,3,147.0,LM-RC000,39659,11001302821548857957,exact_duplicate
+2026-01-25,7,6,Pattaya_Central,Pineapple Smoothie,49.0,4,196.0,LM-RC000,40069,6748993211599796798,exact_duplicate
+2026-07-27,1,0,Pattaya_Beach,Guava Ice,49.0,1,49.0,LM-RC000,40376,17510330137523709119,exact_duplicate
+2025-11-25,18,1,Pattaya_Beach,ฝรั่งปั่น,49.0,5,245.0,LM-RC000,40603,4975389404005984474,exact_duplicate
+2026-06-29,21,0,Pattaya_Central,ฝรั่งปั่น,49.0,6,294.0,GB-RC000,40869,13533343494881034251,exact_duplicate
+2026-04-04,19,5,BKK_Ladprao,Watermelon Ice,36.0,11,396.0,LM-RC102,41111,1175647842759312551,exact_duplicate
+2026-03-14,22,5,Pattaya_Central,Watermelon smoothy,45.0,31,1395.0,LM-RC000,41756,7226295524591832134,exact_duplicate
+2026-08-19,1,2,BKK_Sukhumvit,Watermelon Ice,45.0,1,45.0,GB-RC000,42261,17062596798394320817,exact_duplicate
+2025-11-30,15,6,BKK_Ladprao,Pineapple smoothie ,49.0,5,245.0,GB-RC000,42317,1454651113076437193,exact_duplicate
+2025-11-17,9,0,Pattaya_Central,เสาวรสปั่นเข้มข้น,65.0,2,130.0,GB-RC000,42389,10224097223240364604,exact_duplicate
+2026-04-02,17,3,BKK_Ladprao,แตงโมปั่น (ไซส์ M),45.0,10,450.0,LM-RC000,42843,11793353380270885018,exact_duplicate
+2026-04-25,7,5,Pattaya_Beach,Pineapple Smoothie,41.65,1,41.65,LM-RC101-PA,43342,4543448685182969523,exact_duplicate
+2026-04-21,19,1,BKK_Ladprao,Guava Smoothie,49.0,1,49.0,GB-RC000,44812,1979266633160505557,exact_duplicate
+2026-06-13,8,5,BKK_Sukhumvit,Pineapple Smoothie,49.0,4,196.0,GB-RC000,45763,14486241216563789278,exact_duplicate
+2026-03-05,11,3,Pattaya_Central,pineapple ice,49.0,12,588.0,GB-RC000,46132,9396362615749060713,exact_duplicate
+2026-08-10,15,0,Pattaya_Beach,Passion Fruit Smoothie,57.2,2,114.4,LM-RC103,46910,17532981604887071608,exact_duplicate
+2025-12-15,20,0,Pattaya_Central,แตงโมปั่น,45.0,12,540.0,LM-RC000,48888,3532372037100222184,exact_duplicate
+2025-10-14,18,1,BKK_Ladprao,เสาวรสปั่น,65.0,1,65.0,GB-RC000,50205,17116889074563267003,exact_duplicate
+2026-05-15,6,4,Pattaya_Beach,Passion Fruit Ice,65.0,1,65.0,GB-RC000,51424,9359171360826952626,exact_duplicate
+2026-05-21,18,3,Pattaya_Beach,ฝรั่งปั่น,49.0,4,196.0,LM-RC000,51757,8846786112723248955,exact_duplicate
+2026-01-07,7,2,Pattaya_Beach,Watermelon Ice,45.0,3,135.0,GB-RC000,51942,17154404212551948593,exact_duplicate
+2026-04-13,6,0,BKK_Sukhumvit,ฝรั่งปั่น (ใส่เกลือ),49.0,3,147.0,GB-RC000,52030,13042452385717117329,exact_duplicate
+2026-06-08,23,0,Pattaya_Central,Pineapple Smoothie,49.0,10,490.0,GB-RC000,52414,765395137705603976,exact_duplicate
+2025-12-22,18,0,Pattaya_Central,Pineapple smoothie ,49.0,13,637.0,GB-RC000,52623,11047679738081551762,exact_duplicate
+2026-04-20,17,0,BKK_Ladprao,ฝรั่งปั่น,49.0,5,245.0,LM-RC000,52719,6877210502655673273,exact_duplicate
+2026-08-14,20,4,BKK_Ladprao,สัปปะรดปั่น,49.0,2,98.0,LM-RC000,53068,10101021257626714365,exact_duplicate
+2025-12-17,11,2,BKK_Sukhumvit,Guava Ice,49.0,4,196.0,GB-RC000,53115,16724193863204443451,exact_duplicate
+2025-09-07,17,6,Pattaya_Central,แตงโมปั่น,45.0,23,1035.0,GB-RC000,53375,1165450194036181065,exact_duplicate
+2025-10-18,12,5,Pattaya_Central,guava ice,49.0,6,294.0,GB-RC000,53803,10272397447411208520,exact_duplicate
+2026-08-06,12,3,BKK_Ladprao,Watermelon smoothy,45.0,5,225.0,LM-RC000,53814,4893860481217023564,exact_duplicate
+2026-03-30,22,0,Pattaya_Beach,Pineapple Smoothie,49.0,10,490.0,LM-RC000,53928,7273812705102650812,exact_duplicate
+2026-02-23,18,0,BKK_Sukhumvit,Watermelon Ice,45.0,13,585.0,LM-RC000,54299,15465096024789365157,exact_duplicate
+2025-12-22,21,0,Pattaya_Beach,สัปปะรดปั่น,49.0,7,343.0,LM-RC000,54465,12238314269718119858,exact_duplicate
+2026-02-13,13,4,BKK_Sukhumvit,ฝรั่งปั่น,49.0,1,49.0,LM-RC000,54781,1647356483381946537,exact_duplicate
+2025-10-22,19,2,BKK_Sukhumvit,แตงโมปั่น (ไซส์ M),45.0,9,405.0,LM-RC000,55416,6013701688160877527,exact_duplicate
+2026-05-09,11,5,BKK_Sukhumvit,Guava Ice,49.0,4,196.0,GB-RC000,56202,6170977109441957466,exact_duplicate
+2026-06-25,13,3,Pattaya_Beach,Pineapple smoothie ,43.12,7,301.84,LM-RC103,57122,16993075532527816637,exact_duplicate
+2026-04-26,1,6,Pattaya_Beach,Guava Ice,49.0,4,196.0,LM-RC000,57485,11367153346245242680,exact_duplicate
+2026-05-27,2,2,Pattaya_Beach,pineapple ice,49.0,3,147.0,GB-RC000,57503,13955137775748634936,exact_duplicate
+2026-07-10,13,4,Pattaya_Central,สัปปะรดปั่น,49.0,10,490.0,GB-RC000,57978,11026814536357697454,exact_duplicate
+2026-03-02,0,0,Pattaya_Central,Guava Ice,49.0,1,49.0,GB-RC000,58242,5127315864032395690,exact_duplicate
+2026-06-22,20,0,BKK_Ladprao,Mixed Berry Premium,89.0,1,89.0,LM-RC000,58695,2418836979073978579,exact_duplicate
+2026-03-18,9,2,BKK_Sukhumvit,Guava Smoothie,49.0,2,98.0,LM-RC000,58957,4038587257458245595,exact_duplicate
+2025-09-15,23,0,Pattaya_Central,Passion Fruit Ice,57.2,2,114.4,LM-RC103,59015,11870268682526767755,exact_duplicate
+2026-08-03,22,0,Pattaya_Beach,เบอร์รี่ปั่นพรีเมียม,89.0,2,178.0,LM-RC000,59035,6648252180564961978,exact_duplicate
+2026-05-26,22,1,Pattaya_Beach,guava ice,49.0,8,392.0,LM-RC000,59249,18329385502492952019,exact_duplicate
+2026-05-23,0,5,Pattaya_Beach,passionfruit ice,65.0,2,130.0,GB-RC000,59306,13753951950015901771,exact_duplicate
+2026-04-27,13,0,BKK_Ladprao,pineapple ice,49.0,10,490.0,GB-RC000,60266,18116536398113189101,exact_duplicate
+2025-10-17,10,4,Pattaya_Beach,Pineapple Smoothie,43.12,1,43.12,LM-RC103,60719,11648051457777037185,exact_duplicate
+2026-06-20,21,5,BKK_Ladprao,Guava Smoothie,49.0,4,196.0,LM-RC000,60728,61755966941617753,exact_duplicate
+2026-04-23,23,3,BKK_Sukhumvit,Pineapple smoothie ,49.0,8,392.0,GB-RC000,61295,15157683801704109970,exact_duplicate
+2025-12-07,11,6,Pattaya_Central,watermelon ice,45.0,14,630.0,GB-RC000,61562,7808569668104082591,exact_duplicate
+2026-04-01,9,2,BKK_Ladprao,Guava Smoothie,49.0,2,98.0,LM-RC000,61609,6313712931402688086,exact_duplicate
+2025-12-28,17,6,BKK_Ladprao,Passion Fruit Ice,65.0,2,130.0,GB-RC000,62845,9508358102971759942,exact_duplicate
+2026-04-16,10,3,BKK_Sukhumvit,Pineapple Smoothie,49.0,12,588.0,LM-RC000,63344,7010880713588833796,exact_duplicate
+2025-09-12,23,4,BKK_Ladprao,Pineapple Ice,49.0,3,147.0,GB-RC000,63454,15359736876497821019,exact_duplicate
+2025-12-06,11,5,BKK_Ladprao,Pineapple Ice,49.0,2,98.0,GB-RC000,63872,15737712193784835672,exact_duplicate
+2026-04-01,19,2,BKK_Ladprao,Watermelon Ice,45.0,7,315.0,LM-RC000,63919,2056888501705371580,exact_duplicate
+2026-05-25,16,0,Pattaya_Central,ฝรั่งปั่น,49.0,8,392.0,LM-RC000,64068,16684867783990327513,exact_duplicate
+2026-08-04,23,1,Pattaya_Beach,Watermelon smoothy,45.0,13,585.0,LM-RC000,64218,5353544836640611163,exact_duplicate
+2026-05-25,13,0,BKK_Ladprao,Mixed Berry (Premium),89.0,1,89.0,GB-RC000,64369,6107500575252203860,exact_duplicate
+2026-03-19,16,3,BKK_Ladprao,สัปปะรดปั่น,49.0,7,343.0,GB-RC000,64542,13592012944566590710,exact_duplicate
+2026-05-05,16,1,BKK_Ladprao,passionfruit ice,52.0,5,260.0,LM-RC102,64653,9222000587195332636,exact_duplicate
+2026-05-04,0,0,Pattaya_Central,guava ice,49.0,1,49.0,LM-RC000,65438,2242548168432120140,exact_duplicate
+2026-01-12,9,0,Pattaya_Beach,ฝรั่งปั่น,49.0,4,196.0,GB-RC000,65908,13841892436948721170,exact_duplicate
+2026-04-17,17,4,BKK_Ladprao,Passion Fruit Smoothie,65.0,1,65.0,LM-RC000,66047,9233915525013803432,exact_duplicate
+2025-09-05,9,4,BKK_Ladprao,Pineapple Ice,41.65,1,41.65,GB-RC101-PA,66062,968780915155839790,exact_duplicate
+2026-06-17,2,2,Pattaya_Beach,guava ice,43.12,1,43.12,LM-RC103,66208,571768113051224514,exact_duplicate
+2025-11-24,22,0,Pattaya_Central,Guava Smoothie,49.0,6,294.0,GB-RC000,66260,10559216862547352859,exact_duplicate
+2026-05-26,13,1,BKK_Sukhumvit,Guava Smoothie,49.0,6,294.0,GB-RC000,66442,1027206772954496624,exact_duplicate
+2025-09-05,16,4,Pattaya_Central,เสาวรสปั่น,65.0,2,130.0,GB-RC000,66550,6385360000812868158,exact_duplicate
+2026-03-16,17,0,BKK_Ladprao,Guava Ice,49.0,3,147.0,LM-RC000,66834,13537877249751317496,exact_duplicate
+2026-05-29,14,4,BKK_Sukhumvit,ฝรั่งปั่น,49.0,5,245.0,LM-RC000,66925,15988828611131322246,exact_duplicate
+2026-03-25,2,2,Pattaya_Central,Guava Ice,49.0,3,147.0,LM-RC000,67251,9807405674683709806,exact_duplicate
+2026-05-22,8,4,Pattaya_Central,watermelon ice,45.0,9,405.0,LM-RC000,68228,7268694989812444269,exact_duplicate
+2025-09-20,9,5,Pattaya_Beach,watermelon ice,45.0,6,270.0,GB-RC000,68483,9032648881326969033,exact_duplicate
+2025-11-27,8,3,Pattaya_Beach,แตงโมปั่น (ไซส์ M),45.0,4,180.0,GB-RC000,68715,7620102322521813845,exact_duplicate
+2026-08-05,15,2,BKK_Sukhumvit,แตงโมปั่น,45.0,9,405.0,LM-RC000,68917,12939895719551606981,exact_duplicate
+2025-12-09,3,1,BKK_Sukhumvit,ฝรั่งปั่น (ใส่เกลือ),49.0,2,98.0,LM-RC000,69828,8243497583755924628,exact_duplicate
+2026-06-01,12,0,Pattaya_Central,watermelon ice,45.0,14,630.0,GB-RC000,70052,2344577473641858584,exact_duplicate
+2026-08-12,12,2,BKK_Ladprao,Watermelon Smoothie,45.0,4,180.0,LM-RC000,70675,444294247253283291,exact_duplicate
+2025-11-07,16,4,Pattaya_Beach,ฝรั่งปั่น,49.0,4,196.0,GB-RC000,70690,8373193065909345547,exact_duplicate
+2026-05-01,16,4,BKK_Ladprao,guava ice,49.0,4,196.0,GB-RC000,71195,1059225337743847215,exact_duplicate
+2025-10-05,15,6,Pattaya_Central,Pineapple smoothie ,49.0,3,147.0,GB-RC000,71806,1380882192317862133,exact_duplicate
+2026-03-29,6,6,BKK_Sukhumvit,แตงโมปั่น,45.0,3,135.0,GB-RC000,71877,16974612300259909694,exact_duplicate
+2025-12-17,22,2,BKK_Sukhumvit,Guava Smoothie,49.0,3,147.0,GB-RC000,71939,13374348645037188716,exact_duplicate
+2026-02-26,19,3,BKK_Ladprao,สับปะรดปั่น,49.0,3,147.0,LM-RC000,72096,16719575855042238309,exact_duplicate
+2026-02-04,15,2,Pattaya_Central,Passion Fruit Smoothie,65.0,5,325.0,GB-RC000,72539,11948975321790038681,exact_duplicate
+2026-04-24,19,4,Pattaya_Beach,สัปปะรดปั่น,49.0,10,490.0,LM-RC000,73151,5270193902663063054,exact_duplicate
+2026-05-03,1,6,Pattaya_Beach,guava ice,49.0,2,98.0,GB-RC000,73187,18113541200108866229,exact_duplicate
+2026-02-17,23,1,BKK_Sukhumvit,Passion Fruit Smoothie,65.0,7,455.0,GB-RC000,73315,17815932239096284445,exact_duplicate
+2026-07-12,9,6,BKK_Ladprao,Watermelon Smoothie,45.0,3,135.0,GB-RC000,73499,17114807271193854043,exact_duplicate
+2025-12-08,0,0,Pattaya_Central,แตงโมปั่น (ไซส์ M),45.0,3,135.0,GB-RC000,73535,18165086349889346421,exact_duplicate
+2026-03-30,16,0,BKK_Ladprao,Passion Fruit Smoothie,65.0,2,130.0,GB-RC000,73711,9031357720254128317,exact_duplicate
+2026-02-18,4,2,Pattaya_Central,แตงโมปั่นสด,45.0,2,90.0,LM-RC000,73957,17327340821224562613,exact_duplicate
+2025-10-02,7,3,Pattaya_Beach,แตงโมปั่น (ไซส์ M),45.0,2,90.0,GB-RC000,74134,15892653025840293714,exact_duplicate
+2025-12-25,15,3,BKK_Sukhumvit,เสาวรสปั่น,65.0,1,65.0,LM-RC000,75066,14964248745382487895,exact_duplicate
+2026-04-13,3,0,BKK_Ladprao,Passion Fruit Smoothie,65.0,1,65.0,LM-RC000,75100,14425631293462345311,exact_duplicate
+2026-05-13,6,2,Pattaya_Beach,Watermelon Smoothie,45.0,2,90.0,GB-RC000,75217,16879702532683025774,exact_duplicate
+2026-06-24,15,2,BKK_Ladprao,แตงโมปั่นสด,45.0,4,180.0,LM-RC000,75220,3897990364066725744,exact_duplicate
+2026-08-15,0,5,Pattaya_Central,Pineapple Ice,49.0,3,147.0,LM-RC000,75560,2422665873932234698,exact_duplicate
+2025-12-18,14,3,Pattaya_Beach,แตงโมปั่นสด,45.0,8,360.0,LM-RC000,76340,8083444597435163231,exact_duplicate
+2026-06-11,3,3,Pattaya_Central,Pineapple Smoothie,49.0,2,98.0,GB-RC000,76499,4031661057318020585,exact_duplicate
+2025-11-22,10,5,Pattaya_Beach,Watermelon Smoothie,45.0,9,405.0,GB-RC000,76941,2212176155597395752,exact_duplicate
+2025-10-13,23,0,Pattaya_Beach,Pineapple smoothie ,49.0,10,490.0,GB-RC000,77008,12778586127549658197,exact_duplicate
+2026-02-09,9,0,Pattaya_Central,สัปปะรดปั่น,49.0,5,245.0,LM-RC000,77079,5159327626983783959,exact_duplicate
+2025-12-13,23,5,Pattaya_Beach,Pineapple smoothie ,49.0,9,441.0,LM-RC000,77215,11335410605167653737,exact_duplicate
+2025-09-03,22,2,Pattaya_Beach,สัปปะรดปั่น,49.0,6,294.0,LM-RC000,77350,16717999687470991100,exact_duplicate
+2025-10-31,15,4,BKK_Ladprao,ฝรั่งปั่น (ใส่เกลือ),49.0,2,98.0,GB-RC000,77566,5513340078157179972,exact_duplicate
+2025-11-27,13,3,BKK_Ladprao,แก้วเปล่า,99.0,1,99.0,GB-RC000,77773,16511249576465834091,exact_duplicate
+2025-12-12,9,4,Pattaya_Central,passionfruit ice,52.0,10,520.0,LM-RC102,77851,8663454101921229628,exact_duplicate
+2026-06-01,23,0,BKK_Ladprao,guava ice,49.0,2,98.0,LM-RC000,78194,8794931409794551271,exact_duplicate
+2026-08-06,20,3,BKK_Ladprao,Watermelon smoothy,45.0,3,135.0,LM-RC000,78196,7259197613430661449,exact_duplicate
+2026-02-19,23,3,BKK_Sukhumvit,เสาวรสปั่นเข้มข้น,65.0,4,260.0,LM-RC000,78304,15809772484664284905,exact_duplicate
+2025-09-26,14,4,BKK_Sukhumvit,Guava Smoothie,49.0,2,98.0,LM-RC000,78426,4057171152680589825,exact_duplicate
+2025-11-14,10,4,BKK_Sukhumvit,สับปะรดปั่น,49.0,3,147.0,LM-RC000,78427,9880370440983941296,exact_duplicate
+2026-03-31,6,1,Pattaya_Beach,สัปปะรดปั่น,49.0,1,49.0,LM-RC000,78943,2524209590512813572,exact_duplicate
+2025-12-30,1,1,Pattaya_Central,watermelon ice,45.0,3,135.0,GB-RC000,79642,643474391773436025,exact_duplicate
+2025-12-02,13,1,Pattaya_Central,Pineapple smoothie ,49.0,10,490.0,GB-RC000,79776,1711013638354058746,exact_duplicate
+2025-09-03,20,2,Pattaya_Beach,Guava Ice,49.0,2,98.0,LM-RC000,80567,16954321591799740877,exact_duplicate
+2026-04-27,15,0,BKK_Ladprao,เบอร์รี่รวมพรีเมียม,89.0,2,178.0,GB-RC000,81103,16066639066630020615,exact_duplicate
+2026-08-27,9,3,BKK_Sukhumvit,เสาวรสปั่น,65.0,2,130.0,LM-RC000,81400,10602608721486117219,exact_duplicate
+2026-01-27,15,1,Pattaya_Central,สับปะรดปั่น,49.0,2,98.0,GB-RC000,81474,15409723399178426535,exact_duplicate
+2025-10-20,7,0,Pattaya_Beach,สัปปะรดปั่น,49.0,4,196.0,GB-RC000,82147,2087572356042258753,exact_duplicate
+2026-08-07,16,4,BKK_Sukhumvit,pineapple ice,49.0,4,196.0,GB-RC000,82425,6164032915117484273,exact_duplicate
+2026-05-06,22,2,Pattaya_Beach,Guava Ice,49.0,6,294.0,GB-RC000,82668,12725227322177390588,exact_duplicate
+2025-09-24,10,2,BKK_Sukhumvit,Pineapple Smoothie,49.0,2,98.0,LM-RC000,82829,9320086084595786335,exact_duplicate
+2026-06-06,16,5,Pattaya_Beach,Mixed Berry Premium,71.2,2,142.4,GB-RC102,82870,2549833259064215641,exact_duplicate
+2026-05-13,1,2,Pattaya_Central,passionfruit ice,65.0,2,130.0,LM-RC000,83128,2669992709920347156,exact_duplicate
+2025-11-23,11,6,BKK_Sukhumvit,pineapple ice,49.0,7,343.0,GB-RC000,83241,15040423578560429028,exact_duplicate
+2026-07-04,20,5,Pattaya_Central,สับปะรดปั่น,49.0,5,245.0,LM-RC000,83311,7247178191639956000,exact_duplicate
+2026-06-20,0,5,BKK_Ladprao,Guava Ice,49.0,1,49.0,LM-RC000,84152,1743460666484791181,exact_duplicate
+2025-09-14,9,6,BKK_Ladprao,Pineapple Smoothie,49.0,4,196.0,GB-RC000,84394,7599996323154786451,exact_duplicate
+2026-03-05,0,3,BKK_Sukhumvit,Watermelon Smoothie,45.0,6,270.0,LM-RC000,84491,12451002389998883578,exact_duplicate
+2026-07-20,2,0,BKK_Ladprao,Watermelon Smoothie,45.0,2,90.0,LM-RC000,84504,6830530803558640536,exact_duplicate
+2026-06-16,8,1,BKK_Ladprao,แตงโมปั่น (ไซส์ M),45.0,3,135.0,LM-RC000,85369,14200088733717900853,exact_duplicate
+2026-06-21,17,6,BKK_Sukhumvit,เบอร์รี่รวมพรีเมียม,89.0,2,178.0,GB-RC000,85525,8518124484711411695,exact_duplicate
+2025-09-05,9,4,Pattaya_Beach,Pineapple Ice,41.65,5,208.25,GB-RC101-PA,86112,5255598328740925107,exact_duplicate
+2026-04-18,8,5,BKK_Ladprao,Passion Fruit Ice,65.0,2,130.0,LM-RC000,86280,11215863115861687571,exact_duplicate
+2025-12-06,22,5,Pattaya_Central,เสาวรสปั่น,65.0,6,390.0,LM-RC000,86646,3577163785395234731,exact_duplicate
+2026-05-25,20,0,BKK_Sukhumvit,แตงโมปั่น (ไซส์ M),45.0,10,450.0,GB-RC000,86920,16422427240591193804,exact_duplicate
+2025-10-05,16,6,BKK_Ladprao,Pineapple Ice,49.0,3,147.0,GB-RC000,86952,11532082297220097328,exact_duplicate
+2025-09-22,17,0,Pattaya_Beach,Passion Fruit Smoothie,65.0,1,65.0,LM-RC000,87163,7031805669766119948,exact_duplicate
+2026-04-21,8,1,BKK_Ladprao,Mixed Berry (Premium),89.0,1,89.0,LM-RC000,87687,7847354306442304920,exact_duplicate
+2026-05-02,9,5,Pattaya_Central,passionfruit ice,65.0,4,260.0,LM-RC000,87720,13563863704956137503,exact_duplicate
+2026-05-27,10,2,Pattaya_Central,แตงโมปั่น,45.0,7,315.0,LM-RC000,88110,9836847301387519677,exact_duplicate
+2026-06-18,2,3,BKK_Ladprao,Watermelon Smoothie,45.0,1,45.0,GB-RC000,88133,18090730964836077070,exact_duplicate
+2025-11-02,7,6,BKK_Sukhumvit,Pineapple smoothie ,49.0,6,294.0,GB-RC000,88268,16081584771418006929,exact_duplicate
+2026-05-11,20,0,BKK_Ladprao,guava ice,49.0,2,98.0,GB-RC000,88287,6126517169676666263,exact_duplicate
+2026-03-29,23,6,BKK_Sukhumvit,Mixed Berry Premium,89.0,2,178.0,GB-RC000,88337,17918657257747075480,exact_duplicate
+2026-03-22,11,6,Pattaya_Beach,Guava Ice,49.0,7,343.0,LM-RC000,88348,14988506859026922114,exact_duplicate
+2026-06-13,20,5,BKK_Sukhumvit,pineapple ice,49.0,5,245.0,GB-RC000,88458,11519919957212793566,exact_duplicate
+2025-10-27,8,0,BKK_Sukhumvit,เสาวรสปั่น,65.0,1,65.0,GB-RC000,89194,13663132492364516040,exact_duplicate
+2026-01-06,11,1,Pattaya_Beach,เสาวรสปั่น,65.0,3,195.0,LM-RC000,89239,4261056205684349187,exact_duplicate
+2025-12-15,17,0,Pattaya_Beach,Passion Fruit Smoothie,65.0,5,325.0,GB-RC000,89445,5500211850083856730,exact_duplicate
+2026-05-08,20,4,Pattaya_Central,Passion Fruit Ice,65.0,6,390.0,LM-RC000,89518,7260838453685952904,exact_duplicate
+2026-01-30,10,4,BKK_Sukhumvit,สับปะรดปั่น,49.0,3,147.0,GB-RC000,89801,6440720802098363206,exact_duplicate
+2026-05-28,16,3,Pattaya_Beach,Pineapple smoothie ,49.0,6,294.0,GB-RC000,90115,2241031509837506489,exact_duplicate
+2026-07-28,19,1,Pattaya_Beach,ฝรั่งปั่น,49.0,5,245.0,LM-RC000,90259,14502328466893446223,exact_duplicate
+2025-09-05,19,4,Pattaya_Central,ฝรั่งปั่น,49.0,4,196.0,LM-RC000,90579,12414445994812814076,exact_duplicate
+2025-12-07,15,6,Pattaya_Beach,Watermelon Smoothie,45.0,10,450.0,GB-RC000,91516,12056674769046475386,exact_duplicate
+2026-04-03,0,4,BKK_Ladprao,Guava Smoothie,49.0,4,196.0,GB-RC000,91755,16815610050848049056,exact_duplicate
+2025-11-30,8,6,Pattaya_Central,Passion Fruit Ice,65.0,1,65.0,GB-RC000,91997,14056204203798725015,exact_duplicate
+2025-12-26,11,4,BKK_Ladprao,pineapple ice,49.0,7,343.0,GB-RC000,92176,12327604654133914261,exact_duplicate
+2026-08-04,11,1,Pattaya_Central,Watermelon Ice,45.0,12,540.0,LM-RC000,92450,15820174620158865797,exact_duplicate
+2026-02-16,10,0,BKK_Ladprao,Guava Ice,49.0,4,196.0,LM-RC000,92514,9677587174602864623,exact_duplicate
+2026-05-16,18,5,BKK_Sukhumvit,passionfruit ice,65.0,2,130.0,LM-RC000,93015,15584913421936838418,exact_duplicate
+2026-05-05,23,1,Pattaya_Central,pineapple ice,39.2,15,588.0,LM-RC102,93135,9579703963825169965,exact_duplicate
+2026-06-02,9,1,Pattaya_Central,สัปปะรดปั่น,49.0,4,196.0,LM-RC000,93145,6631191717540267519,exact_duplicate
+2025-11-24,10,0,Pattaya_Central,เสาวรสปั่นเข้มข้น,65.0,3,195.0,GB-RC000,93342,13523125866826825220,exact_duplicate
+2025-12-13,13,5,Pattaya_Central,ฝรั่งปั่น,49.0,2,98.0,LM-RC000,93352,13341121060618805799,exact_duplicate
+2025-11-11,18,1,BKK_Ladprao,เสาวรสปั่นเข้มข้น,52.0,2,104.0,LM-RC102,94101,5235815481580954760,exact_duplicate
+2026-04-11,13,5,Pattaya_Central,เบอร์รี่ปั่นพรีเมียม,75.65,7,529.55,GB-RC101-MB,94831,4014574146065107431,exact_duplicate
+2026-03-10,9,1,Pattaya_Central,watermelon ice,45.0,7,315.0,GB-RC000,95254,11956334773470228581,exact_duplicate
+2026-06-01,19,0,Pattaya_Central,pineapple ice,49.0,6,294.0,GB-RC000,95282,8022619441013802497,exact_duplicate
+2026-06-29,21,0,BKK_Ladprao,ฝรั่งปั่น (ใส่เกลือ),49.0,1,49.0,LM-RC000,95674,15159119354663539248,exact_duplicate
+2026-06-14,21,6,BKK_Sukhumvit,สับปะรดปั่น,49.0,7,343.0,GB-RC000,95913,17328697643501154169,exact_duplicate
+2026-06-10,19,2,Pattaya_Beach,Mixed Berry Premium,89.0,1,89.0,LM-RC000,95922,693570451003327979,exact_duplicate
+2026-02-28,6,5,Pattaya_Beach,สัปปะรดปั่น,49.0,4,196.0,GB-RC000,95949,13472563546121082628,exact_duplicate
+2025-11-14,20,4,Pattaya_Beach,Watermelon Ice,45.0,7,315.0,GB-RC000,96193,1923847155278127006,exact_duplicate
+2026-03-29,18,6,Pattaya_Beach,watermelon ice,45.0,10,450.0,LM-RC000,96300,3751302281595753352,exact_duplicate
+2026-01-29,4,3,Pattaya_Central,Watermelon Smoothie,45.0,1,45.0,GB-RC000,96437,1237363772175698979,exact_duplicate
+2026-06-15,16,0,BKK_Ladprao,แตงโมปั่น (ไซส์ M),45.0,2,90.0,GB-RC000,96690,4237832753179800024,exact_duplicate
+2026-02-14,11,5,Pattaya_Beach,สับปะรดปั่น,49.0,12,588.0,GB-RC000,96822,2577362150709558987,exact_duplicate
+2026-03-24,7,1,BKK_Sukhumvit,เบอร์รี่รวมพรีเมียม,89.0,1,89.0,LM-RC000,97318,1204219157253574970,exact_duplicate
+2026-03-27,15,4,BKK_Ladprao,guava ice,49.0,6,294.0,GB-RC000,97893,6010842503321839859,exact_duplicate
+2026-03-17,11,1,BKK_Ladprao,เบอร์รี่รวมพรีเมียม,89.0,4,356.0,GB-RC000,97989,10860160114777194500,exact_duplicate
+2026-01-25,14,6,Pattaya_Beach,เสาวรสปั่น,65.0,3,195.0,GB-RC000,98134,5367506145888596040,exact_duplicate
+2026-05-07,14,3,BKK_Ladprao,ฝรั่งปั่น (ใส่เกลือ),49.0,1,49.0,GB-RC000,98509,14070441439229950228,exact_duplicate
+2026-06-05,19,4,Pattaya_Central,Passion Fruit Ice,57.2,4,228.8,GB-RC103,98569,6590841347661832877,exact_duplicate
+2026-02-12,18,3,Pattaya_Beach,ฝรั่งปั่น,49.0,3,147.0,LM-RC000,98672,7094603914140271697,exact_duplicate
+2026-03-26,13,3,BKK_Ladprao,แตงโมปั่น,45.0,8,360.0,LM-RC000,98889,7370259839848396870,exact_duplicate
+2026-04-14,10,1,BKK_Sukhumvit,berry premium smoothie,89.0,6,534.0,GB-RC000,99442,132456444277469485,exact_duplicate
+2026-04-21,9,1,BKK_Sukhumvit,Guava Smoothie,49.0,3,147.0,LM-RC000,99586,11908719763464770530,exact_duplicate
+2026-04-14,3,1,Pattaya_Beach,ฝรั่งปั่น,49.0,1,49.0,LM-RC000,100421,4356031981434226464,exact_duplicate
+2026-05-13,15,2,BKK_Sukhumvit,Mixed Berry Premium,89.0,2,178.0,GB-RC000,100452,8308344466838829474,exact_duplicate
+2026-08-21,17,4,BKK_Sukhumvit,passionfruit ice,65.0,2,130.0,LM-RC000,100892,3438799847327978762,exact_duplicate
+2025-10-05,20,6,Pattaya_Central,Pineapple smoothie ,49.0,9,441.0,GB-RC000,101163,2332271589937426321,exact_duplicate
+2026-08-04,22,1,Pattaya_Beach,แตงโมปั่น,45.0,7,315.0,LM-RC000,101391,2245461315492169164,exact_duplicate
+2026-08-14,7,4,BKK_Sukhumvit,ฝรั่งปั่น,49.0,1,49.0,GB-RC000,101400,12285813718350232146,exact_duplicate
+2026-04-01,15,2,Pattaya_Central,ฝรั่งปั่น,49.0,7,343.0,LM-RC000,101801,13074090979208705408,exact_duplicate
+2026-08-23,23,6,Pattaya_Beach,Guava Smoothie,43.12,4,172.48,LM-RC103,101979,581203108394788193,exact_duplicate
+2026-04-07,0,1,BKK_Ladprao,ฝรั่งปั่น,49.0,1,49.0,GB-RC000,102213,2007031871285407883,exact_duplicate
+2026-03-16,11,0,BKK_Sukhumvit,Mixed Berry Premium,89.0,6,534.0,GB-RC000,102311,9207573065142522427,exact_duplicate
+2026-07-22,11,2,BKK_Sukhumvit,pineapple ice,49.0,9,441.0,GB-RC000,102401,5904642522796687588,exact_duplicate
+2026-01-11,21,6,BKK_Sukhumvit,แตงโมปั่น (ไซส์ M),45.0,7,315.0,LM-RC000,102430,16701184875463488831,exact_duplicate
+2026-01-04,16,6,BKK_Ladprao,แตงโมปั่นสด,45.0,8,360.0,LM-RC000,102717,14843760873436149512,exact_duplicate
+2026-03-15,23,6,Pattaya_Central,แก้วเปล่า,35.0,3,105.0,LM-RC000,103067,5038777599268660858,exact_duplicate
+2026-06-24,13,2,BKK_Sukhumvit,Passion Fruit Ice,65.0,2,130.0,LM-RC000,103447,14256382984743412434,exact_duplicate
+2026-05-09,7,5,Pattaya_Beach,แตงโมปั่นสด,45.0,2,90.0,LM-RC000,103468,15616398436927209216,exact_duplicate
+2025-10-23,6,3,Pattaya_Central,ฝรั่งปั่น,49.0,1,49.0,LM-RC000,103549,17941978233686049550,exact_duplicate
+2026-03-23,20,0,BKK_Sukhumvit,berry premium smoothie,89.0,5,445.0,GB-RC000,103699,14848420870809066288,exact_duplicate
+2026-08-15,8,5,BKK_Sukhumvit,Watermelon Ice,45.0,2,90.0,GB-RC000,103804,8911069243102113455,exact_duplicate
+2026-04-12,20,6,Pattaya_Beach,passionfruit ice,65.0,6,390.0,LM-RC000,104219,7033390151021245937,exact_duplicate
+2025-11-16,8,6,Pattaya_Beach,แตงโมปั่นสด,45.0,8,360.0,GB-RC000,104309,14622710934358339339,exact_duplicate
+2025-11-02,8,6,BKK_Sukhumvit,Watermelon Smoothie,45.0,2,90.0,LM-RC000,104408,6533373330248934923,exact_duplicate
+2025-10-18,19,5,BKK_Ladprao,Watermelon Ice,45.0,4,180.0,GB-RC000,104949,15385828732940009807,exact_duplicate
+2026-07-04,7,5,Pattaya_Beach,เบอร์รี่รวมพรีเมียม,89.0,1,89.0,LM-RC000,105074,3330567298763056857,exact_duplicate
+2026-01-03,8,5,Pattaya_Central,Watermelon smoothy,45.0,11,495.0,GB-RC000,105394,12509223965501688209,exact_duplicate
+2026-07-03,1,4,BKK_Sukhumvit,แตงโมปั่น,45.0,1,45.0,LM-RC000,105476,10709988495358208807,exact_duplicate
+2026-06-24,16,2,Pattaya_Central,berry premium smoothie,89.0,5,445.0,LM-RC000,105556,2777163501377280149,exact_duplicate
+2026-08-21,12,4,BKK_Sukhumvit,Guava Ice,49.0,10,490.0,LM-RC000,105589,2709798986451127326,exact_duplicate
+2025-12-03,8,2,Pattaya_Central,Watermelon smoothy,45.0,5,225.0,GB-RC000,105595,9096298176923813165,exact_duplicate
+2026-06-22,13,0,Pattaya_Beach,Guava Ice,49.0,1,49.0,LM-RC000,105903,10763481775250581235,exact_duplicate
+2026-03-14,20,5,Pattaya_Central,berry premium smoothie,89.0,4,356.0,GB-RC000,105965,6759317425387345199,exact_duplicate
+2026-05-04,19,0,BKK_Sukhumvit,Guava Smoothie,49.0,7,343.0,GB-RC000,106311,11345378568763544213,exact_duplicate
+2026-06-16,19,1,Pattaya_Beach,Watermelon Ice,45.0,11,495.0,GB-RC000,106599,15403041284645547738,exact_duplicate
+2026-05-07,11,3,Pattaya_Central,ฝรั่งปั่น (ใส่เกลือ),49.0,2,98.0,GB-RC000,106893,3132569414171309584,exact_duplicate
+2026-02-19,1,3,Pattaya_Beach,guava ice,49.0,1,49.0,LM-RC000,106979,9340561706870539332,exact_duplicate
+2025-12-26,20,4,Pattaya_Beach,Guava Ice,49.0,1,49.0,LM-RC000,107152,8508789758045086784,exact_duplicate
+2026-06-17,20,2,Pattaya_Central,watermelon ice,39.6,15,594.0,LM-RC103,107543,17673206732845464417,exact_duplicate
+2026-08-06,17,3,Pattaya_Beach,น้ำส้มปั่น (เมนูทดลอง),99.0,3,297.0,GB-RC000,107666,11109867015648730313,exact_duplicate
+2026-03-04,0,2,Pattaya_Central,Pineapple Smoothie,49.0,5,245.0,LM-RC000,107895,9367638377893493217,exact_duplicate
+2026-04-12,13,6,BKK_Sukhumvit,guava ice,49.0,9,441.0,LM-RC000,108264,16764853140722533249,exact_duplicate
+2025-12-13,16,5,Pattaya_Beach,Pineapple smoothie ,49.0,8,392.0,LM-RC000,108283,10924636743692180949,exact_duplicate
+2026-01-18,8,6,BKK_Ladprao,แตงโมปั่น,45.0,2,90.0,GB-RC000,108307,5021015326817657820,exact_duplicate
+2026-01-30,11,4,BKK_Ladprao,สัปปะรดปั่น,49.0,7,343.0,LM-RC000,108523,7569350694818289954,exact_duplicate
+2026-02-07,8,5,BKK_Sukhumvit,Passion Fruit Ice,65.0,2,130.0,LM-RC000,108700,15852160505464145829,exact_duplicate
+2025-09-26,1,4,BKK_Ladprao,Watermelon smoothy,45.0,2,90.0,LM-RC000,108822,6784731195985484039,exact_duplicate
+2026-02-28,18,5,BKK_Sukhumvit,แตงโมปั่น (ไซส์ M),45.0,8,360.0,GB-RC000,108825,16538602107320971774,exact_duplicate
+2025-09-18,12,3,Pattaya_Central,pineapple ice,49.0,11,539.0,LM-RC000,108835,679118160719476792,exact_duplicate
+2025-12-31,13,2,Pattaya_Central,แตงโมปั่น,45.0,12,540.0,LM-RC000,109078,4162507977952019046,exact_duplicate
+2026-06-01,11,0,Pattaya_Beach,Passion Fruit Smoothie,65.0,2,130.0,LM-RC000,109477,7314860015688639593,exact_duplicate
+2026-08-25,17,1,BKK_Ladprao,แตงโมปั่น,45.0,7,315.0,LM-RC000,109739,6254847023765318221,exact_duplicate
+2025-12-17,15,2,BKK_Ladprao,Passion Fruit Smoothie,65.0,1,65.0,LM-RC000,110131,4839267568542637370,exact_duplicate
+2026-06-23,16,1,BKK_Ladprao,Pineapple Ice,49.0,2,98.0,GB-RC000,110223,14857707689975665240,exact_duplicate
+2025-11-16,12,6,BKK_Sukhumvit,Passion Fruit Smoothie,65.0,4,260.0,LM-RC000,110225,8549636929301290760,exact_duplicate
+2026-07-16,16,3,BKK_Ladprao,เสาวรสปั่น,65.0,2,130.0,LM-RC000,110307,10795826358806695156,exact_duplicate
+2026-03-06,23,4,Pattaya_Beach,แตงโมปั่น,45.0,11,495.0,LM-RC000,110331,10886330742687642679,exact_duplicate
+2026-01-09,13,4,BKK_Ladprao,สับปะรดปั่น,49.0,4,196.0,LM-RC000,110338,11297279721819626164,exact_duplicate
+2026-05-17,16,6,Pattaya_Central,Watermelon smoothy,45.0,21,945.0,GB-RC000,110521,339296159173239028,exact_duplicate
+2025-10-01,13,2,BKK_Sukhumvit,Guava Smoothie,49.0,7,343.0,LM-RC000,111419,5611300301565586861,exact_duplicate
+2026-01-02,4,4,BKK_Ladprao,แตงโมปั่นสด,45.0,1,45.0,GB-RC000,111421,18212314475738750714,exact_duplicate
+2025-10-21,3,1,BKK_Sukhumvit,guava ice,49.0,1,49.0,LM-RC000,111492,15425803846932643022,exact_duplicate
+2026-07-02,10,3,Pattaya_Central,pineapple ice,49.0,3,147.0,GB-RC000,111696,14212254530724296360,exact_duplicate
+2026-01-20,21,1,BKK_Ladprao,แตงโมปั่น (ไซส์ M),45.0,6,270.0,GB-RC000,111805,1618477100449944107,exact_duplicate
+2025-11-25,17,1,BKK_Ladprao,Guava Smoothie,49.0,4,196.0,LM-RC000,112277,17513213510028190033,exact_duplicate
+2025-11-19,20,2,BKK_Ladprao,guava ice,49.0,2,98.0,LM-RC000,112576,4612469168692921391,exact_duplicate
+2026-03-18,15,2,BKK_Ladprao,passionfruit ice,65.0,2,130.0,LM-RC000,112605,17370305672729345566,exact_duplicate
+2026-04-03,11,4,Pattaya_Central,Pineapple Ice,49.0,16,784.0,LM-RC000,112660,17834491331510366558,exact_duplicate
+2026-02-13,20,4,BKK_Ladprao,เสาวรสปั่น,65.0,3,195.0,GB-RC000,112796,2005102825816475216,exact_duplicate
+2026-06-18,20,3,Pattaya_Beach,เบอร์รี่รวมพรีเมียม,89.0,1,89.0,GB-RC000,112797,14424149682373128645,exact_duplicate
+2026-04-07,20,1,Pattaya_Beach,เสาวรสปั่น,65.0,5,325.0,LM-RC000,112840,7984311069262386906,exact_duplicate
+2026-03-10,17,1,BKK_Sukhumvit,Pineapple Ice,49.0,10,490.0,LM-RC000,112847,3788184059334470028,exact_duplicate
+2026-05-16,20,5,Pattaya_Beach,pineapple ice,49.0,3,147.0,LM-RC000,112894,8382855405860919522,exact_duplicate
+2026-01-18,12,6,Pattaya_Beach,เสาวรสปั่น,65.0,7,455.0,GB-RC000,113490,1876420595199416554,exact_duplicate
+2026-04-01,2,2,BKK_Ladprao,แตงโมปั่น (ไซส์ M),45.0,1,45.0,LM-RC000,113897,13645883643573898920,exact_duplicate
+2025-12-25,21,3,BKK_Sukhumvit,Passion Fruit Ice,65.0,4,260.0,LM-RC000,113959,14218431521971723789,exact_duplicate
+2025-11-01,22,5,BKK_Sukhumvit,Watermelon smoothy,45.0,14,630.0,LM-RC000,114062,7051352061652902828,exact_duplicate
+2026-06-24,22,2,BKK_Ladprao,Pineapple Smoothie,49.0,5,245.0,LM-RC000,114483,6827521594272979828,exact_duplicate
+2026-01-12,0,0,BKK_Ladprao,passionfruit ice,65.0,1,65.0,GB-RC000,114575,16523353691582641557,exact_duplicate
+2025-12-21,6,6,Pattaya_Beach,ฝรั่งปั่น (ใส่เกลือ),49.0,1,49.0,LM-RC000,114620,13249114478034026280,exact_duplicate
+2025-11-22,17,5,Pattaya_Central,guava ice,49.0,10,490.0,LM-RC000,114689,11194047912508169466,exact_duplicate
+2026-06-18,1,3,Pattaya_Beach,แตงโมปั่น,45.0,3,135.0,LM-RC000,114895,17028130784415116282,exact_duplicate
+2026-02-06,14,4,Pattaya_Central,Passion Fruit Ice,65.0,3,195.0,LM-RC000,114932,7764153251488708071,exact_duplicate
+2026-05-03,23,6,BKK_Sukhumvit,Pineapple Smoothie,49.0,6,294.0,GB-RC000,115540,1470278565934012894,exact_duplicate
+2025-10-16,10,3,BKK_Ladprao,pineapple ice,49.0,4,196.0,GB-RC000,115790,10190426200871660031,exact_duplicate
+2026-05-21,0,3,Pattaya_Central,guava ice,49.0,3,147.0,LM-RC000,115921,10071070838599076789,exact_duplicate
+2026-06-04,13,3,Pattaya_Central,สัปปะรดปั่น,49.0,9,441.0,LM-RC000,116201,15827293012993733764,exact_duplicate
+2026-04-13,11,0,BKK_Ladprao,ฝรั่งปั่น,49.0,8,392.0,LM-RC000,116363,10375563302363576479,exact_duplicate
+2026-03-24,12,1,Pattaya_Beach,Mixed Berry Premium,89.0,4,356.0,GB-RC000,116862,6805307925076404633,exact_duplicate
+2025-10-21,16,1,Pattaya_Central,แตงโมปั่นสด,45.0,11,495.0,GB-RC000,116889,9202096444577399326,exact_duplicate
+2026-03-15,3,6,Pattaya_Central,guava ice,49.0,1,49.0,GB-RC000,117004,1376722786566949644,exact_duplicate
+2026-05-29,13,4,Pattaya_Central,สัปปะรดปั่น,49.0,9,441.0,LM-RC000,117199,7274862648021763065,exact_duplicate
+2025-10-13,13,0,BKK_Sukhumvit,Passion Fruit Smoothie,65.0,4,260.0,LM-RC000,117221,4228131679569119652,exact_duplicate
+2025-10-03,11,4,Pattaya_Central,ฝรั่งปั่น (ใส่เกลือ),49.0,7,343.0,GB-RC000,117342,12249720653647260455,exact_duplicate
+2026-06-18,0,3,Pattaya_Central,เสาวรสปั่น,65.0,1,65.0,LM-RC000,117368,3065992132468884791,exact_duplicate
+2026-04-21,10,1,BKK_Sukhumvit,Guava Smoothie,49.0,1,49.0,LM-RC000,117641,15097540340581857666,exact_duplicate
+2025-12-27,0,5,BKK_Sukhumvit,Passion Fruit Ice,65.0,2,130.0,LM-RC000,117874,8989498259690302246,exact_duplicate
+2026-02-19,9,3,BKK_Sukhumvit,passionfruit ice,65.0,1,65.0,LM-RC000,117998,4345216130320651008,exact_duplicate
+2026-07-23,11,3,Pattaya_Central,Guava Smoothie,49.0,4,196.0,GB-RC000,118076,1557899869295495743,exact_duplicate
+2025-09-02,23,1,BKK_Ladprao,สัปปะรดปั่น,49.0,5,245.0,GB-RC000,118089,15408613179424416490,exact_duplicate
+2026-06-04,18,3,BKK_Ladprao,Pineapple Ice,49.0,2,98.0,LM-RC000,118178,5046827891125717126,exact_duplicate
+2026-08-10,18,0,BKK_Ladprao,Pineapple Smoothie,43.12,1,43.12,GB-RC103,118227,17458885329982943989,exact_duplicate
+2026-04-04,23,5,Pattaya_Beach,เบอร์รี่รวมพรีเมียม,71.2,4,284.8,LM-RC102,118251,12191611259517182643,exact_duplicate
+2026-02-16,7,0,BKK_Sukhumvit,แตงโมปั่น (ไซส์ M),45.0,1,45.0,GB-RC000,118264,16329394673302707530,exact_duplicate
+2025-12-03,14,2,Pattaya_Beach,เสาวรสปั่นเข้มข้น,65.0,3,195.0,LM-RC000,118293,13896020333852875534,exact_duplicate
+2026-03-13,23,4,BKK_Sukhumvit,เสาวรสปั่นเข้มข้น,65.0,1,65.0,GB-RC000,118721,4233985235611524686,exact_duplicate
+2026-08-22,16,5,BKK_Sukhumvit,Guava Smoothie,49.0,4,196.0,LM-RC000,118820,15233276935082767948,exact_duplicate
+2026-08-01,10,5,BKK_Sukhumvit,แตงโมปั่นสด,45.0,6,270.0,GB-RC000,118829,3106880690196498395,exact_duplicate
+2026-02-06,2,4,BKK_Sukhumvit,เสาวรสปั่น,65.0,1,65.0,LM-RC000,118900,14399807235527946422,exact_duplicate
+2025-10-23,22,3,BKK_Sukhumvit,แตงโมปั่น (ไซส์ M),45.0,7,315.0,LM-RC000,119169,6647566843547798347,exact_duplicate
+2026-07-19,6,6,Pattaya_Central,น้ำส้มปั่น (เมนูทดลอง),59.0,1,59.0,LM-RC000,119564,3208744272405440312,exact_duplicate
+2026-07-20,13,0,Pattaya_Beach,แตงโมปั่น (ไซส์ M),45.0,12,540.0,LM-RC000,119754,2452634498916562451,exact_duplicate
+2026-01-30,2,4,BKK_Sukhumvit,Watermelon Ice,45.0,2,90.0,LM-RC000,120096,1115785277806675357,exact_duplicate
+2026-07-03,23,4,BKK_Sukhumvit,สับปะรดปั่น,49.0,5,245.0,LM-RC000,120121,16817797810091743747,exact_duplicate
+2025-10-28,1,1,Pattaya_Central,Watermelon smoothy,45.0,2,90.0,GB-RC000,120329,12284545555113521698,exact_duplicate
+2026-04-25,10,5,BKK_Sukhumvit,Passion Fruit Ice,65.0,3,195.0,LM-RC000,120494,15825445480434108725,exact_duplicate
+2025-12-20,13,5,Pattaya_Beach,แตงโมปั่น (ไซส์ M),45.0,17,765.0,GB-RC000,120543,13620139171064345657,exact_duplicate
+2025-09-08,23,0,Pattaya_Central,Pineapple Ice,49.0,4,196.0,LM-RC000,120708,14823250397761483412,exact_duplicate
+2026-02-14,21,5,BKK_Sukhumvit,ฝรั่งปั่น (ใส่เกลือ),49.0,5,245.0,GB-RC000,120738,566454645399628574,exact_duplicate
+2026-02-02,9,0,Pattaya_Beach,watermelon ice,36.0,8,288.0,LM-RC102,120784,10309324429711099581,exact_duplicate
+2026-06-23,16,1,Pattaya_Beach,แตงโมปั่น (ไซส์ M),45.0,8,360.0,LM-RC000,120861,12532685485225317151,exact_duplicate
+2026-03-11,6,2,BKK_Sukhumvit,Pineapple Smoothie,49.0,2,98.0,LM-RC000,121050,5736297171625438043,exact_duplicate
+2026-02-20,8,4,Pattaya_Central,Watermelon smoothy,45.0,4,180.0,GB-RC000,121387,11878896947992069434,exact_duplicate
+2025-09-05,6,4,Pattaya_Central,สับปะรดปั่น,41.65,1,41.65,LM-RC101-PA,121753,6715507343762137132,exact_duplicate
+2026-03-18,0,2,Pattaya_Central,Mixed Berry Premium,89.0,1,89.0,GB-RC000,122065,1157334198162988991,exact_duplicate
+2025-12-16,10,1,BKK_Sukhumvit,Watermelon smoothy,45.0,2,90.0,GB-RC000,122141,6402219328070249609,exact_duplicate
+2025-12-23,23,1,BKK_Ladprao,passionfruit ice,65.0,1,65.0,LM-RC000,122708,14730435418391432281,exact_duplicate
+2025-11-04,23,1,Pattaya_Central,guava ice,49.0,6,294.0,GB-RC000,122967,1144084553349491311,exact_duplicate
+2025-12-23,19,1,Pattaya_Central,Watermelon Ice,45.0,8,360.0,GB-RC000,123108,796699401412240423,exact_duplicate
+2026-08-29,23,5,Pattaya_Central,pineapple ice,49.0,9,441.0,GB-RC000,123194,5423060648910173470,exact_duplicate
+2025-10-05,22,6,Pattaya_Beach,Passion Fruit Ice,65.0,4,260.0,GB-RC000,123251,10166865909766863440,exact_duplicate
+2026-08-05,12,2,BKK_Ladprao,เสาวรสปั่น,65.0,3,195.0,LM-RC000,123435,17850969017612699223,exact_duplicate
+2026-06-04,23,3,Pattaya_Central,pineapple ice,49.0,6,294.0,LM-RC000,123717,3506853479120283720,exact_duplicate
+2026-07-22,20,2,Pattaya_Beach,Guava Smoothie,49.0,4,196.0,GB-RC000,123719,10989919403842103911,exact_duplicate
+2025-12-11,22,3,BKK_Ladprao,ฝรั่งปั่น,49.0,4,196.0,GB-RC000,123860,4917433894807596511,exact_duplicate
+2025-12-19,18,4,BKK_Ladprao,สับปะรดปั่น,49.0,7,343.0,LM-RC000,124082,1990904473279627290,exact_duplicate
+2025-10-21,10,1,BKK_Ladprao,สับปะรดปั่น,49.0,3,147.0,LM-RC000,124195,8887585343049036105,exact_duplicate
+2026-08-17,23,0,BKK_Ladprao,Watermelon smoothy,45.0,3,135.0,GB-RC000,124267,6199790545230022072,exact_duplicate

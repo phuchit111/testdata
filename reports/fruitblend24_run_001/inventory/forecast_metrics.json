@@ -1,0 +1,51 @@
+{
+  "scope": "A5 leakage-safe forecast and inventory policy",
+  "data_version": "fruitblend24_v1_c2869ce419bf",
+  "cutoff": "2026-08-31",
+  "forecast_period": [
+    "2026-09-01",
+    "2026-11-30"
+  ],
+  "selected_method": "exp_smoothing_4w",
+  "selected_method_mean_wape": 0.24213844122152536,
+  "methods_evaluated": [
+    "exp_smoothing_4w",
+    "moving_avg_4w",
+    "naive_last_day",
+    "seasonal_naive_7d",
+    "weekday_median_8w"
+  ],
+  "backtest_cutoffs": [
+    "2026-04-30",
+    "2026-05-31",
+    "2026-06-30",
+    "2026-07-31"
+  ],
+  "coverage_rule": "Fill zero only within each SKU x kitchen active window; observed daily rows cover every date in those active windows. Do not create pre-launch MixedBerryPremium zeros.",
+  "forecast_uncertainty_basis": "Lower/upper cup range uses selected-method mean rolling-origin WAPE around each point forecast; it is a planning range, not a statistical confidence interval.",
+  "commission_basis": "Recent 56-day SKU-weighted platform commission mix; future platform mix shift is not modeled.",
+  "mixedberry_note": "MixedBerryPremium is a recent launch with a shorter active history; no pre-launch zero fill is used, and its forecast carries higher decision risk despite the same error-range framework.",
+  "inventory_policy_assumptions": {
+    "service_level": 0.95,
+    "z_value": 1.65,
+    "review_period_days": 7,
+    "abc_basis": "positive contribution after waste",
+    "xyz_basis": "recent 12-week demand CV; X <=25%, Y <=50%, Z >50%"
+  },
+  "base_forecast_units": 126835.74337566507,
+  "base_forecast_lower_units": 96123.93418350811,
+  "base_forecast_upper_units": 157547.55256782201,
+  "scenario_basis": {
+    "base": "selected forecast, recent realized price, recent median fruit cost, recent waste rate",
+    "downside": "demand reduced by mean backtest WAPE, fruit cost at recent p90, waste rate 1.25x recent",
+    "price_and_waste_action": "same demand, standard-code realized price, recent median cost, waste rate reduced by 25%; no causal demand uplift assumed"
+  },
+  "inventory_limitations": [
+    "No on-hand",
+    "No inbound",
+    "No lead time",
+    "No shelf life",
+    "No BOM/yield",
+    "No stockout flags"
+  ]
+}

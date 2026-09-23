@@ -1,0 +1,6 @@
+﻿sku,price_change_pct,projected_price_thb,elasticity_used,assumption_source,demand_factor,projected_units,projected_revenue_thb,projected_contribution_after_waste_thb,delta_contribution_vs_current_thb
+Guava,0.15,55.32288268442623,-0.3,illustrative -0.30 assumption; observed directional median -1.81 is confounded and non-causal,0.955,96936.31999999999,5362796.65922,1790667.9102605504,447367.43486055033
+MixedBerryPremium,0.15,100.0212491798602,-0.3,illustrative -0.30 assumption; observed directional median -6.69 is confounded and non-causal,0.955,26782.02,2678771.0959599996,202863.5956250996,256723.62282509956
+PassionFruit,0.15,73.39593206495037,-0.3,illustrative -0.30 assumption; observed directional median -6.45 is confounded and non-causal,0.955,77752.28,5706701.060775,1426273.82975,498581.97975000006
+Pineapple,0.15,55.42572976481179,-0.3,illustrative -0.30 assumption; observed directional median -4.19 is confounded and non-causal,0.955,154870.44,8583807.155997498,2970999.011194999,712027.1311949985
+Watermelon,0.15,50.75533268569049,-0.3,illustrative -0.30 assumption; observed directional median -3.94 is confounded and non-causal,0.955,233966.405,11875042.723049998,4143991.777109248,983326.978109248

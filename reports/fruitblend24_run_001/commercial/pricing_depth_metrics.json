@@ -1,0 +1,76 @@
+{
+  "data_version": "fruitblend24_v1_c2869ce419bf",
+  "scope": "Task 2 normalized demand, directional price sensitivity, and contribution simulation",
+  "caution": "Effective price is observed post-promotion price. Historical price variation is not randomized; directional sensitivity is not causal elasticity.",
+  "daypart_order": [
+    "Late Night",
+    "Morning",
+    "Lunch",
+    "Afternoon",
+    "Dinner",
+    "Late Evening"
+  ],
+  "price_change_grid": [
+    -0.1,
+    -0.05,
+    0.0,
+    0.05,
+    0.1,
+    0.15
+  ],
+  "fallback_elasticity_assumption": -0.3,
+  "heatmap_denominator": "active observed dates for each day-of-week x hour cell",
+  "price_simulation_cost_policy": "Keep weighted variable cost, commission rate, and waste cost per sold cup at observed SKU levels; do not forecast overhead in the price decision.",
+  "best_scenario_by_sku": [
+    {
+      "sku": "Guava",
+      "price_change_pct": 0.15,
+      "projected_price_thb": 55.32288268442623,
+      "projected_units": 96936.31999999999,
+      "projected_contribution_after_waste_thb": 1790667.9102605504,
+      "delta_contribution_vs_current_thb": 447367.43486055033,
+      "elasticity_used": -0.3,
+      "assumption_source": "illustrative -0.30 assumption; observed directional median -1.81 is confounded and non-causal"
+    },
+    {
+      "sku": "MixedBerryPremium",
+      "price_change_pct": 0.15,
+      "projected_price_thb": 100.0212491798602,
+      "projected_units": 26782.02,
+      "projected_contribution_after_waste_thb": 202863.5956250996,
+      "delta_contribution_vs_current_thb": 256723.62282509956,
+      "elasticity_used": -0.3,
+      "assumption_source": "illustrative -0.30 assumption; observed directional median -6.69 is confounded and non-causal"
+    },
+    {
+      "sku": "PassionFruit",
+      "price_change_pct": 0.15,
+      "projected_price_thb": 73.39593206495037,
+      "projected_units": 77752.28,
+      "projected_contribution_after_waste_thb": 1426273.82975,
+      "delta_contribution_vs_current_thb": 498581.97975000006,
+      "elasticity_used": -0.3,
+      "assumption_source": "illustrative -0.30 assumption; observed directional median -6.45 is confounded and non-causal"
+    },
+    {
+      "sku": "Pineapple",
+      "price_change_pct": 0.15,
+      "projected_price_thb": 55.42572976481179,
+      "projected_units": 154870.44,
+      "projected_contribution_after_waste_thb": 2970999.011194999,
+      "delta_contribution_vs_current_thb": 712027.1311949985,
+      "elasticity_used": -0.3,
+      "assumption_source": "illustrative -0.30 assumption; observed directional median -4.19 is confounded and non-causal"
+    },
+    {
+      "sku": "Watermelon",
+      "price_change_pct": 0.15,
+      "projected_price_thb": 50.75533268569049,
+      "projected_units": 233966.405,
+      "projected_contribution_after_waste_thb": 4143991.777109248,
+      "delta_contribution_vs_current_thb": 983326.978109248,
+      "elasticity_used": -0.3,
+      "assumption_source": "illustrative -0.30 assumption; observed directional median -3.94 is confounded and non-causal"
+    }
+  ]
+}
