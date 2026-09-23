@@ -64,12 +64,12 @@ def run() -> dict:
     recovery_nov_capacity = pd.read_csv(PLANNING / "november_capacity_gate.csv", encoding="utf-8-sig")
     checks = []
     expected_tabs = [
-        "ภาพรวมและแผนแก้ไข",
-        "สินค้า สาขา และผลเทียบงบ",
-        "โปรโมชั่นคุ้มไหม",
-        "ยอดขายและความเหมาะสมของราคา",
-        "แผน 3 เดือนและการเตรียมสินค้า",
-        "ที่มาข้อมูลและข้อจำกัด",
+        "Overview & recovery plan",
+        "Portfolio, kitchens & budget performance",
+        "Promotions & rate codes",
+        "Demand & price fit",
+        "3-month outlook & preparation plan",
+        "Data quality & limitations",
     ]
 
     app_test = AppTest.from_file(str(APP)).run(timeout=60)
@@ -80,21 +80,21 @@ def run() -> dict:
     checks.append(check("Deployment entrypoint exposes all six task tabs", [tab.label for tab in root_app_test.tabs] == expected_tabs, expected_tabs, [tab.label for tab in root_app_test.tabs]))
     labels = [metric.label for metric in app_test.metric]
     required_labels = [
-        "รายได้จากการขาย", "ต่างจากเป้ารายได้", "ผลดำเนินงานตามแบบจำลอง",
-        "แถวคำสั่งซื้อดิบ", "แถวเมนูที่ใช้วิเคราะห์", "ช่วงยอดขายรวมสูงสุด",
-        "ส่วนลด", "Forecast เดิม (ฐาน)", "เป้าเตรียมจาก Forecast เดิม",
+        "Sales revenue", "Revenue vs. budget", "Modeled operating result",
+        "Raw order rows", "Retained menu rows", "Peak sales hour",
+        "Discount", "Baseline forecast", "Baseline forecast prep target",
     ]
     checks.append(check("App exposes required metric cards", all(label in labels for label in required_labels), required_labels, labels))
     required_sections = [
-        "5 ข้อค้นพบที่ควรใช้ตัดสินใจ", "แผนลงมือทำ", "จากข้อมูลดิบสู่ข้อมูลที่ใช้วิเคราะห์",
-        "ราคาปัจจุบันของแต่ละสินค้า", "Scorecard: ลดราคาแล้วเหลือเงินเท่าไร?",
-        "ยอดขายเพิ่มพอคุ้มส่วนลดหรือไม่?", "รายได้จริงเทียบงบรายเดือน",
-        "สินค้าไหนควรทำอะไร?", "ครัวไหนควรเริ่มแก้ก่อน?", "ยอดขายย้อนหลังต่อด้วยยอดขายคาดการณ์",
-        "หน้านี้มีตัวเลข 2 ชุด", "เป้าสมจริงเพื่อคุ้มทุนสะสม", "ผลดำเนินงานที่คาดใน 3 สถานการณ์", "เป้าเตรียมเมื่อแผนยอดขายได้รับการยืนยัน", "นโยบายเตรียมและเติมสินค้า",
-        "สูตรที่ใช้เมื่อมีข้อมูลสต็อกครบ",
+        "5 decision-relevant findings", "Action plan", "From raw data to released analytical data",
+        "Current price fit by product", "Scorecard: how much contribution remains after discounting?",
+        "Is the sales lift enough to cover the discount?", "Actual revenue vs. monthly budget",
+        "What should we do by product?", "Which kitchens should be fixed first?", "Historical sales followed by forecast sales",
+        "This page shows two sets of numbers", "Realistic cumulative break-even target", "Modeled result across 3 scenarios", "Preparation target after sales confirmation", "Preparation and replenishment policy",
+        "Formula to use when inventory data is complete",
     ]
     checks.append(check("App includes readable decision sections for all six tasks", all(section in app_text for section in required_sections), required_sections, [section for section in required_sections if section in app_text]))
-    task_markers = ["Task 1 · Data quality", "Task 2 · Demand & pricing", "Task 3 · Promotions & rate codes", "Task 4 · Portfolio & budget performance", "Task 5 · Inventory & 3-month outlook", "Task 6 · สรุปเพื่อการตัดสินใจ"]
+    task_markers = ["Task 1 · Data quality", "Task 2 · Demand & pricing", "Task 3 · Promotions & rate codes", "Task 4 · Portfolio & budget performance", "Task 5 · Inventory & 3-month outlook", "Task 6 · Decision summary"]
     checks.append(check("App keeps every assessment task traceable", all(marker in app_text for marker in task_markers), task_markers, [marker for marker in task_markers if marker in app_text]))
     checks.append(check("Issue log is valid CSV", len(issues) == 6, 6, int(len(issues))))
     checks.append(check("Price ladder covers all five SKUs", price_ladder["sku"].nunique() == 5, 5, int(price_ladder["sku"].nunique())))
@@ -126,8 +126,8 @@ def run() -> dict:
     base_forecast_units = float(scenario.loc[scenario["scenario"] == "base", "forecast_units"].sum())
     checks.append(check("App bases outlook on released three-month scenario", abs(base_forecast_units - forecast_metrics["base_forecast_units"]) < 0.01, forecast_metrics["base_forecast_units"], base_forecast_units))
     optimized_result = float(scenario.loc[scenario["scenario"] == "price_and_waste_action", "modeled_operating_result_thb"].sum())
-    checks.append(check("App discloses the remaining three-month profitability gap", abs(optimized_result + 597324) < 1 and "ยังขาดทุน" in app_text and "ช่องว่าง" in app_text, {"optimized_result_rounded": -597324, "required_copy": ["ยังขาดทุน", "ช่องว่าง"]}, {"optimized_result": optimized_result, "has_required_copy": all(text in app_text for text in ["ยังขาดทุน", "ช่องว่าง"])}))
-    checks.append(check("Price page gives a test recommendation for every core SKU", all(sku_name in app_text for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"]) and "ข้อเสนอทดสอบ" in app_text, "5 SKUs + test recommendation", {"sku_mentions": [sku_name for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"] if sku_name in app_text], "has_test_label": "ข้อเสนอทดสอบ" in app_text}))
+    checks.append(check("App discloses the remaining three-month profitability gap", abs(optimized_result + 597324) < 1 and "still loses" in app_text and "gap" in app_text, {"optimized_result_rounded": -597324, "required_copy": ["still loses", "gap"]}, {"optimized_result": optimized_result, "has_required_copy": all(text in app_text for text in ["still loses", "gap"])}))
+    checks.append(check("Price page gives a test recommendation for every core SKU", all(sku_name in app_text for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"]) and "Test recommendation" in app_text, "5 SKUs + test recommendation", {"sku_mentions": [sku_name for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"] if sku_name in app_text], "has_test_label": "Test recommendation" in app_text}))
     checks.append(check("Forecast benchmarks five methods with rolling-origin windows", set(backtest["method"]) == {"naive_last_day", "moving_avg_4w", "exp_smoothing_4w", "seasonal_naive_7d", "weekday_median_8w"} and (backtest["cutoffs"] == 4).all(), "5 methods / 4 cutoffs", {"methods": sorted(backtest["method"].unique().tolist()), "cutoffs": sorted(backtest["cutoffs"].unique().tolist())}))
     checks.append(check("Forecast uncertainty range is present and ordered", all(col in forecast.columns for col in ["forecast_lower_units", "forecast_units_base", "forecast_upper_units"]) and bool((forecast["forecast_lower_units"] <= forecast["forecast_units_base"]).all()) and bool((forecast["forecast_units_base"] <= forecast["forecast_upper_units"]).all()), True, {"rows": int(len(forecast)), "range_ordered": bool((forecast["forecast_lower_units"] <= forecast["forecast_units_base"]).all() and (forecast["forecast_units_base"] <= forecast["forecast_upper_units"]).all())}))
     checks.append(check("Forecast is at Kitchen x SKU level", forecast[["kitchen", "sku"]].drop_duplicates().shape[0] == 20, 20, int(forecast[["kitchen", "sku"]].drop_duplicates().shape[0])))

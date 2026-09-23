@@ -34,16 +34,16 @@ def pct(value: float, decimals: int = 1) -> str:
     return f"{value * 100:.{decimals}f}%"
 
 
-MONTH_NAMES_TH = {
-    1: "ม.ค.", 2: "ก.พ.", 3: "มี.ค.", 4: "เม.ย.", 5: "พ.ค.", 6: "มิ.ย.",
-    7: "ก.ค.", 8: "ส.ค.", 9: "ก.ย.", 10: "ต.ค.", 11: "พ.ย.", 12: "ธ.ค.",
+MONTH_NAMES = {
+    1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
+    7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec",
 }
-WEEKDAY_NAMES_TH = {0: "จันทร์", 1: "อังคาร", 2: "พุธ", 3: "พฤหัสบดี", 4: "ศุกร์", 5: "เสาร์", 6: "อาทิตย์"}
+WEEKDAY_NAMES = {0: "Monday", 1: "Tuesday", 2: "Wednesday", 3: "Thursday", 4: "Friday", 5: "Saturday", 6: "Sunday"}
 
 
-def month_th(value) -> str:
+def month_name(value) -> str:
     timestamp = pd.Timestamp(value)
-    return f"{MONTH_NAMES_TH[timestamp.month]} {timestamp.year}"
+    return f"{MONTH_NAMES[timestamp.month]} {timestamp.year}"
 
 
 def apply_theme() -> None:
@@ -82,7 +82,7 @@ def display_table(
     decimal_columns: tuple[str, ...] = (),
     height: int | None = None,
 ) -> None:
-    """Show selected business fields with Thai labels and units that remain readable in a table."""
+    """Show selected business fields with English labels and readable units."""
     view = frame.loc[:, [column for column in columns if column in frame.columns]].copy()
     for column in money_columns:
         if column in view:
@@ -95,7 +95,7 @@ def display_table(
             view[column] = view[column].map(lambda value: f"{value:,.0f}" if pd.notna(value) else "n/a")
     for column in date_columns:
         if column in view:
-            view[column] = pd.to_datetime(view[column]).map(month_th)
+            view[column] = pd.to_datetime(view[column]).map(month_name)
     for column in decimal_columns:
         if column in view:
             view[column] = view[column].map(lambda value: f"{value:,.1f}" if pd.notna(value) else "n/a")
@@ -204,45 +204,45 @@ def metric_cards(data: dict) -> tuple[float, float, float]:
     revenue_variance = float(pnl["revenue_variance_thb"].sum())
     operating = float(pnl["modeled_operating_result_thb"].sum())
     c1, c2, c3 = st.columns(3)
-    c1.metric("รายได้จากการขาย", money(revenue), "ยอดจริงหลังคัดข้อมูล")
-    c2.metric("ต่างจากเป้ารายได้", money(revenue_variance), pct(revenue_variance / float(pnl["budget_revenue_thb"].sum())))
-    c3.metric("ผลดำเนินงานตามแบบจำลอง", money(operating), "หลังของเสียและค่าใช้จ่ายคงที่")
+    c1.metric("Sales revenue", money(revenue), "Actual after data screening")
+    c2.metric("Revenue vs. budget", money(revenue_variance), pct(revenue_variance / float(pnl["budget_revenue_thb"].sum())))
+    c3.metric("Modeled operating result", money(operating), "After waste and fixed overhead")
     return revenue, revenue_variance, operating
 
 
 def overview(data: dict) -> None:
-    task_heading("Task 6 · สรุปเพื่อการตัดสินใจ", "ภาพรวมและแผนแก้ไข", "เริ่มจากภาพรวม แล้วค่อยเปิดดูหลักฐานเรื่องราคา โปรโมชั่น สินค้า ครัว และการเตรียมสินค้า")
+    task_heading("Task 6 · Decision summary", "Overview & recovery plan", "Start with the overview, then open the evidence on pricing, promotions, products, kitchens, and preparation planning.")
     st.markdown(
         """
         <div class="hero">
-          <div class="eyebrow">FRUITBLEND24 · กรณีศึกษาข้อมูลจำลอง</div>
-          <h2>ขายได้ แต่เงินที่เหลือหลังต้นทุนยังไม่พอ</h2>
-          <p>รายได้อยู่ใกล้เป้าหมาย แต่ส่วนลด สินค้าที่มีเงินเหลือติดลบ ของเสีย และค่าใช้จ่ายคงที่ ทำให้ผลดำเนินงานตามแบบจำลองยังขาดทุน</p>
+          <div class="eyebrow">FRUITBLEND24 · Synthetic data case study</div>
+          <h2>Sales are strong, but post-cost contribution is not enough</h2>
+          <p>Revenue is close to target, but discounts, loss-making products, waste, and fixed overhead keep the modeled operating result negative.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
     revenue, revenue_variance, operating = metric_cards(data)
-    st.caption("ผลย้อนหลัง: ก.ย. 2025–ส.ค. 2026 · แผนคาดการณ์: ก.ย.–พ.ย. 2026 · ไม่ใช่ข้อมูลสด")
+    st.caption("Historical period: Sep 2025–Aug 2026 · Forecast plan: Sep–Nov 2026 · Not live data")
 
     pnl = data["pnl_company"].copy().set_index("month")
     left, right = st.columns((1.1, 0.9))
     with left:
-        st.markdown("#### ยอดขายจริงเทียบเป้าในแต่ละเดือน")
+        st.markdown("#### Actual sales vs. monthly target")
         st.line_chart(
-            pnl[["gross_revenue_thb", "budget_revenue_thb"]].rename(columns={"gross_revenue_thb": "รายได้จริง", "budget_revenue_thb": "เป้ารายได้"}),
+            pnl[["gross_revenue_thb", "budget_revenue_thb"]].rename(columns={"gross_revenue_thb": "Actual revenue", "budget_revenue_thb": "Revenue target"}),
             height=280,
         )
     with right:
-        st.markdown("#### เงินจากยอดขายหายไปกับอะไร?")
+        st.markdown("#### Where does sales revenue go?")
         waterfall = data["pnl_waterfall"].copy().set_index("pnl_component")
         waterfall.index = [
-            "รายได้", "ต้นทุนผลไม้", "บรรจุภัณฑ์", "แรงงาน", "ค่าคอมมิชชันแพลตฟอร์ม",
-            "เงินเหลือก่อนของเสีย", "ต้นทุนของเสีย", "เงินเหลือหลังของเสีย", "ค่าใช้จ่ายคงที่", "ผลดำเนินงาน",
+            "Revenue", "Fruit cost", "Packaging", "Labor", "Platform commission",
+            "Contribution before waste", "Waste cost", "Contribution after waste", "Fixed overhead", "Operating result",
         ]
-        st.bar_chart(waterfall[["thb"]].rename(columns={"thb": "บาท"}), height=280)
+        st.bar_chart(waterfall[["thb"]].rename(columns={"thb": "THB"}), height=280)
 
-    st.markdown("#### 5 ข้อค้นพบที่ควรใช้ตัดสินใจ")
+    st.markdown("#### 5 decision-relevant findings")
     reconciliation = data["reconciliation"]
     peak_hour = data["hourly"].sort_values("units_sold", ascending=False).iloc[0]
     weekend_revenue_share = float(data["weekday"].loc[data["weekday"]["day_of_week"].isin([5, 6]), "revenue_share"].sum())
@@ -251,30 +251,30 @@ def overview(data: dict) -> None:
     base_wape = float(data["metrics"]["selected_method_mean_wape"])
     base_outlook = data["scenario"].loc[data["scenario"]["scenario"] == "base"]
     insights = pd.DataFrame([
-        ["ข้อมูลพร้อมใช้", f"ตัดรายการซ้ำ 372 แถว ป้องกันรายได้ถูกนับเกิน {money(reconciliation['duplicate_revenue_removed_thb'])}; ตัดรายการที่ไม่ใช่เมนู 370 แถว", "ใช้เฉพาะข้อมูลเมนูที่ผ่านการคัดกรอง 123,655 แถว"],
-        ["ลูกค้าซื้อเป็นช่วง", f"ยอดรวมสูงสุดอยู่ที่ 22:00 จำนวน {peak_hour['units_sold']:,.0f} แก้ว; เสาร์–อาทิตย์สร้างรายได้ {pct(weekend_revenue_share)}", "เพิ่มการเตรียมก่อนช่วงค่ำและวันหยุด ลดการเตรียมล่วงหน้าช่วงยอดต่ำ"],
-        ["โปรโมชันกินเงินเหลือ", f"RC102 เหลือ {money(promo.loc['RC102', 'contribution_before_waste_per_cup_thb'], 2)}/แก้ว เทียบราคาปกติ {money(promo.loc['RC000', 'contribution_before_waste_per_cup_thb'], 2)}/แก้ว ก่อนของเสีย", "ใช้ราคาปกติเป็นกลุ่มเปรียบเทียบ และทดสอบโปรโมชันแบบควบคุม"],
-        ["MixedBerryPremium ต้องแก้ก่อนขยาย", f"เงินเหลือหลังของเสีย {money(mixed['contribution_after_waste_thb'])} หรือ {money(mixed['contribution_after_waste_per_cup_thb'], 2)}/แก้ว; ของเสีย {pct(mixed['waste_rate'])}", "ทดลองปรับราคา ปริมาณ และการเตรียมเป็นรอบเล็กก่อนเพิ่มยอดขาย"],
-        ["3 เดือนข้างหน้ายังมีช่องว่าง", f"กรณีฐานคาด {base_outlook['forecast_units'].sum():,.0f} แก้ว และขาดทุนตามแบบจำลอง {money(base_outlook['modeled_operating_result_thb'].sum())}; WAPE {pct(base_wape)}", "วางแผนเตรียมรายครัว–สินค้า และทำมาตรการราคา/ของเสียควบคู่กัน"],
-    ], columns=["ข้อค้นพบ", "หลักฐานเชิงตัวเลข", "สิ่งที่ควรทำ"])
+        ["Data is ready", f"Removed 372 duplicate rows, preventing {money(reconciliation['duplicate_revenue_removed_thb'])} of overstated revenue; excluded 370 non-menu rows", "Use only the 123,655 screened menu rows"],
+        ["Demand is time-dependent", f"Peak volume occurs at 22:00 with {peak_hour['units_sold']:,.0f} cups; weekends contribute {pct(weekend_revenue_share)} of revenue", "Add preparation before evenings and weekends; reduce early prep during low-demand periods"],
+        ["Promotions consume contribution", f"RC102 contributes {money(promo.loc['RC102', 'contribution_before_waste_per_cup_thb'], 2)}/cup vs. {money(promo.loc['RC000', 'contribution_before_waste_per_cup_thb'], 2)}/cup for standard pricing before waste", "Use standard pricing as the control and run controlled promotion tests"],
+        ["Fix MixedBerryPremium before scaling", f"Post-waste contribution is {money(mixed['contribution_after_waste_thb'])}, or {money(mixed['contribution_after_waste_per_cup_thb'], 2)}/cup; waste is {pct(mixed['waste_rate'])}", "Pilot price, portion, and small-batch preparation changes before adding volume"],
+        ["The next 3 months still have a gap", f"The base case forecasts {base_outlook['forecast_units'].sum():,.0f} cups and a modeled loss of {money(base_outlook['modeled_operating_result_thb'].sum())}; WAPE is {pct(base_wape)}", "Plan kitchen–SKU preparation and price/waste actions together"],
+    ], columns=["Finding", "Numeric evidence", "Recommended action"])
     st.dataframe(insights, width="stretch", hide_index=True)
 
-    st.markdown("#### จุดที่ควรเริ่มแก้")
+    st.markdown("#### Where to start")
     card1, card2, card3 = st.columns(3)
-    card1.warning("**สินค้า:** MixedBerryPremium\n\nเงินเหลือหลังของเสียติดลบ และมีของเสีย 20.5% จึงยังไม่ควรเร่งขยายยอด")
-    card2.warning("**โปรโมชั่น:** RC101–RC103\n\nเงินเหลือต่อแก้วต่ำกว่าราคาปกติทั้งหมด ควรเลิกใช้แบบหว่านและทดสอบเฉพาะกลุ่ม")
-    card3.warning("**ครัว:** BKK_Ladprao และ BKK_Sukhumvit\n\nผลดำเนินงานตามแบบจำลองติดลบ จึงควรไล่ดูคู่ครัว–สินค้าและของเสียก่อน")
+    card1.warning("**Product:** MixedBerryPremium\n\nPost-waste contribution is negative and waste is 20.5%; do not accelerate scale-up yet.")
+    card2.warning("**Promotions:** RC101–RC103\n\nAll deliver lower contribution per cup than standard pricing; stop blanket use and test selectively.")
+    card3.warning("**Kitchens:** BKK_Ladprao and BKK_Sukhumvit\n\nThe modeled operating result is negative; inspect kitchen–SKU pairs and waste first.")
 
-    st.markdown("#### แผนลงมือทำ")
+    st.markdown("#### Action plan")
     actions = pd.DataFrame([
-        ["ราคาและโปรโมชั่น", "ใช้ RC000 เป็นกลุ่มเปรียบเทียบ จำกัด RC101/RC103 และทดสอบ RC102 เฉพาะลูกค้าใหม่หรือช่วงยอดต่ำ โดยผ่านเกณฑ์เงินเหลือต่อแก้วก่อนขยาย", "ทีม Commercial + Growth (ข้อเสนอ)", "รอบแคมเปญถัดไป 2 สัปดาห์", "เงินเหลือต่อแก้ว, ยอดเพิ่มเทียบกลุ่มควบคุม, ของเสียจากโปรโมชัน"],
-        ["สินค้า", "ทำ pilot MixedBerryPremium 4 สัปดาห์: ทดสอบราคา/ปริมาณต่อแก้ว และเตรียมแบบรอบเล็ก ห้ามขยายจนเงินเหลือหลังของเสียเป็นบวก", "ทีม Category + Kitchen Operations (ข้อเสนอ)", "เริ่มภายใน 1 สัปดาห์; ทบทวนรายสัปดาห์", "เงินเหลือหลังของเสียต่อแก้ว > 0; ของเสียต่ำกว่าเป้าหมาย pilot 10%"],
-        ["การเตรียมสินค้า", f"ใช้ {data['metrics']['selected_method']} คาดการณ์รายวันระดับครัว–สินค้า รวมของเสียคาดการณ์เป็นเป้าเตรียม และทบทวนทุก 7 วัน", "ทีม Operations + Supply (ข้อเสนอ)", "เตรียมรายวัน; ทบทวนรายสัปดาห์", f"WAPE ≤ {pct(base_wape)}, ของเสีย, forecast bias, service level เมื่อมีข้อมูลของหมด"],
-        ["ฟื้นผลดำเนินงานครัว", "เริ่มที่ Ladprao และ Sukhumvit: ดูคู่ครัว–สินค้าที่เงินเหลือติดลบหรือของเสียสูง ทบทวนราคา/โปรโมชันและขนาดรอบเตรียม", "ผู้จัดการครัว + Commercial (ข้อเสนอ)", "ประชุมติดตามรายสัปดาห์", "ผลดำเนินงาน, ต้นทุนของเสีย/รายได้, เงินเหลือต่อแก้ว"],
-    ], columns=["ด้าน", "สิ่งที่ทำ", "ผู้รับผิดชอบที่เสนอ", "จังหวะทำงาน", "ตัวชี้วัด"])
+        ["Pricing & promotions", "Use RC000 as the control, limit RC101/RC103, and test RC102 only for new users or low-demand periods after passing the contribution-per-cup gate", "Commercial + Growth (proposed)", "Next 2-week campaign cycle", "Contribution/cup, lift vs. control, promotion waste"],
+        ["Product", "Run a 4-week MixedBerryPremium pilot: test price/portion and small-batch preparation; do not scale until post-waste contribution is positive", "Category + Kitchen Operations (proposed)", "Start within 1 week; weekly review", "Post-waste contribution/cup > 0; waste below 10% pilot target"],
+        ["Preparation planning", f"Use {data['metrics']['selected_method']} for daily kitchen–SKU forecasts, include expected waste in prep targets, and review every 7 days", "Operations + Supply (proposed)", "Daily preparation; weekly review", f"WAPE ≤ {pct(base_wape)}, waste, forecast bias, service level when stockout data is available"],
+        ["Kitchen recovery", "Start with Ladprao and Sukhumvit: inspect loss-making or high-waste kitchen–SKU pairs and review pricing, promotions, and batch size", "Kitchen Manager + Commercial (proposed)", "Weekly review meeting", "Operating result, waste cost/revenue, contribution/cup"],
+    ], columns=["Area", "Action", "Proposed owner", "Timing", "KPI"])
     st.dataframe(actions, width="stretch", hide_index=True)
 
-    st.markdown("#### มองไปข้างหน้า: ก.ย.–พ.ย. 2026")
+    st.markdown("#### Outlook: Sep–Nov 2026")
     scenario_totals = data["scenario"].groupby("scenario_display", as_index=False).agg(
         forecast_units=("forecast_units", "sum"), modeled_operating_result_thb=("modeled_operating_result_thb", "sum")
     )
@@ -283,385 +283,385 @@ def overview(data: dict) -> None:
     scenario_totals = scenario_totals.sort_values("sort_order")
     scenario_columns = st.columns(3)
     for column, (_, row) in zip(scenario_columns, scenario_totals.iterrows()):
-        thai_name = {"Base case": "กรณีฐาน", "Optimized case": "กรณีปรับปรุง", "Downside case": "กรณีแย่ลง"}[row["scenario_display"]]
-        column.metric(thai_name, money(row["modeled_operating_result_thb"]), f"คาดขาย {row['forecast_units']:,.0f} แก้ว")
+        scenario_name = {"Base case": "Base case", "Optimized case": "Optimized case", "Downside case": "Downside case"}[row["scenario_display"]]
+        column.metric(scenario_name, money(row["modeled_operating_result_thb"]), f"Forecast {row['forecast_units']:,.0f} cups")
     optimized_result = float(scenario_totals.loc[scenario_totals["scenario_display"] == "Optimized case", "modeled_operating_result_thb"].iloc[0])
     base_result = float(scenario_totals.loc[scenario_totals["scenario_display"] == "Base case", "modeled_operating_result_thb"].iloc[0])
     st.markdown(
-        f"<div class='callout'><strong>แผนไปสู่กำไรยังไม่จบในกรณีปรับปรุง:</strong> จากกรณีฐาน {money(base_result)} การใช้ราคาที่รับจริงแบบมาตรฐานและลดอัตราของเสีย 25% ช่วยลดการขาดทุน {money(optimized_result - base_result)} แต่ยังเหลือช่องว่าง {money(-optimized_result)} ก่อนคุ้มทุนใน 3 เดือน จึงต้องวัดผลจริงและประเมินต้นทุนคงที่ ต้นทุนจัดซื้อ และยอดขายที่สร้างเงินเหลือเป็นบวกเพิ่มเติม</div>",
+        f"<div class='callout'><strong>The optimized plan does not yet reach profitability:</strong> Starting from the base case at {money(base_result)}, standard realized pricing and a 25% waste reduction reduce the loss by {money(optimized_result - base_result)}, but a {money(-optimized_result)} gap remains before 3-month break-even. Measure actual results and reassess fixed costs, purchasing costs, and positive-contribution sales.</div>",
         unsafe_allow_html=True,
     )
 
-    with st.expander("หลักคิดและข้อจำกัดที่มีผลต่อการตัดสินใจ"):
-        st.markdown("รายได้ใช้ราคาที่สังเกตได้หลังโปรโมชันแล้ว จึงไม่หักส่วนลดซ้ำ ผลดำเนินงานตามแบบจำลองหักต้นทุนผลไม้ บรรจุภัณฑ์ แรงงาน ค่าคอมมิชชัน ของเสียที่บันทึก และค่าใช้จ่ายคงที่ของครัว แต่ขอบเขตต้นทุนของ GP ในงบยังไม่ระบุ จึงไม่เรียกผลนี้ว่าเป็นส่วนต่าง GP เทียบงบ")
-        st.markdown("ผลโปรโมชั่นเป็นความสัมพันธ์จากข้อมูล ไม่ใช่การพิสูจน์ว่าโปรโมชันทำให้ยอดเปลี่ยน ส่วนช่วง Forecast เป็นช่วงวางแผนจาก WAPE ไม่ใช่ช่วงความเชื่อมั่นทางสถิติ")
+    with st.expander("Decision logic and limitations"):
+        st.markdown("Revenue uses observed post-promotion prices, so discounts are not deducted again. The modeled operating result deducts fruit, packaging, labor, commission, recorded waste, and kitchen fixed overhead; the budget GP boundary is unspecified, so this is not presented as a budget GP variance.")
+        st.markdown("Promotion results are observed associations, not proof that promotions caused demand changes. The forecast range is a WAPE-based planning range, not a statistical confidence interval.")
 
-    with st.expander("ที่มาและสถานะการตรวจสอบ"):
+    with st.expander("Source and validation status"):
         qa = data["qa"]
-        st.success(f"ตรวจ artifact ที่ใช้คำนวณแล้ว: {qa['status']} · ผ่าน {len(qa['checks']) - qa['failed_count']}/{len(qa['checks'])} รายการ")
-        st.write(f"ข้อมูลเวอร์ชัน: `{DATA_VERSION}`")
-        st.write("เปิดแท็บ “ที่มาข้อมูลและข้อจำกัด” เพื่อดูการคัดกรองข้อมูล รายการประเด็น และ QA รายข้อ")
+        st.success(f"Calculation artifacts checked: {qa['status']} · Passed {len(qa['checks']) - qa['failed_count']}/{len(qa['checks'])} checks")
+        st.write(f"Data version: `{DATA_VERSION}`")
+        st.write("Open the “Data quality and limitations” tab for screening, open issues, and check-level QA.")
 
 
 def demand_pricing(data: dict) -> None:
-    task_heading("Task 2 · Demand & pricing", "ยอดขายและความเหมาะสมของราคา", "ลูกค้าซื้อเมื่อไร และราคาแต่ละสินค้ามีพื้นที่เหลือเหนือระดับคุ้มทุนก่อนของเสียมากน้อยแค่ไหน?")
+    task_heading("Task 2 · Demand & pricing", "Demand & price fit", "When do customers buy, and how much headroom does each product have above its pre-waste break-even price?")
     hourly = data["hourly"].copy()
     weekday = data["weekday"].copy()
-    weekday["weekday"] = weekday["day_of_week"].map(WEEKDAY_NAMES_TH)
+    weekday["weekday"] = weekday["day_of_week"].map(WEEKDAY_NAMES)
     monthly = data["monthly_demand"].copy()
     peak_hour = hourly.sort_values("units_sold", ascending=False).iloc[0]
     peak_day = weekday.sort_values("units_sold", ascending=False).iloc[0]
     top_platform = data["platform"].sort_values("gross_revenue_thb", ascending=False).iloc[0]
     c1, c2, c3 = st.columns(3)
-    c1.metric("ช่วงยอดขายรวมสูงสุด", f"{int(peak_hour['hour']):02d}:00", f"{peak_hour['units_sold']:,.0f} แก้วตลอดช่วงย้อนหลัง")
-    c2.metric("วันที่ยอดขายสูงสุด", str(peak_day["weekday"]), f"{peak_day['units_sold']:,.0f} แก้วตลอดช่วงย้อนหลัง")
-    c3.metric("แพลตฟอร์มรายได้สูงสุด", str(top_platform["platform_name"]), money(top_platform["gross_revenue_thb"]))
-    st.caption("ยอดตามชั่วโมงและวันด้านบนเป็นผลรวม 12 เดือน ไม่ใช่ยอดขายของวันเดียว")
+    c1.metric("Peak sales hour", f"{int(peak_hour['hour']):02d}:00", f"{peak_hour['units_sold']:,.0f} cups across history")
+    c2.metric("Peak sales day", str(peak_day["weekday"]), f"{peak_day['units_sold']:,.0f} cups across history")
+    c3.metric("Top revenue platform", str(top_platform["platform_name"]), money(top_platform["gross_revenue_thb"]))
+    st.caption("The hourly and daily totals above cover 12 months, not a single day.")
 
-    st.markdown("#### ลูกค้าซื้อเมื่อไร?")
+    st.markdown("#### When do customers buy?")
     left, right = st.columns(2)
-    left.markdown("**ยอดขายรวมตามชั่วโมง**")
-    left.bar_chart(hourly.set_index("hour")[["units_sold"]].rename(columns={"units_sold": "แก้ว"}), height=270)
-    right.markdown("**ยอดขายรวมตามวันในสัปดาห์**")
-    right.bar_chart(weekday.set_index("weekday")[["units_sold"]].rename(columns={"units_sold": "แก้ว"}), height=270)
+    left.markdown("**Total sales by hour**")
+    left.bar_chart(hourly.set_index("hour")[["units_sold"]].rename(columns={"units_sold": "Cups"}), height=270)
+    right.markdown("**Total sales by weekday**")
+    right.bar_chart(weekday.set_index("weekday")[["units_sold"]].rename(columns={"units_sold": "Cups"}), height=270)
     left, right = st.columns(2)
-    left.markdown("**ยอดขายรวมรายเดือน**")
-    monthly_cups = monthly.set_index("month")[["units_sold"]].rename(columns={"units_sold": "แก้ว"})
+    left.markdown("**Total monthly sales**")
+    monthly_cups = monthly.set_index("month")[["units_sold"]].rename(columns={"units_sold": "Cups"})
     left.line_chart(monthly_cups, height=260)
-    right.markdown("**รายได้รวมรายเดือน**")
-    right.line_chart(monthly.set_index("month")[["gross_revenue_thb"]].rename(columns={"gross_revenue_thb": "บาท"}), height=260)
-    st.info("การเตรียมสินค้าควรเพิ่มก่อนช่วงค่ำ โดยเฉพาะ 22:00 และวันเสาร์–อาทิตย์ แต่ไม่ควรตีความว่าแถวชั่วโมงที่ไม่พบใน export เป็นยอดขายศูนย์")
+    right.markdown("**Total monthly revenue**")
+    right.line_chart(monthly.set_index("month")[["gross_revenue_thb"]].rename(columns={"gross_revenue_thb": "THB"}), height=260)
+    st.info("Increase preparation before the evening peak, especially 22:00 and weekends. Do not interpret hours missing from the export as zero sales.")
 
-    with st.expander("ดู Demand แบบเทียบต่อวันและรายละเอียดช่วงเวลา"):
+    with st.expander("Normalized demand and time-of-day detail"):
         normalized_hour = data["hourly_normalized"].copy().set_index("hour")
         normalized_day = data["weekday_normalized"].copy()
-        normalized_day["weekday"] = normalized_day["day_of_week"].map(WEEKDAY_NAMES_TH)
+        normalized_day["weekday"] = normalized_day["day_of_week"].map(WEEKDAY_NAMES)
         normalized_day = normalized_day.set_index("weekday")
         left, right = st.columns(2)
-        left.markdown("**เฉลี่ยต่อวันที่มีข้อมูลตามชั่วโมง**")
-        left.bar_chart(normalized_hour[["avg_cups_per_active_day"]].rename(columns={"avg_cups_per_active_day": "แก้วเฉลี่ย"}), height=260)
-        right.markdown("**เฉลี่ยต่อวันที่มีข้อมูลตามวันในสัปดาห์**")
-        right.bar_chart(normalized_day[["avg_cups_per_active_day"]].rename(columns={"avg_cups_per_active_day": "แก้วเฉลี่ย"}), height=260)
+        left.markdown("**Average cups per active day by hour**")
+        left.bar_chart(normalized_hour[["avg_cups_per_active_day"]].rename(columns={"avg_cups_per_active_day": "Average cups"}), height=260)
+        right.markdown("**Average cups per active day by weekday**")
+        right.bar_chart(normalized_day[["avg_cups_per_active_day"]].rename(columns={"avg_cups_per_active_day": "Average cups"}), height=260)
         daypart = data["daypart"].sort_values("daypart_order").set_index("daypart")
-        st.markdown("**เฉลี่ยต่อชั่วโมงที่สังเกตตามช่วงเวลา**")
-        st.bar_chart(daypart[["avg_cups_per_observed_hour"]].rename(columns={"avg_cups_per_observed_hour": "แก้วเฉลี่ย"}), height=240)
-        st.markdown("**แผนภาพความต้องการ: วัน × ชั่วโมง และครัว × สินค้า**")
-        day_names = list(WEEKDAY_NAMES_TH.values())
+        st.markdown("**Average cups per observed hour by daypart**")
+        st.bar_chart(daypart[["avg_cups_per_observed_hour"]].rename(columns={"avg_cups_per_observed_hour": "Average cups"}), height=240)
+        st.markdown("**Demand heatmaps: weekday × hour and kitchen × SKU**")
+        day_names = list(WEEKDAY_NAMES.values())
         heat = data["heatmap"].copy()
-        heat["weekday"] = heat["day_of_week"].map(WEEKDAY_NAMES_TH)
+        heat["weekday"] = heat["day_of_week"].map(WEEKDAY_NAMES)
         heat_table = heat.pivot(index="weekday", columns="hour", values="avg_cups_per_active_day").reindex(day_names).round(1)
-        st.dataframe(heat_table.style.background_gradient(cmap="YlOrRd").format("{:.1f} แก้ว"), width="stretch")
+        st.dataframe(heat_table.style.background_gradient(cmap="YlOrRd").format("{:.1f} cups"), width="stretch")
         kitchen_heat = data["kitchen_sku"].pivot(index="kitchen", columns="sku", values="avg_cups_per_active_day").round(1)
-        st.dataframe(kitchen_heat.style.background_gradient(cmap="YlGnBu").format("{:.1f} แก้ว"), width="stretch")
+        st.dataframe(kitchen_heat.style.background_gradient(cmap="YlGnBu").format("{:.1f} cups"), width="stretch")
 
-    st.markdown("#### ราคาปัจจุบันของแต่ละสินค้า")
-    st.write("ตารางนี้เทียบราคาที่ลูกค้าจ่ายจริงกับระดับคุ้มทุน **ก่อนของเสียและค่าใช้จ่ายคงที่** จึงใช้เพื่อคัดกรองความเหมาะสมของราคา ไม่ใช่ราคาคุ้มทุนของทั้งธุรกิจ")
+    st.markdown("#### Current price fit by product")
+    st.write("This table compares realized customer prices with **pre-waste, pre-fixed-overhead break-even**. It screens price fit; it is not the break-even price for the whole business.")
     price_summary = data["price_floor"].merge(
         data["portfolio"][["sku", "contribution_after_waste_per_cup_thb", "waste_rate", "action_note"]], on="sku", how="left"
     )
     price_summary["headroom_before_waste_thb"] = price_summary["realized_price_thb"] - price_summary["break_even_price_before_waste_thb"]
     price_actions = {
-        "Watermelon": "คงราคา; ทดสอบ +5% ช่วงยอดสูงและปกป้องสินค้าพร้อมขาย",
-        "Pineapple": "คงราคา; ทดสอบ +5% ช่วงยอดสูงและปกป้องสินค้าพร้อมขาย",
-        "Guava": "คงราคา; ทดลอง +5% เฉพาะช่วงยอดสูงพร้อมกลุ่มควบคุม",
-        "PassionFruit": "คงราคา; ทบทวนการกระจายและของเสียก่อนทดสอบราคา",
-        "MixedBerryPremium": "ทดลอง +5% พร้อมคุมปริมาณและการเตรียมเป็นรอบเล็ก",
+        "Watermelon": "Hold price; test +5% during peak demand and protect availability",
+        "Pineapple": "Hold price; test +5% during peak demand and protect availability",
+        "Guava": "Hold price; test +5% during peak demand with a control group",
+        "PassionFruit": "Hold price; review distribution and waste before testing price",
+        "MixedBerryPremium": "Test +5% with portion control and small-batch preparation",
     }
     price_summary["recommendation"] = price_summary["sku"].map(price_actions)
     display_table(
         price_summary.sort_values("contribution_after_waste_per_cup_thb", ascending=False),
         ["sku", "realized_price_thb", "break_even_price_before_waste_thb", "headroom_before_waste_thb", "contribution_before_waste_per_cup_thb", "contribution_after_waste_per_cup_thb", "waste_rate", "recommendation"],
-        {"sku": "สินค้า", "realized_price_thb": "ราคาที่รับจริง/แก้ว", "break_even_price_before_waste_thb": "คุ้มทุนก่อนของเสีย/แก้ว", "headroom_before_waste_thb": "ส่วนต่างเหนือคุ้มทุน", "contribution_before_waste_per_cup_thb": "เงินเหลือก่อนของเสีย/แก้ว", "contribution_after_waste_per_cup_thb": "เงินเหลือหลังของเสีย/แก้ว", "waste_rate": "อัตราของเสีย", "recommendation": "ข้อเสนอทดสอบ"},
+        {"sku": "SKU", "realized_price_thb": "Realized price/cup", "break_even_price_before_waste_thb": "Pre-waste break-even/cup", "headroom_before_waste_thb": "Break-even headroom", "contribution_before_waste_per_cup_thb": "Contribution before waste/cup", "contribution_after_waste_per_cup_thb": "Contribution after waste/cup", "waste_rate": "Waste rate", "recommendation": "Test recommendation"},
         money_columns=("realized_price_thb", "break_even_price_before_waste_thb", "headroom_before_waste_thb", "contribution_before_waste_per_cup_thb", "contribution_after_waste_per_cup_thb"),
         percent_columns=("waste_rate",),
     )
-    st.caption("ข้อเสนอราคาเป็นการทดสอบแบบมีกลุ่มควบคุม ไม่ใช่คำสั่งปรับราคาทันที เพราะการเปลี่ยนราคาที่สังเกตได้ส่วนใหญ่มาจาก rate code และปัจจัยอื่นร่วมกัน")
+    st.caption("Price recommendations are controlled tests, not immediate price-change instructions, because observed price changes mostly reflect rate codes and other confounding factors.")
 
-    st.markdown("#### ดูรายละเอียดราคาสินค้ารายตัว")
+    st.markdown("#### Product-level price detail")
     sku_options = data["sku"]["sku"].tolist()
-    selected_sku = st.selectbox("เลือกสินค้า", sku_options, index=sku_options.index("MixedBerryPremium") if "MixedBerryPremium" in sku_options else 0)
+    selected_sku = st.selectbox("Select product", sku_options, index=sku_options.index("MixedBerryPremium") if "MixedBerryPremium" in sku_options else 0)
     sku_row = data["sku"].loc[data["sku"]["sku"] == selected_sku].iloc[0]
     price_row = data["price_floor"].loc[data["price_floor"]["sku"] == selected_sku].iloc[0]
     price_headroom = sku_row["realized_price_thb"] - price_row["break_even_price_before_waste_thb"]
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("ยอดขายย้อนหลัง", f"{sku_row['units_sold']:,.0f} แก้ว")
-    c2.metric("ราคาที่รับจริง", money(sku_row["realized_price_thb"], 2))
-    c3.metric("ส่วนต่างเหนือคุ้มทุนก่อนของเสีย", money(price_headroom, 2))
-    c4.metric("เงินเหลือหลังของเสียต่อแก้ว", money(sku_row["contribution_after_waste_per_cup_thb"], 2))
+    c1.metric("Historical sales", f"{sku_row['units_sold']:,.0f} cups")
+    c2.metric("Realized price", money(sku_row["realized_price_thb"], 2))
+    c3.metric("Pre-waste break-even headroom", money(price_headroom, 2))
+    c4.metric("Post-waste contribution/cup", money(sku_row["contribution_after_waste_per_cup_thb"], 2))
 
     left, right = st.columns(2)
     ladder = data["price_ladder"].loc[data["price_ladder"]["sku"] == selected_sku].sort_values("observed_price_thb")
     with left:
-        st.markdown("**ราคาเทียบยอดขายต่อชั่วโมงที่มีข้อมูล**")
-        st.line_chart(ladder.set_index("observed_price_thb")[["avg_cups_per_active_hour"]].rename(columns={"avg_cups_per_active_hour": "แก้วต่อชั่วโมง"}), height=250)
+        st.markdown("**Price vs. sales per active hour**")
+        st.line_chart(ladder.set_index("observed_price_thb")[["avg_cups_per_active_hour"]].rename(columns={"avg_cups_per_active_hour": "Cups per hour"}), height=250)
     with right:
-        st.markdown("**สถานการณ์เงินเหลือหลังของเสีย**")
+        st.markdown("**Post-waste contribution scenarios**")
         simulation = data["price_simulation"].loc[data["price_simulation"]["sku"] == selected_sku].sort_values("price_change_pct").copy()
         simulation["price_change_label"] = simulation["price_change_pct"].map(lambda value: pct(value, 0))
-        st.line_chart(simulation.set_index("price_change_label")[["projected_contribution_after_waste_thb"]].rename(columns={"projected_contribution_after_waste_thb": "บาท"}), height=250)
-    with st.expander("หลักฐานราคาและข้อจำกัดเชิงสถิติ"):
+        st.line_chart(simulation.set_index("price_change_label")[["projected_contribution_after_waste_thb"]].rename(columns={"projected_contribution_after_waste_thb": "THB"}), height=250)
+    with st.expander("Price evidence and statistical limitations"):
         display_table(
             ladder,
             ["observed_price_thb", "units_sold", "active_hours", "avg_cups_per_active_hour", "contribution_per_cup_thb", "promo_families"],
-            {"observed_price_thb": "ราคาที่พบ", "units_sold": "ยอดขาย", "active_hours": "ชั่วโมงที่มีข้อมูล", "avg_cups_per_active_hour": "แก้ว/ชั่วโมง", "contribution_per_cup_thb": "เงินเหลือ/แก้ว", "promo_families": "กลุ่ม rate code"},
+            {"observed_price_thb": "Observed price", "units_sold": "Units sold", "active_hours": "Active hours", "avg_cups_per_active_hour": "Cups/hour", "contribution_per_cup_thb": "Contribution/cup", "promo_families": "Rate-code families"},
             money_columns=("observed_price_thb", "contribution_per_cup_thb"), integer_columns=("units_sold", "active_hours"), decimal_columns=("avg_cups_per_active_hour",),
         )
         sensitivity = data["price_sensitivity"].copy()
         display_table(
             sensitivity,
             ["sku", "price_points", "min_observed_price_thb", "max_observed_price_thb", "price_cv", "pairwise_midpoint_elasticity_median", "pairwise_comparisons", "interpretation"],
-            {"sku": "สินค้า", "price_points": "ระดับราคาที่พบ", "min_observed_price_thb": "ราคาต่ำสุด", "max_observed_price_thb": "ราคาสูงสุด", "price_cv": "ความผันผวนราคา", "pairwise_midpoint_elasticity_median": "ความไวต่อราคา (เชิงทิศทาง)", "pairwise_comparisons": "คู่เปรียบเทียบ", "interpretation": "ข้อจำกัด"},
+            {"sku": "SKU", "price_points": "Observed price points", "min_observed_price_thb": "Minimum price", "max_observed_price_thb": "Maximum price", "price_cv": "Price volatility", "pairwise_midpoint_elasticity_median": "Price sensitivity (directional)", "pairwise_comparisons": "Pairwise comparisons", "interpretation": "Limitations"},
             money_columns=("min_observed_price_thb", "max_observed_price_thb"), percent_columns=("price_cv",), integer_columns=("price_points", "pairwise_comparisons"), decimal_columns=("pairwise_midpoint_elasticity_median",),
         )
         display_table(
             simulation,
             ["price_change_pct", "projected_price_thb", "demand_factor", "projected_units", "projected_contribution_after_waste_thb", "delta_contribution_vs_current_thb", "assumption_source"],
-            {"price_change_pct": "การเปลี่ยนราคา", "projected_price_thb": "ราคาสมมติ", "demand_factor": "ตัวคูณ Demand", "projected_units": "ยอดขายสมมติ", "projected_contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "delta_contribution_vs_current_thb": "ต่างจากปัจจุบัน", "assumption_source": "ที่มาสมมติฐาน"},
+            {"price_change_pct": "Price change", "projected_price_thb": "Scenario price", "demand_factor": "Demand factor", "projected_units": "Scenario units", "projected_contribution_after_waste_thb": "Post-waste contribution", "delta_contribution_vs_current_thb": "Change vs. current", "assumption_source": "Assumption source"},
             money_columns=("projected_price_thb", "projected_contribution_after_waste_thb", "delta_contribution_vs_current_thb"), percent_columns=("price_change_pct",), integer_columns=("projected_units",), decimal_columns=("demand_factor",),
         )
         best = data["price_simulation_best"].loc[data["price_simulation_best"]["sku"] == selected_sku]
         if not best.empty:
             best_row = best.iloc[0]
-            st.info(f"แบบจำลองเชิงตัวอย่างให้ผลเงินเหลือสูงสุดที่ราคาเปลี่ยน {pct(best_row['price_change_pct'])} สำหรับ {selected_sku} แต่ใช้สมมติฐาน elasticity {best_row['elasticity_used']:.2f} จึงใช้เพื่อออกแบบการทดสอบ +5% ช่วงยอดสูงเท่านั้น ไม่ใช่หลักฐานว่าควรปรับราคาไปที่ค่านั้น")
+            st.info(f"The illustrative model gives the highest contribution at a {pct(best_row['price_change_pct'])} price change for {selected_sku}, but it uses an elasticity assumption of {best_row['elasticity_used']:.2f}. Use it only to design a +5% peak-period test, not as evidence for a permanent price change.")
 
 
 def promotions(data: dict) -> None:
-    task_heading("Task 3 · Promotions & rate codes", "โปรโมชันคุ้มไหม?", "ดูเงินเหลือต่อแก้วและผลเทียบกลุ่มราคาแบบมาตรฐานก่อนตัดสินใจเพิ่มยอดขายด้วยส่วนลด")
+    task_heading("Task 3 · Promotions & rate codes", "Are promotions worth it?", "Review contribution per cup and standard-price comparisons before using discounts to drive volume.")
     metrics = data["promotion_depth_metrics"]
     scorecard = data["promo_scorecard"].copy().sort_values("base_code")
     matched = data["promo_matched_scorecard"].copy().sort_values("base_code")
-    decision_map = {"CONTROL / DEFAULT": "ใช้เป็นกลุ่มเปรียบเทียบ", "OPTIMIZE / TARGET ONLY": "จำกัดและทดสอบเฉพาะกลุ่ม"}
-    scorecard["thai_decision"] = scorecard["decision"].map(decision_map).fillna(scorecard["decision"])
-    matched["thai_decision"] = matched["decision"].map(decision_map).fillna(matched["decision"])
+    decision_map = {"CONTROL / DEFAULT": "Use as control", "OPTIMIZE / TARGET ONLY": "Limit and test selectively"}
+    scorecard["decision_display"] = scorecard["decision"].map(decision_map).fillna(scorecard["decision"])
+    matched["decision_display"] = matched["decision"].map(decision_map).fillna(matched["decision"])
 
-    st.caption("รายได้เป็นราคาที่ลูกค้าจ่ายหลังโปรโมชันแล้ว ต้นทุนส่วนลดจึงแสดงเพื่อวิเคราะห์ผลกระทบ แต่ไม่นำไปหักจากรายได้ซ้ำ")
-    st.markdown("#### สรุปการตัดสินใจต่อรหัสที่ใช้อยู่")
+    st.caption("Revenue is the customer's post-promotion price. Discount cost is shown for impact analysis and is not deducted from revenue again.")
+    st.markdown("#### Decision summary for active rate codes")
     promo_actions = pd.DataFrame([
-        ["RC000 · Standard", "คงไว้", "เป็นฐานเปรียบเทียบ: เหลือ 14.48 บาท/แก้วก่อนของเสีย"],
-        ["RC101 · Bundle Deal", "จำกัด", "ยอดเพิ่มที่เห็นยังต่ำกว่าระดับที่ต้องเพิ่มเพื่อคุ้มส่วนลด"],
-        ["RC102 · Double Day New User", "ออกแบบใหม่และทดสอบ", "เหลือ 6.90 บาท/แก้วก่อนของเสีย และยอดเพิ่มที่เห็นยังไม่ถึงจุดคุ้ม"],
-        ["RC103 · Seasonal Push", "จำกัด", "ยอดเพิ่มที่เห็นยังต่ำกว่าระดับที่ต้องเพิ่มเพื่อคุ้มส่วนลด"],
-    ], columns=["รหัสและชื่อ", "ข้อเสนอ", "เหตุผล"])
+        ["RC000 · Standard", "Keep", "Control baseline: 14.48 THB/cup before waste"],
+        ["RC101 · Bundle Deal", "Limit", "Observed lift is below the level required to cover the discount"],
+        ["RC102 · Double Day New User", "Redesign and test", "6.90 THB/cup before waste; observed lift has not reached break-even"],
+        ["RC103 · Seasonal Push", "Limit", "Observed lift is below the level required to cover the discount"],
+    ], columns=["Code and name", "Recommendation", "Reason"])
     st.dataframe(promo_actions, width="stretch", hide_index=True)
 
-    st.markdown("#### Scorecard: ลดราคาแล้วเหลือเงินเท่าไร?")
+    st.markdown("#### Scorecard: how much contribution remains after discounting?")
     display_table(
         scorecard,
-        ["base_code", "rate_code_name", "discount_pct", "units_sold", "cups_per_active_hour", "discount_cost_thb", "net_revenue_thb", "contribution_before_waste_per_cup_thb", "contribution_margin_pct", "thai_decision"],
-        {"base_code": "รหัส", "rate_code_name": "ชื่อ", "discount_pct": "ส่วนลด", "units_sold": "ยอดขาย", "cups_per_active_hour": "แก้ว/ชั่วโมง", "discount_cost_thb": "ต้นทุนส่วนลด", "net_revenue_thb": "รายได้หลังส่วนลด", "contribution_before_waste_per_cup_thb": "เงินเหลือก่อนของเสีย/แก้ว", "contribution_margin_pct": "สัดส่วนเงินเหลือ", "thai_decision": "ข้อเสนอ"},
+        ["base_code", "rate_code_name", "discount_pct", "units_sold", "cups_per_active_hour", "discount_cost_thb", "net_revenue_thb", "contribution_before_waste_per_cup_thb", "contribution_margin_pct", "decision_display"],
+        {"base_code": "Code", "rate_code_name": "Name", "discount_pct": "Discount", "units_sold": "Units sold", "cups_per_active_hour": "Cups/hour", "discount_cost_thb": "Discount cost", "net_revenue_thb": "Net revenue", "contribution_before_waste_per_cup_thb": "Contribution before waste/cup", "contribution_margin_pct": "Contribution margin", "decision_display": "Recommendation"},
         money_columns=("discount_cost_thb", "net_revenue_thb", "contribution_before_waste_per_cup_thb"), percent_columns=("discount_pct", "contribution_margin_pct"), integer_columns=("units_sold",), decimal_columns=("cups_per_active_hour",),
     )
     left, right = st.columns(2)
-    left.markdown("**เงินเหลือก่อนของเสียต่อแก้ว**")
-    left.bar_chart(scorecard.set_index("base_code")[["contribution_before_waste_per_cup_thb"]].rename(columns={"contribution_before_waste_per_cup_thb": "บาท/แก้ว"}), height=260)
-    right.markdown("**ต้นทุนส่วนลดรวม**")
-    right.bar_chart(scorecard.set_index("base_code")[["discount_cost_thb"]].rename(columns={"discount_cost_thb": "บาท"}), height=260)
+    left.markdown("**Contribution before waste per cup**")
+    left.bar_chart(scorecard.set_index("base_code")[["contribution_before_waste_per_cup_thb"]].rename(columns={"contribution_before_waste_per_cup_thb": "THB/cup"}), height=260)
+    right.markdown("**Total discount cost**")
+    right.bar_chart(scorecard.set_index("base_code")[["discount_cost_thb"]].rename(columns={"discount_cost_thb": "THB"}), height=260)
 
-    st.markdown("#### ยอดขายเพิ่มพอคุ้มส่วนลดหรือไม่?")
+    st.markdown("#### Is the sales lift enough to cover the discount?")
     if not matched.empty:
         lift = matched.copy()
         display_table(
             lift,
-            ["base_code", "rate_code_name", "discount_pct", "promo_cups_per_active_hour", "baseline_cups_per_active_hour", "actual_demand_lift_pct", "break_even_lift_pct", "actual_vs_breakeven_gap_pct", "incremental_contribution_thb", "thai_decision"],
-            {"base_code": "รหัส", "rate_code_name": "ชื่อ", "discount_pct": "ส่วนลด", "promo_cups_per_active_hour": "แก้ว/ชม. เมื่อมีโปร", "baseline_cups_per_active_hour": "แก้ว/ชม. ฐานปกติ", "actual_demand_lift_pct": "ยอดเพิ่มที่พบ", "break_even_lift_pct": "ยอดเพิ่มที่ต้องมีเพื่อคุ้ม", "actual_vs_breakeven_gap_pct": "ส่วนต่างจากจุดคุ้ม", "incremental_contribution_thb": "เงินเหลือเพิ่มเทียบฐาน", "thai_decision": "ข้อเสนอ"},
+            ["base_code", "rate_code_name", "discount_pct", "promo_cups_per_active_hour", "baseline_cups_per_active_hour", "actual_demand_lift_pct", "break_even_lift_pct", "actual_vs_breakeven_gap_pct", "incremental_contribution_thb", "decision_display"],
+            {"base_code": "Code", "rate_code_name": "Name", "discount_pct": "Discount", "promo_cups_per_active_hour": "Promo cups/hour", "baseline_cups_per_active_hour": "Baseline cups/hour", "actual_demand_lift_pct": "Observed lift", "break_even_lift_pct": "Break-even lift", "actual_vs_breakeven_gap_pct": "Gap to break-even", "incremental_contribution_thb": "Incremental contribution vs. baseline", "decision_display": "Recommendation"},
             money_columns=("incremental_contribution_thb",), percent_columns=("discount_pct", "actual_demand_lift_pct", "break_even_lift_pct", "actual_vs_breakeven_gap_pct"), decimal_columns=("promo_cups_per_active_hour", "baseline_cups_per_active_hour"),
         )
         lift_chart = lift.set_index("base_code")[["actual_demand_lift_pct", "break_even_lift_pct"]].mul(100)
-        lift_chart.columns = ["ยอดเพิ่มที่พบ (%)", "ยอดเพิ่มที่ต้องมีเพื่อคุ้ม (%)"]
+        lift_chart.columns = ["Observed lift (%)", "Required break-even lift (%)"]
         st.bar_chart(lift_chart, height=280)
-        st.caption(f"เทียบในกลุ่ม SKU × ครัว × แพลตฟอร์ม × วัน × เดือน × ชั่วโมง × ช่วงเวลาเดียวกัน {int(metrics['matched_strata_count']):,} แถว โดยแถวชั่วโมงที่ไม่พบใน export ไม่ได้ถูกนับเป็นศูนย์")
+        st.caption(f"Matched across the same SKU × kitchen × platform × weekday × month × hour × daypart for {int(metrics['matched_strata_count']):,} strata. Hours missing from the export are not treated as zero.")
 
     code_options = scorecard["base_code"].tolist()
-    selected_code = st.selectbox("ดูรายละเอียดรหัสโปรโมชั่น", code_options, index=code_options.index("RC102") if "RC102" in code_options else 0)
+    selected_code = st.selectbox("Select promotion code", code_options, index=code_options.index("RC102") if "RC102" in code_options else 0)
     selected = scorecard.set_index("base_code").loc[selected_code]
     selected_match = matched.loc[matched["base_code"] == selected_code]
     p1, p2, p3, p4, p5 = st.columns(5)
-    p1.metric("ส่วนลด", pct(selected["discount_pct"]))
-    p2.metric("สัดส่วนยอดขายทั้งหมด", pct(selected["promo_share_cups"]))
-    p3.metric("ต้นทุนส่วนลด", money(selected["discount_cost_thb"]))
-    p4.metric("เงินเหลือก่อนของเสีย/แก้ว", money(selected["contribution_before_waste_per_cup_thb"], 2))
-    p5.metric("ยอดขายต่อชั่วโมง", f"{selected['cups_per_active_hour']:,.1f} แก้ว")
+    p1.metric("Discount", pct(selected["discount_pct"]))
+    p2.metric("Share of total sales", pct(selected["promo_share_cups"]))
+    p3.metric("Discount cost", money(selected["discount_cost_thb"]))
+    p4.metric("Contribution before waste/cup", money(selected["contribution_before_waste_per_cup_thb"], 2))
+    p5.metric("Sales per hour", f"{selected['cups_per_active_hour']:,.1f} cups")
     if not selected_match.empty:
         row = selected_match.iloc[0]
-        st.warning(f"{selected_code}: ยอดขายเพิ่มที่เห็น {pct(row['actual_demand_lift_pct'])} แต่ต้องเพิ่ม {pct(row['break_even_lift_pct'])} จึงคุ้มส่วนลด และเงินเหลือเพิ่มเทียบฐานเป็น {money(row['incremental_contribution_thb'])} จึงยังไม่ควรขยายแบบหว่าน")
+        st.warning(f"{selected_code}: observed lift is {pct(row['actual_demand_lift_pct'])}, but {pct(row['break_even_lift_pct'])} is required to cover the discount. Incremental contribution vs. baseline is {money(row['incremental_contribution_thb'])}; do not scale broadly yet.")
 
-    with st.expander("รายละเอียดสำหรับออกแบบการทดสอบโปรโมชัน"):
-        st.markdown("**ประสิทธิภาพและการพึ่งพาโปรโมชัน**")
+    with st.expander("Promotion test design detail"):
+        st.markdown("**Promotion efficiency and dependency**")
         efficiency = data["promo_efficiency"].copy()
         matrix = efficiency.set_index("base_code")[["actual_demand_lift_pct", "contribution_lift_pct"]].mul(100)
-        matrix.columns = ["ยอดขายเพิ่ม (%)", "เงินเหลือเพิ่ม (%)"]
+        matrix.columns = ["Sales lift (%)", "Contribution lift (%)"]
         st.bar_chart(matrix, height=260)
         display_table(
             efficiency,
             ["base_code", "actual_demand_lift_pct", "break_even_lift_pct", "contribution_lift_pct", "incremental_contribution_thb", "promo_discount_cost_thb", "promo_roi_on_discount", "decision"],
-            {"base_code": "รหัส", "actual_demand_lift_pct": "ยอดเพิ่มที่พบ", "break_even_lift_pct": "ยอดเพิ่มเพื่อคุ้ม", "contribution_lift_pct": "เงินเหลือเพิ่ม", "incremental_contribution_thb": "เงินเหลือเพิ่มเทียบฐาน", "promo_discount_cost_thb": "ต้นทุนส่วนลด", "promo_roi_on_discount": "ROI ส่วนลด", "decision": "ผลคัดกรอง"},
+            {"base_code": "Code", "actual_demand_lift_pct": "Observed lift", "break_even_lift_pct": "Break-even lift", "contribution_lift_pct": "Contribution lift", "incremental_contribution_thb": "Incremental contribution vs. baseline", "promo_discount_cost_thb": "Discount cost", "promo_roi_on_discount": "Discount ROI", "decision": "Screening result"},
             money_columns=("incremental_contribution_thb", "promo_discount_cost_thb"), percent_columns=("actual_demand_lift_pct", "break_even_lift_pct", "contribution_lift_pct", "promo_roi_on_discount"),
         )
         dependency = data["promo_dependency"].copy()
-        st.markdown("**สัดส่วนยอดขายที่มาจากโปรโมชันตามสินค้า**")
-        st.bar_chart(dependency.set_index("sku")[["promo_share_cups"]].mul(100).rename(columns={"promo_share_cups": "% ของยอดขาย"}), height=240)
+        st.markdown("**Share of sales from promotions by product**")
+        st.bar_chart(dependency.set_index("sku")[["promo_share_cups"]].mul(100).rename(columns={"promo_share_cups": "% of sales"}), height=240)
         display_table(
             dependency, list(dependency.columns),
-            {"sku": "สินค้า", "promo_units": "ยอดขายจากโปร", "total_units": "ยอดขายรวม", "promo_share_cups": "สัดส่วนจากโปร"},
+            {"sku": "SKU", "promo_units": "Promotion units", "total_units": "Total units", "promo_share_cups": "Promotion share"},
             integer_columns=("promo_units", "total_units"), percent_columns=("promo_share_cups",),
         )
 
-        st.markdown("**ค้นหากลุ่มที่ควรหยุดหรือทดสอบต่อ**")
-        segment_view = st.selectbox("แยกกลุ่มตาม", ["สินค้า", "ครัว", "แพลตฟอร์ม", "ชั่วโมง", "ช่วงเวลา"])
+        st.markdown("**Find segments to stop or test further**")
+        segment_view = st.selectbox("Break down by", ["SKU", "Kitchen", "Platform", "Hour", "Daypart"])
         segment_specs = {
-            "สินค้า": ("promo_by_sku", "sku"), "ครัว": ("promo_by_kitchen", "kitchen"),
-            "แพลตฟอร์ม": ("promo_by_platform", "platform_name"), "ชั่วโมง": ("promo_by_hour", "hour"), "ช่วงเวลา": ("promo_by_daypart", "daypart"),
+            "SKU": ("promo_by_sku", "sku"), "Kitchen": ("promo_by_kitchen", "kitchen"),
+            "Platform": ("promo_by_platform", "platform_name"), "Hour": ("promo_by_hour", "hour"), "Daypart": ("promo_by_daypart", "daypart"),
         }
         key, label_col = segment_specs[segment_view]
         segment = data[key].copy()
         view_columns = [label_col, "base_code", "matched_strata", "promo_units", "baseline_units", "promo_cups_per_active_hour", "baseline_cups_per_active_hour", "actual_demand_lift_pct", "break_even_lift_pct", "contribution_lift_pct", "incremental_contribution_thb", "decision"]
         display_table(
             segment.sort_values("incremental_contribution_thb"), view_columns,
-            {label_col: segment_view, "base_code": "รหัส", "matched_strata": "กลุ่มเทียบ", "promo_units": "ยอดขายเมื่อมีโปร", "baseline_units": "ยอดขายฐาน", "promo_cups_per_active_hour": "แก้ว/ชม. เมื่อมีโปร", "baseline_cups_per_active_hour": "แก้ว/ชม. ฐาน", "actual_demand_lift_pct": "ยอดเพิ่มที่พบ", "break_even_lift_pct": "ยอดเพิ่มเพื่อคุ้ม", "contribution_lift_pct": "เงินเหลือเพิ่ม", "incremental_contribution_thb": "เงินเหลือเพิ่มเทียบฐาน", "decision": "ผลคัดกรอง"},
+            {label_col: segment_view, "base_code": "Code", "matched_strata": "Matched strata", "promo_units": "Promotion units", "baseline_units": "Baseline units", "promo_cups_per_active_hour": "Promo cups/hour", "baseline_cups_per_active_hour": "Baseline cups/hour", "actual_demand_lift_pct": "Observed lift", "break_even_lift_pct": "Break-even lift", "contribution_lift_pct": "Contribution lift", "incremental_contribution_thb": "Incremental contribution vs. baseline", "decision": "Screening result"},
             money_columns=("incremental_contribution_thb",), percent_columns=("actual_demand_lift_pct", "break_even_lift_pct", "contribution_lift_pct"), integer_columns=("matched_strata", "promo_units", "baseline_units"), decimal_columns=("promo_cups_per_active_hour", "baseline_cups_per_active_hour"),
             height=360,
         )
 
-        st.markdown("**เกณฑ์ส่วนลดสูงสุดที่ต้องแลกด้วยยอดขายเพิ่ม**")
+        st.markdown("**Maximum discount and required sales lift**")
         depth = data["promo_depth"].copy()
         depth_sku_options = depth["sku"].drop_duplicates().tolist()
-        depth_sku = st.selectbox("เลือกสินค้าสำหรับดูระดับส่วนลด", depth_sku_options, index=depth_sku_options.index("MixedBerryPremium") if "MixedBerryPremium" in depth_sku_options else 0)
+        depth_sku = st.selectbox("Select product for discount depth", depth_sku_options, index=depth_sku_options.index("MixedBerryPremium") if "MixedBerryPremium" in depth_sku_options else 0)
         depth_view = depth.loc[depth["sku"] == depth_sku].sort_values("discount_pct").copy()
         depth_chart = depth_view.set_index("discount_pct")[["required_demand_lift_pct"]].mul(100)
-        depth_chart.columns = ["ยอดขายเพิ่มที่ต้องมีเพื่อคงสัดส่วนเงินเหลือ (%)"]
+        depth_chart.columns = ["Required lift to maintain contribution (%)"]
         st.line_chart(depth_chart, height=260)
         display_table(
             depth_view,
             ["discount_pct", "effective_price_thb", "promo_contribution_per_cup_thb", "contribution_delta_per_cup_thb", "required_demand_lift_pct"],
-            {"discount_pct": "ส่วนลด", "effective_price_thb": "ราคาหลังลด", "promo_contribution_per_cup_thb": "เงินเหลือเมื่อมีโปร/แก้ว", "contribution_delta_per_cup_thb": "เงินเหลือที่ลดลง/แก้ว", "required_demand_lift_pct": "ยอดขายเพิ่มเพื่อคงเงินเหลือ"},
+            {"discount_pct": "Discount", "effective_price_thb": "Post-discount price", "promo_contribution_per_cup_thb": "Promotion contribution/cup", "contribution_delta_per_cup_thb": "Contribution reduction/cup", "required_demand_lift_pct": "Required lift to maintain contribution"},
             money_columns=("effective_price_thb", "promo_contribution_per_cup_thb", "contribution_delta_per_cup_thb"), percent_columns=("discount_pct", "required_demand_lift_pct"),
         )
 
-    st.markdown("#### กติกาก่อนขยายโปรโมชัน")
-    st.write("ขยายส่วนลดเมื่อเงินเหลือเพิ่มเทียบกลุ่มควบคุมเป็นบวก และยอดขายเพิ่มจริงมากกว่าระดับที่ต้องมีเพื่อชดเชยส่วนลดเท่านั้น เริ่มจากกลุ่มสินค้า–ครัว–แพลตฟอร์ม–ช่วงเวลาที่ผ่านเกณฑ์ แล้วติดตามของเสียร่วมด้วย")
-    st.warning("ผลการเทียบเป็นความสัมพันธ์ในข้อมูล ยังไม่ยืนยันผลเชิงเหตุและผล เพราะไม่มีการสุ่มกลุ่มลูกค้า ข้อมูลการแย่งยอดจากสินค้าอื่น และข้อมูลของหมด " + metrics["waste_boundary"])
+    st.markdown("#### Rules before scaling promotions")
+    st.write("Scale a discount only when incremental contribution vs. the control is positive and observed lift exceeds the level needed to cover the discount. Start with SKU–kitchen–platform–daypart segments that pass the gate, and track waste alongside lift.")
+    st.warning("These comparisons are associations in observed data, not causal effects, because there is no randomized customer assignment, cannibalization data, or stockout data. " + metrics["waste_boundary"])
 
 
 def finance(data: dict) -> None:
-    task_heading("Task 4 · Portfolio & budget performance", "สินค้า สาขา และผลเทียบงบ", "P&L นี้ประกอบจากต้นทุนผลไม้ บรรจุภัณฑ์ แรงงาน ค่าคอมมิชชัน ของเสีย และค่าใช้จ่ายคงที่ เพื่อหาว่าส่วนใดควรแก้ก่อน")
+    task_heading("Task 4 · Portfolio & budget performance", "Portfolio, kitchens & budget performance", "This P&L combines fruit, packaging, labor, commission, waste, and fixed overhead to identify what should be fixed first.")
     totals = data["finance_metrics"]
     c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("รายได้จากการขาย", money(totals["historical_revenue_thb"]))
-    c2.metric("ต่างจากเป้ารายได้", money(totals["total_revenue_variance_thb"]))
-    c3.metric("เงินเหลือก่อนของเสีย", money(totals["historical_contribution_before_waste_thb"]), pct(totals["historical_contribution_margin_pct"]))
-    c4.metric("ต้นทุนของเสีย", money(totals["historical_waste_cost_thb"]))
-    c5.metric("ผลดำเนินงานตามแบบจำลอง", money(totals["historical_modeled_operating_result_thb"]), pct(totals["historical_operating_margin_pct"]))
+    c1.metric("Sales revenue", money(totals["historical_revenue_thb"]))
+    c2.metric("Revenue vs. target", money(totals["total_revenue_variance_thb"]))
+    c3.metric("Contribution before waste", money(totals["historical_contribution_before_waste_thb"]), pct(totals["historical_contribution_margin_pct"]))
+    c4.metric("Waste cost", money(totals["historical_waste_cost_thb"]))
+    c5.metric("Modeled operating result", money(totals["historical_modeled_operating_result_thb"]), pct(totals["historical_operating_margin_pct"]))
 
     company = data["pnl_company"]
-    st.markdown("#### จากรายได้สู่ผลดำเนินงาน")
-    st.info("รายได้คือราคาที่ลูกค้าจ่ายหลังโปรโมชัน เงินเหลือก่อนของเสีย = รายได้ − ต้นทุนผลไม้ − บรรจุภัณฑ์ − แรงงาน − ค่าคอมมิชชัน ผลดำเนินงานตามแบบจำลอง = เงินเหลือก่อนของเสีย − ของเสียที่บันทึก − ค่าใช้จ่ายคงที่ครัว")
+    st.markdown("#### From revenue to operating result")
+    st.info("Revenue is the customer's post-promotion price. Contribution before waste = revenue − fruit cost − packaging − labor − commission. Modeled operating result = contribution before waste − recorded waste − kitchen fixed overhead.")
     waterfall = data["pnl_waterfall"]
     waterfall_chart = waterfall.set_index("pnl_component")[["thb"]].copy()
-    waterfall_chart.index = ["รายได้", "ต้นทุนผลไม้", "บรรจุภัณฑ์", "แรงงาน", "ค่าคอมมิชชัน", "เงินเหลือก่อนของเสีย", "ต้นทุนของเสีย", "เงินเหลือหลังของเสีย", "ค่าใช้จ่ายคงที่", "ผลดำเนินงาน"]
-    st.bar_chart(waterfall_chart.rename(columns={"thb": "บาท"}), height=320)
+    waterfall_chart.index = ["Revenue", "Fruit cost", "Packaging", "Labor", "Commission", "Contribution before waste", "Waste cost", "Contribution after waste", "Fixed overhead", "Operating result"]
+    st.bar_chart(waterfall_chart.rename(columns={"thb": "THB"}), height=320)
     display_table(
         waterfall,
         ["pnl_component", "thb", "definition"],
-        {"pnl_component": "รายการ", "thb": "จำนวนเงิน", "definition": "คำอธิบายที่มา"},
+        {"pnl_component": "Component", "thb": "Amount", "definition": "Definition"},
         money_columns=("thb",),
     )
 
-    st.markdown("#### รายได้จริงเทียบงบรายเดือน")
-    st.caption("ข้อมูล budget ไม่ได้นิยามว่า GP รวมค่าคอมมิชชัน ของเสีย แรงงาน หรือค่าใช้จ่ายคงที่หรือไม่ จึงเทียบเป้ารายได้ได้โดยตรง ส่วนชั้น GP แสดงเพื่อวิเคราะห์เท่านั้น")
+    st.markdown("#### Actual revenue vs. monthly budget")
+    st.caption("The budget does not define whether GP includes commission, waste, labor, or fixed overhead, so revenue can be compared directly while the GP layer is shown for analysis only.")
     pnl = company.copy().set_index("month")
-    chart = pnl[["gross_revenue_thb", "budget_revenue_thb"]].rename(columns={"gross_revenue_thb": "รายได้จริง", "budget_revenue_thb": "เป้ารายได้"})
+    chart = pnl[["gross_revenue_thb", "budget_revenue_thb"]].rename(columns={"gross_revenue_thb": "Actual revenue", "budget_revenue_thb": "Revenue target"})
     st.line_chart(chart, height=320)
     monthly_cols = ["month", "gross_revenue_thb", "budget_revenue_thb", "revenue_variance_thb", "revenue_variance_pct", "budget_gross_profit_thb", "product_margin_thb", "contribution_before_waste_thb", "contribution_after_waste_thb", "modeled_operating_result_thb", "budget_gp_boundary_status"]
     display_table(
         company, monthly_cols,
-        {"month": "เดือน", "gross_revenue_thb": "รายได้จริง", "budget_revenue_thb": "เป้ารายได้", "revenue_variance_thb": "ต่างจากเป้า", "revenue_variance_pct": "ต่างจากเป้า (%)", "budget_gross_profit_thb": "เป้า GP (ขอบเขตยังเปิด)", "product_margin_thb": "ส่วนต่างราคากับต้นทุนสินค้า", "contribution_before_waste_thb": "เงินเหลือก่อนของเสีย", "contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง", "budget_gp_boundary_status": "สถานะเทียบ GP"},
+        {"month": "Month", "gross_revenue_thb": "Actual revenue", "budget_revenue_thb": "Revenue target", "revenue_variance_thb": "Variance", "revenue_variance_pct": "Variance (%)", "budget_gross_profit_thb": "Budget GP (boundary open)", "product_margin_thb": "Price less product cost", "contribution_before_waste_thb": "Contribution before waste", "contribution_after_waste_thb": "Contribution after waste", "modeled_operating_result_thb": "Modeled operating result", "budget_gp_boundary_status": "GP comparison status"},
         money_columns=("gross_revenue_thb", "budget_revenue_thb", "revenue_variance_thb", "budget_gross_profit_thb", "product_margin_thb", "contribution_before_waste_thb", "contribution_after_waste_thb", "modeled_operating_result_thb"), percent_columns=("revenue_variance_pct",), date_columns=("month",),
         height=370,
     )
 
-    st.markdown("#### สินค้าไหนควรทำอะไร?")
+    st.markdown("#### What should we do by product?")
     portfolio = data["portfolio"].copy()
     sku_action_map = {
-        "Watermelon": "รักษาความพร้อมขาย; ทดสอบราคาเฉพาะช่วงยอดสูง", "Pineapple": "รักษาความพร้อมขาย; ทดสอบราคาเฉพาะช่วงยอดสูง",
-        "Guava": "รักษาความพร้อมขาย; ทดสอบราคาแบบควบคุม", "PassionFruit": "ทบทวนการกระจาย ของเสีย และบทบาทสินค้า",
-        "MixedBerryPremium": "แก้ราคา ปริมาณ และการเตรียมก่อนขยาย",
+        "Watermelon": "Protect availability; test price during peak demand", "Pineapple": "Protect availability; test price during peak demand",
+        "Guava": "Protect availability; run a controlled price test", "PassionFruit": "Review distribution, waste, and product role",
+        "MixedBerryPremium": "Fix price, portion, and preparation before scaling",
     }
-    portfolio["thai_action"] = portfolio["sku"].map(sku_action_map)
+    portfolio["action_display"] = portfolio["sku"].map(sku_action_map)
     left, right = st.columns(2)
     with left:
-        st.bar_chart(portfolio.set_index("sku")[["contribution_after_waste_thb"]].rename(columns={"contribution_after_waste_thb": "เงินเหลือหลังของเสีย (บาท)"}), height=280)
+        st.bar_chart(portfolio.set_index("sku")[["contribution_after_waste_thb"]].rename(columns={"contribution_after_waste_thb": "Contribution after waste (THB)"}), height=280)
     with right:
-        st.scatter_chart(portfolio, x="units_sold", y="contribution_after_waste_margin_pct", size="gross_revenue_thb", color="sku", x_label="ยอดขาย (แก้ว)", y_label="สัดส่วนเงินเหลือหลังของเสีย", height=280)
+        st.scatter_chart(portfolio, x="units_sold", y="contribution_after_waste_margin_pct", size="gross_revenue_thb", color="sku", x_label="Units sold (cups)", y_label="Contribution-after-waste margin", height=280)
     display_table(
         portfolio.sort_values("contribution_after_waste_thb", ascending=False),
-        ["sku", "units_sold", "gross_revenue_thb", "revenue_share", "contribution_after_waste_thb", "contribution_after_waste_per_cup_thb", "contribution_after_waste_margin_pct", "waste_cost_thb", "waste_rate", "thai_action"],
-        {"sku": "สินค้า", "units_sold": "ยอดขาย", "gross_revenue_thb": "รายได้", "revenue_share": "สัดส่วนรายได้", "contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "contribution_after_waste_per_cup_thb": "เงินเหลือ/แก้ว", "contribution_after_waste_margin_pct": "สัดส่วนเงินเหลือ", "waste_cost_thb": "ต้นทุนของเสีย", "waste_rate": "อัตราของเสีย", "thai_action": "สิ่งที่ควรทำ"},
+        ["sku", "units_sold", "gross_revenue_thb", "revenue_share", "contribution_after_waste_thb", "contribution_after_waste_per_cup_thb", "contribution_after_waste_margin_pct", "waste_cost_thb", "waste_rate", "action_display"],
+        {"sku": "SKU", "units_sold": "Units sold", "gross_revenue_thb": "Revenue", "revenue_share": "Revenue share", "contribution_after_waste_thb": "Contribution after waste", "contribution_after_waste_per_cup_thb": "Contribution/cup", "contribution_after_waste_margin_pct": "Contribution margin", "waste_cost_thb": "Waste cost", "waste_rate": "Waste rate", "action_display": "Recommended action"},
         money_columns=("gross_revenue_thb", "contribution_after_waste_thb", "contribution_after_waste_per_cup_thb", "waste_cost_thb"), percent_columns=("revenue_share", "contribution_after_waste_margin_pct", "waste_rate"), integer_columns=("units_sold",),
     )
-    st.caption("เงินเหลือระดับสินค้าเป็นเงินเหลือหลังของเสียก่อนจัดสรรค่าใช้จ่ายคงที่ของครัว จึงไม่ใช่กำไรสุทธิของสินค้า")
+    st.caption("Product-level contribution is after waste but before allocating kitchen fixed overhead, so it is not product net profit.")
 
-    st.markdown("#### ครัวไหนควรเริ่มแก้ก่อน?")
+    st.markdown("#### Which kitchens should be fixed first?")
     kitchen_rollup = data["finance_kitchen"].copy()
-    kitchen_action_map = {"BKK_Ladprao": "ต้องแก้ก่อน: ผลติดลบและของเสียสูงสุด", "BKK_Sukhumvit": "ต้องแก้ลำดับสอง: ผลติดลบ", "Pattaya_Beach": "รักษาผลบวกและคุมของเสีย", "Pattaya_Central": "รักษาผลบวกและคุมของเสีย"}
-    kitchen_rollup["thai_action"] = kitchen_rollup["kitchen"].map(kitchen_action_map)
+    kitchen_action_map = {"BKK_Ladprao": "Fix first: negative result and highest waste", "BKK_Sukhumvit": "Fix second: negative result", "Pattaya_Beach": "Protect positive result and control waste", "Pattaya_Central": "Protect positive result and control waste"}
+    kitchen_rollup["action_display"] = kitchen_rollup["kitchen"].map(kitchen_action_map)
     left, right = st.columns(2)
-    left.markdown("**ผลดำเนินงานตามแบบจำลองรายครัว**")
-    left.bar_chart(kitchen_rollup.set_index("kitchen")[["modeled_operating_result_thb"]].rename(columns={"modeled_operating_result_thb": "บาท"}), height=270)
-    right.markdown("**ต้นทุนของเสียตามครัว**")
-    right.bar_chart(kitchen_rollup.set_index("kitchen")[["waste_cost_thb"]].rename(columns={"waste_cost_thb": "บาท"}), height=270)
+    left.markdown("**Modeled operating result by kitchen**")
+    left.bar_chart(kitchen_rollup.set_index("kitchen")[["modeled_operating_result_thb"]].rename(columns={"modeled_operating_result_thb": "THB"}), height=270)
+    right.markdown("**Waste cost by kitchen**")
+    right.bar_chart(kitchen_rollup.set_index("kitchen")[["waste_cost_thb"]].rename(columns={"waste_cost_thb": "THB"}), height=270)
     display_table(
         kitchen_rollup.sort_values("modeled_operating_result_thb"),
-        ["kitchen", "units_sold", "gross_revenue_thb", "contribution_before_waste_thb", "waste_cost_thb", "waste_rate", "fixed_monthly_overhead_thb", "modeled_operating_result_thb", "operating_margin_pct", "thai_action"],
-        {"kitchen": "ครัว", "units_sold": "ยอดขาย", "gross_revenue_thb": "รายได้", "contribution_before_waste_thb": "เงินเหลือก่อนของเสีย", "waste_cost_thb": "ต้นทุนของเสีย", "waste_rate": "อัตราของเสีย", "fixed_monthly_overhead_thb": "ค่าใช้จ่ายคงที่", "modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง", "operating_margin_pct": "สัดส่วนผลดำเนินงาน", "thai_action": "ลำดับทำงาน"},
+        ["kitchen", "units_sold", "gross_revenue_thb", "contribution_before_waste_thb", "waste_cost_thb", "waste_rate", "fixed_monthly_overhead_thb", "modeled_operating_result_thb", "operating_margin_pct", "action_display"],
+        {"kitchen": "Kitchen", "units_sold": "Units sold", "gross_revenue_thb": "Revenue", "contribution_before_waste_thb": "Contribution before waste", "waste_cost_thb": "Waste cost", "waste_rate": "Waste rate", "fixed_monthly_overhead_thb": "Fixed overhead", "modeled_operating_result_thb": "Modeled operating result", "operating_margin_pct": "Operating margin", "action_display": "Priority"},
         money_columns=("gross_revenue_thb", "contribution_before_waste_thb", "waste_cost_thb", "fixed_monthly_overhead_thb", "modeled_operating_result_thb"), percent_columns=("waste_rate", "operating_margin_pct"), integer_columns=("units_sold",),
     )
     kitchen_options = kitchen_rollup["kitchen"].tolist()
-    selected_kitchen = st.selectbox("ดูแนวโน้มรายเดือนของครัว", kitchen_options, index=kitchen_options.index("BKK_Ladprao") if "BKK_Ladprao" in kitchen_options else 0)
+    selected_kitchen = st.selectbox("View monthly kitchen trend", kitchen_options, index=kitchen_options.index("BKK_Ladprao") if "BKK_Ladprao" in kitchen_options else 0)
     kitchen = data["pnl_kitchen"].loc[data["pnl_kitchen"]["kitchen"] == selected_kitchen].copy().set_index("month")
-    st.line_chart(kitchen[["contribution_after_waste_thb", "modeled_operating_result_thb"]].rename(columns={"contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง"}), height=260)
+    st.line_chart(kitchen[["contribution_after_waste_thb", "modeled_operating_result_thb"]].rename(columns={"contribution_after_waste_thb": "Contribution after waste", "modeled_operating_result_thb": "Modeled operating result"}), height=260)
 
-    with st.expander("รายละเอียดต้นทุน ของเสีย และการวิเคราะห์ความไว"):
-        st.markdown("**ที่มาของการเปลี่ยนรายได้เดือนต่อเดือน**")
+    with st.expander("Cost, waste, and sensitivity detail"):
+        st.markdown("**Sources of month-to-month revenue change**")
         decomp = data["revenue_decomp"].dropna(subset=["prior_month"]).copy()
         if not decomp.empty:
-            st.bar_chart(decomp.set_index("month")[["volume_effect_thb", "price_mix_effect_thb"]].rename(columns={"volume_effect_thb": "ผลจากปริมาณ", "price_mix_effect_thb": "ผลจากราคา/ส่วนผสม"}), height=250)
+            st.bar_chart(decomp.set_index("month")[["volume_effect_thb", "price_mix_effect_thb"]].rename(columns={"volume_effect_thb": "Volume effect", "price_mix_effect_thb": "Price/mix effect"}), height=250)
             display_table(
                 decomp, ["month", "revenue_change_thb", "volume_effect_thb", "price_mix_effect_thb", "decomposition_check_thb", "basis"],
-                {"month": "เดือน", "revenue_change_thb": "รายได้เปลี่ยน", "volume_effect_thb": "ผลจากปริมาณ", "price_mix_effect_thb": "ผลจากราคา/ส่วนผสม", "decomposition_check_thb": "ผลตรวจสอบ", "basis": "ขอบเขต"},
+                {"month": "Month", "revenue_change_thb": "Revenue change", "volume_effect_thb": "Volume effect", "price_mix_effect_thb": "Price/mix effect", "decomposition_check_thb": "Check", "basis": "Basis"},
                 money_columns=("revenue_change_thb", "volume_effect_thb", "price_mix_effect_thb", "decomposition_check_thb"), date_columns=("month",),
             )
-        st.markdown("**ของเสียแยกครัว–สินค้า**")
+        st.markdown("**Waste by kitchen and SKU**")
         waste = data["waste_heatmap"].copy()
         waste_table = waste.pivot(index="kitchen", columns="sku", values="waste_rate").mul(100).round(1)
         st.dataframe(waste_table.style.background_gradient(cmap="YlOrRd").format("{:.1f}%"), width="stretch")
         display_table(
             waste.sort_values("waste_rate", ascending=False), ["kitchen", "sku", "units_sold", "units_wasted", "waste_rate", "waste_cost_thb", "waste_cost_pct_revenue"],
-            {"kitchen": "ครัว", "sku": "สินค้า", "units_sold": "ยอดขาย", "units_wasted": "ของเสีย (แก้ว)", "waste_rate": "อัตราของเสีย", "waste_cost_thb": "ต้นทุนของเสีย", "waste_cost_pct_revenue": "ต้นทุนของเสีย/รายได้"},
+            {"kitchen": "Kitchen", "sku": "SKU", "units_sold": "Units sold", "units_wasted": "Waste (cups)", "waste_rate": "Waste rate", "waste_cost_thb": "Waste cost", "waste_cost_pct_revenue": "Waste cost/revenue"},
             integer_columns=("units_sold", "units_wasted"), percent_columns=("waste_rate", "waste_cost_pct_revenue"), money_columns=("waste_cost_thb",),
         )
-        st.markdown("**แนวโน้มต้นทุนผลไม้และการกระจายเงินเหลือ**")
+        st.markdown("**Fruit-cost trend and contribution distribution**")
         fruit_cost = data["fruit_cost_trend"].copy()
         st.line_chart(fruit_cost.pivot(index="week_start", columns="sku", values="fruit_cost_per_cup_thb"), height=270)
         pareto = data["sku_kitchen_pareto"].copy()
         display_table(
             pareto.head(12), ["kitchen", "sku", "units_sold", "gross_revenue_thb", "contribution_after_waste_thb", "contribution_mix", "cumulative_contribution_mix", "profit_rank"],
-            {"kitchen": "ครัว", "sku": "สินค้า", "units_sold": "ยอดขาย", "gross_revenue_thb": "รายได้", "contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "contribution_mix": "สัดส่วนเงินเหลือ", "cumulative_contribution_mix": "สัดส่วนสะสม", "profit_rank": "อันดับ"},
+            {"kitchen": "Kitchen", "sku": "SKU", "units_sold": "Units sold", "gross_revenue_thb": "Revenue", "contribution_after_waste_thb": "Contribution after waste", "contribution_mix": "Contribution mix", "cumulative_contribution_mix": "Cumulative share", "profit_rank": "Rank"},
             integer_columns=("units_sold", "profit_rank"), money_columns=("gross_revenue_thb", "contribution_after_waste_thb"), percent_columns=("contribution_mix", "cumulative_contribution_mix"),
         )
-        st.markdown("**โอกาสฟื้นผลดำเนินงานจากข้อมูลย้อนหลัง**")
+        st.markdown("**Operating-result recovery opportunities from historical data**")
         display_table(
             data["gap_closing"], ["gap_or_opportunity", "thb", "basis", "status"],
-            {"gap_or_opportunity": "รายการ", "thb": "มูลค่า", "basis": "ฐานคิด", "status": "สถานะ"}, money_columns=("thb",),
+            {"gap_or_opportunity": "Item", "thb": "Value", "basis": "Basis", "status": "Status"}, money_columns=("thb",),
         )
         display_table(
             data["finance_scenarios"], ["scenario", "modeled_operating_result_thb", "delta_vs_current_thb", "basis", "status"],
-            {"scenario": "สถานการณ์", "modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง", "delta_vs_current_thb": "ต่างจากปัจจุบัน", "basis": "ฐานคิด", "status": "สถานะ"}, money_columns=("modeled_operating_result_thb", "delta_vs_current_thb"),
+            {"scenario": "Scenario", "modeled_operating_result_thb": "Modeled operating result", "delta_vs_current_thb": "Change vs. current", "basis": "Basis", "status": "Status"}, money_columns=("modeled_operating_result_thb", "delta_vs_current_thb"),
         )
-        st.caption("Sensitivity นี้เป็นหลักฐานคัดกรองจากข้อมูลย้อนหลัง: ผลโปรโมชันเป็น association ก่อนของเสีย และ sensitivity ของเสียคงต้นทุนของเสียต่อแก้วไว้ จึงไม่ใช่ผลประหยัดที่รับประกัน หรือสะพานไปยัง GP budget โดยตรง")
+        st.caption("This sensitivity analysis screens historical opportunities: promotion results are associations before waste, and waste sensitivity holds waste cost per cup constant. It is not guaranteed savings or a direct bridge to budget GP.")
 
 
 def forecast_inventory(data: dict) -> None:
-    task_heading("Task 5 · Inventory & 3-month outlook", "แผน 3 เดือนและการเตรียมสินค้า", "คาดการณ์ความต้องการระดับครัว–สินค้า แล้วแปลงเป็นแผนคุ้มทุนและเป้าเตรียมที่รวมของเสีย โดยยังไม่สร้างใบสั่งซื้อจากข้อมูลที่ไม่มี")
+    task_heading("Task 5 · Inventory & 3-month outlook", "3-month outlook & preparation plan", "Forecast demand by kitchen–SKU and convert it into a break-even plan and waste-inclusive preparation targets without creating purchase orders from unavailable data.")
     scenario = data["scenario"].copy()
     base = scenario.loc[scenario["scenario"] == "base"]
     requirements = data["requirements"]
@@ -682,142 +682,140 @@ def forecast_inventory(data: dict) -> None:
     nov_target_units = float(recovery_monthly.loc[pd.to_datetime(recovery_monthly["month"]).dt.month == 11, "planned_units"].sum())
     nov_growth_pct = nov_target_units / nov_base_units - 1 if nov_base_units else 0.0
     c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Forecast เดิม (ฐาน)", f"{baseline_units:,.0f} แก้ว")
-    c2.metric("ช่วงสำหรับวางแผน", f"{data['metrics']['base_forecast_lower_units']:,.0f}–{data['metrics']['base_forecast_upper_units']:,.0f} แก้ว")
-    c3.metric("เป้าเตรียมจาก Forecast เดิม", f"{baseline_prep:,.0f} แก้ว")
-    c4.metric("ของเสียที่คาด", f"{requirements['expected_waste_units_base'].sum():,.0f} แก้ว")
-    c5.metric("ผล Forecast เดิม", money(base["modeled_operating_result_thb"].sum()))
-    st.caption("ช่วงสำหรับวางแผนคำนวณจาก WAPE ของวิธีที่เลือก ไม่ใช่ช่วงความเชื่อมั่นทางสถิติ")
+    c1.metric("Baseline forecast", f"{baseline_units:,.0f} cups")
+    c2.metric("Planning range", f"{data['metrics']['base_forecast_lower_units']:,.0f}–{data['metrics']['base_forecast_upper_units']:,.0f} cups")
+    c3.metric("Baseline forecast prep target", f"{baseline_prep:,.0f} cups")
+    c4.metric("Expected waste", f"{requirements['expected_waste_units_base'].sum():,.0f} cups")
+    c5.metric("Baseline forecast result", money(base["modeled_operating_result_thb"].sum()))
+    st.caption("The planning range is calculated from the selected method's WAPE, not a statistical confidence interval.")
     st.info(
-        f"หน้านี้มีตัวเลข 2 ชุด: Forecast เดิมคาดขาย {baseline_units:,.0f} แก้วและเตรียม {baseline_prep:,.0f} แก้ว "
-        f"โดยยังไม่ใช้มาตรการ; ส่วนเป้าสมจริงเพื่อคุ้มทุนคาดขาย {target_units:,.0f} แก้วและเตรียม {target_prep:,.0f} แก้ว "
-        f"เมื่อสมมติว่าราคา โปรโมชัน ของเสีย ต้นทุน และยอดขายเป้าทำได้ตามแผน โดยพฤศจิกายนเพิ่มจาก Forecast เดิมประมาณ {pct(nov_growth_pct)} "
-        "จึงไม่ควรนำสองชุดไปเทียบว่าเป็น Forecast เดียวกัน"
+        f"This page shows two sets of numbers: the baseline forecast expects {baseline_units:,.0f} cups sold and {baseline_prep:,.0f} cups prepared without interventions; "
+        f"the break-even target expects {target_units:,.0f} cups sold and {target_prep:,.0f} cups prepared assuming planned prices, promotions, waste, costs, and sales targets are achieved. "
+        f"November is approximately {pct(nov_growth_pct)} above the baseline forecast, so the two sets should not be treated as one forecast."
     )
 
-    st.markdown("#### เป้าสมจริงเพื่อคุ้มทุนสะสม")
+    st.markdown("#### Realistic cumulative break-even target")
     st.warning(
-        f"นี่คือเป้าบริหารที่คำนวณย้อนจากจุดคุ้มทุน ไม่ใช่ Forecast ใหม่หรือการรับประกันกำไร: "
-        f"ถ้าทำมาตรการครบ ผลตามแบบจำลองจะอยู่ที่ {money(recovery['proposed_target_result_thb'])} ใน 3 เดือน "
-        f"แต่เดือนแรกยังขาดทุน และเดือน 3 ต้องเพิ่มยอดสุทธิของ Watermelon, Pineapple และ Guava "
-        f"ประมาณ {pct(recovery['final_month_core_growth_needed_for_3m_breakeven'])} เพื่อให้คุ้มทุนสะสม"
+        f"This is a management target back-solved from break-even, not a new forecast or profit guarantee: "
+        f"if all interventions are delivered, the modeled result is {money(recovery['proposed_target_result_thb'])} over 3 months. "
+        f"The first month remains loss-making, and month 3 requires approximately {pct(recovery['final_month_core_growth_needed_for_3m_breakeven'])} more net Watermelon, Pineapple, and Guava sales to reach cumulative break-even."
     )
     nov_evidence = recovery["november_growth_evidence"]
     st.caption(
-        f"แม้เป้า พ.ย. สูงกว่า Forecast พ.ย. {pct(nov_growth_pct)} แต่เส้นเป้าบริหารเพิ่มจาก ต.ค. → พ.ย. "
-        f"{pct(nov_evidence['conditional_target_oct_to_nov_total_growth'])}; ใช้ยอดขายจริงยืนยันก่อนเพิ่มการเตรียมสินค้า"
+        f"Although the November target is {pct(nov_growth_pct)} above the November forecast, the management target grows from October to November by "
+        f"{pct(nov_evidence['conditional_target_oct_to_nov_total_growth'])}; validate with actual sales before increasing preparation."
     )
 
-    st.markdown("#### ฐานรองรับและ Gate ของเป้า พ.ย.")
+    st.markdown("#### Evidence base and November target gate")
     st.info(
-        f"ยอดจริงปี 2025 โต ต.ค. → พ.ย. {pct(nov_evidence['historical_oct_to_nov_total_growth'])} รวมทุกสินค้า "
-        f"และ {pct(nov_evidence['historical_oct_to_nov_core_growth'])} สำหรับ Watermelon, Pineapple, Guava. "
-        f"จึงรองรับได้เพียงสมมติฐานฤดูกาล—not a new forecast. {nov_evidence['limitation']}"
+        f"Actual 2025 sales grew from October to November by {pct(nov_evidence['historical_oct_to_nov_total_growth'])} across all products "
+        f"and {pct(nov_evidence['historical_oct_to_nov_core_growth'])} for Watermelon, Pineapple, and Guava. "
+        f"This supports a seasonal assumption only—not a new forecast. {nov_evidence['limitation']}"
     )
     evidence_view = recovery_nov_evidence.copy()
-    evidence_view["month_label"] = evidence_view["month"].map(lambda value: MONTH_NAMES_TH[int(value)])
+    evidence_view["month_label"] = evidence_view["month"].map(lambda value: MONTH_NAMES[int(value)])
     display_table(
         evidence_view,
         ["month_label", "historical_total_cups_2025", "historical_total_mom_growth", "historical_core_cups_2025", "historical_core_mom_growth", "conditional_target_total_cups_2026", "conditional_target_total_mom_growth", "conditional_target_core_cups_2026", "conditional_target_core_mom_growth"],
-        {"month_label": "เดือน", "historical_total_cups_2025": "ยอดจริงรวม 2025", "historical_total_mom_growth": "ยอดจริงรวม MoM", "historical_core_cups_2025": "ยอดจริง Core 2025", "historical_core_mom_growth": "ยอดจริง Core MoM", "conditional_target_total_cups_2026": "เป้ารวมแบบมีเงื่อนไข 2026", "conditional_target_total_mom_growth": "เป้ารวม MoM", "conditional_target_core_cups_2026": "เป้า Core แบบมีเงื่อนไข 2026", "conditional_target_core_mom_growth": "เป้า Core MoM"},
+        {"month_label": "Month", "historical_total_cups_2025": "Total actual cups 2025", "historical_total_mom_growth": "Total actual MoM", "historical_core_cups_2025": "Core actual cups 2025", "historical_core_mom_growth": "Core actual MoM", "conditional_target_total_cups_2026": "Conditional total target 2026", "conditional_target_total_mom_growth": "Total target MoM", "conditional_target_core_cups_2026": "Conditional core target 2026", "conditional_target_core_mom_growth": "Core target MoM"},
         integer_columns=("historical_total_cups_2025", "historical_core_cups_2025", "conditional_target_total_cups_2026", "conditional_target_core_cups_2026"),
         percent_columns=("historical_total_mom_growth", "historical_core_mom_growth", "conditional_target_total_mom_growth", "conditional_target_core_mom_growth"),
     )
     st.write(
-        "ก่อนปล่อยยอดเพิ่ม ต้องมีผลทดสอบ ต.ค. ที่วัด incremental core cups หลัง cannibalization และเงินเหลือหลัง commission/waste เป็นบวก; "
-        "ยืนยันว่าค่าโฆษณา/กะเสริมยังอยู่ในงบ; และผ่าน capacity trial รายครัว. หากข้อใดไม่ผ่าน ให้ reforecast จาก actual และไม่ผลิตเพื่อไล่เป้ากำไร."
+        "Before releasing incremental volume, October tests must measure incremental core cups after cannibalization and show positive contribution after commission/waste; "
+        "confirm advertising and extra-shift costs remain within budget; and pass a kitchen-level capacity trial. If any gate fails, reforecast from actuals and do not produce to chase a profit target."
     )
     display_table(
         recovery_nov_capacity,
         ["kitchen", "net_extra_cups_per_day", "extra_core_cups_per_day"],
-        {"kitchen": "ครัว", "net_extra_cups_per_day": "ยอดสุทธิเพิ่ม/วัน", "extra_core_cups_per_day": "Core cups เพิ่ม/วัน"},
+        {"kitchen": "Kitchen", "net_extra_cups_per_day": "Net extra cups/day", "extra_core_cups_per_day": "Extra core cups/day"},
         decimal_columns=("net_extra_cups_per_day", "extra_core_cups_per_day"),
     )
     st.caption(
-        f"Capacity Gate รวม: ยอดสุทธิเพิ่ม {recovery['november_capacity_gate']['net_extra_cups_per_day']:,.1f} แก้ว/วัน, "
-        f"แต่ต้องทำ Core เพิ่ม {recovery['november_capacity_gate']['extra_core_cups_per_day']:,.1f} แก้ว/วัน เพราะแผนพัก MixedBerry."
+        f"Total capacity gate: add {recovery['november_capacity_gate']['net_extra_cups_per_day']:,.1f} net cups/day, "
+        f"including {recovery['november_capacity_gate']['extra_core_cups_per_day']:,.1f} extra core cups/day because the plan pauses MixedBerry."
     )
     recovery_monthly["month"] = pd.to_datetime(recovery_monthly["month"])
     display_table(
         recovery_monthly,
         ["month", "planned_units", "planned_prep", "contribution_thb", "fixed_overhead_thb", "implementation_cost_thb", "operating_result_thb", "cumulative_result_thb"],
-        {"month": "เดือน", "planned_units": "เป้าขาย", "planned_prep": "เป้าเตรียมเมื่อยอดถึงเป้า", "contribution_thb": "เงินเหลือหลังของเสีย", "fixed_overhead_thb": "ค่าใช้จ่ายคงที่ตามเป้า", "implementation_cost_thb": "งบดำเนินแผน", "operating_result_thb": "ผลดำเนินงาน", "cumulative_result_thb": "ผลสะสม"},
+        {"month": "Month", "planned_units": "Sales target", "planned_prep": "Prep target at target sales", "contribution_thb": "Contribution after waste", "fixed_overhead_thb": "Fixed overhead at target", "implementation_cost_thb": "Implementation budget", "operating_result_thb": "Operating result", "cumulative_result_thb": "Cumulative result"},
         date_columns=("month",), integer_columns=("planned_units", "planned_prep"), money_columns=("contribution_thb", "fixed_overhead_thb", "implementation_cost_thb", "operating_result_thb", "cumulative_result_thb"),
     )
-    st.caption("เงื่อนไขหลักของเป้านี้คือ ลดของเสีย/ต้นทุนผลไม้/ค่าใช้จ่ายคงที่ และสร้างยอดสุทธิหลังการเปลี่ยนราคาและโปรโมชันตามแผน หากทำไม่ครบ ผลจะกลับไปติดลบ")
+    st.caption("The main conditions are lower waste, fruit cost, and fixed overhead plus net sales after the planned price and promotion changes. If delivery is incomplete, the result returns to negative.")
 
-    st.markdown("#### ยอดขายย้อนหลังต่อด้วยยอดขายคาดการณ์")
+    st.markdown("#### Historical sales followed by forecast sales")
     history_weekly = data["weekly_demand"].groupby("week_start", as_index=True)["units_sold"].sum().rename("Historical cups")
     future_weekly = data["forecast"].assign(week_start=lambda d: d["date"] - pd.to_timedelta(d["date"].dt.dayofweek, unit="D")).groupby("week_start", as_index=True).agg(
         base_forecast=("forecast_units_base", "sum"), lower=("forecast_lower_units", "sum"), upper=("forecast_upper_units", "sum")
-    ).rename(columns={"base_forecast": "คาดการณ์กรณีฐาน", "lower": "ขอบล่างสำหรับวางแผน", "upper": "ขอบบนสำหรับวางแผน"})
-    history_weekly = history_weekly.rename("ยอดขายย้อนหลัง")
+    ).rename(columns={"base_forecast": "Base forecast", "lower": "Planning lower bound", "upper": "Planning upper bound"})
+    history_weekly = history_weekly.rename("Historical cups")
     history_chart = pd.concat([history_weekly, future_weekly], axis=1)
     st.line_chart(history_chart, height=280)
 
-    st.markdown("#### ผลดำเนินงานที่คาดใน 3 สถานการณ์")
+    st.markdown("#### Modeled result across 3 scenarios")
     scenario_chart = scenario.pivot(index="month", columns="scenario_display", values="modeled_operating_result_thb")
-    scenario_chart = scenario_chart.rename(columns={"Base case": "กรณีฐาน", "Downside case": "กรณีแย่ลง", "Optimized case": "กรณีปรับปรุง"})
-    scenario_chart = scenario_chart.reindex(columns=["กรณีฐาน", "กรณีปรับปรุง", "กรณีแย่ลง"])
+    scenario_chart = scenario_chart.rename(columns={"Base case": "Base case", "Downside case": "Downside case", "Optimized case": "Optimized case"})
+    scenario_chart = scenario_chart.reindex(columns=["Base case", "Optimized case", "Downside case"])
     st.line_chart(scenario_chart, height=280)
     scenario_total = scenario.groupby("scenario_display", as_index=False).agg(
         forecast_units=("forecast_units", "sum"), revenue_thb=("revenue_thb", "sum"), contribution_after_waste_thb=("contribution_after_waste_thb", "sum"), fixed_overhead_thb=("fixed_overhead_thb", "sum"), modeled_operating_result_thb=("modeled_operating_result_thb", "sum")
     )
-    scenario_total["scenario_th"] = scenario_total["scenario_display"].map({"Base case": "กรณีฐาน", "Downside case": "กรณีแย่ลง", "Optimized case": "กรณีปรับปรุง"})
+    scenario_total["scenario_display_name"] = scenario_total["scenario_display"].map({"Base case": "Base case", "Downside case": "Downside case", "Optimized case": "Optimized case"})
     scenario_total["sort_order"] = scenario_total["scenario_display"].map({"Base case": 0, "Optimized case": 1, "Downside case": 2})
     display_table(
         scenario_total.sort_values("sort_order"),
-        ["scenario_th", "forecast_units", "revenue_thb", "contribution_after_waste_thb", "fixed_overhead_thb", "modeled_operating_result_thb"],
-        {"scenario_th": "สถานการณ์", "forecast_units": "ยอดขายคาดการณ์", "revenue_thb": "รายได้", "contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "fixed_overhead_thb": "ค่าใช้จ่ายคงที่", "modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง"},
+        ["scenario_display_name", "forecast_units", "revenue_thb", "contribution_after_waste_thb", "fixed_overhead_thb", "modeled_operating_result_thb"],
+        {"scenario_display_name": "Scenario", "forecast_units": "Forecast units", "revenue_thb": "Revenue", "contribution_after_waste_thb": "Contribution after waste", "fixed_overhead_thb": "Fixed overhead", "modeled_operating_result_thb": "Modeled operating result"},
         integer_columns=("forecast_units",), money_columns=("revenue_thb", "contribution_after_waste_thb", "fixed_overhead_thb", "modeled_operating_result_thb"),
     )
     optimized_result = float(scenario_total.loc[scenario_total["scenario_display"] == "Optimized case", "modeled_operating_result_thb"].iloc[0])
     base_result = float(scenario_total.loc[scenario_total["scenario_display"] == "Base case", "modeled_operating_result_thb"].iloc[0])
-    st.warning(f"กรณีปรับปรุงใช้ราคาที่รับจริงแบบมาตรฐานและลดอัตราของเสีย 25% โดยไม่สมมติว่ายอดขายเพิ่มจากราคา ผลจึงดีขึ้น {money(optimized_result - base_result)} จากกรณีฐาน แต่ยังขาดทุน {money(-optimized_result)} ใน 3 เดือน นี่คือช่องว่างที่ต้องปิดด้วยมาตรการที่มีผลจริงและไม่ซ้ำกับสมมติฐานกรณีปรับปรุง")
+    st.warning(f"The optimized case uses standard realized pricing and reduces waste by 25% without assuming a price-driven sales lift. It improves by {money(optimized_result - base_result)} vs. the base case but still loses {money(-optimized_result)} over 3 months. This gap must be closed with real actions not already included in the optimized assumptions.")
 
-    st.markdown("#### เป้าเตรียมเมื่อแผนยอดขายได้รับการยืนยัน")
-    st.info("อย่าเตรียมเพิ่มตามเป้าเติบโตทันที เป้าด้านล่างเป็นความต้องการเมื่อยอดขายตามแผนเกิดขึ้นจริง ใช้ยอดคำสั่งซื้อและยอดขายระหว่างวันยืนยันก่อน แล้วคำนวณรอบเตรียมใหม่ทุก 7 วัน")
+    st.markdown("#### Preparation target after sales confirmation")
+    st.info("Do not increase preparation immediately to match the growth target. The table below shows demand if planned sales actually occur. Confirm with orders and intraday sales first, then recalculate preparation every 7 days.")
     recovery_prep["month"] = pd.to_datetime(recovery_prep["month"])
     display_table(
         recovery_prep,
         ["month", "kitchen", "sku", "baseline_units", "target_sales", "target_prep", "expected_waste", "waste_rate_target", "target_price", "extra_sales_vs_base", "contribution_per_cup"],
-        {"month": "เดือน", "kitchen": "ครัว", "sku": "สินค้า", "baseline_units": "ฐานคาดการณ์", "target_sales": "เป้าขาย", "target_prep": "เป้าเตรียม", "expected_waste": "ของเสียที่คาด", "waste_rate_target": "อัตราของเสียเป้า", "target_price": "ราคาเป้าทดสอบ", "extra_sales_vs_base": "ยอดเพิ่มจากฐาน", "contribution_per_cup": "เงินเหลือหลังของเสีย/แก้ว"},
+        {"month": "Month", "kitchen": "Kitchen", "sku": "SKU", "baseline_units": "Baseline forecast", "target_sales": "Sales target", "target_prep": "Prep target", "expected_waste": "Expected waste", "waste_rate_target": "Target waste rate", "target_price": "Test target price", "extra_sales_vs_base": "Extra sales vs. baseline", "contribution_per_cup": "Post-waste contribution/cup"},
         date_columns=("month",), integer_columns=("baseline_units", "target_sales", "target_prep", "expected_waste", "extra_sales_vs_base"), percent_columns=("waste_rate_target",), money_columns=("target_price", "contribution_per_cup",), height=420,
     )
-    st.caption("เป้าเตรียมนี้เป็นแก้วตามแบบจำลอง ไม่ใช่จำนวนสั่งซื้อวัตถุดิบ เพราะยังไม่มี stock on hand, inbound, lead time, shelf life และ BOM/yield")
+    st.caption("This is a modeled cup-preparation target, not a raw-material order quantity, because stock on hand, inbound, lead time, shelf life, and BOM/yield are unavailable.")
 
-    with st.expander("ดูผลรายครัวและความเสี่ยงเมื่อทำเป้าไม่ได้"):
+    with st.expander("Kitchen results and downside if targets are missed"):
         recovery_kitchen["month"] = pd.to_datetime(recovery_kitchen["month"])
         display_table(
             recovery_kitchen,
             ["month", "kitchen", "target_sales", "target_prep", "contribution_thb", "fixed_overhead_thb", "operating_before_central_implementation_thb"],
-            {"month": "เดือน", "kitchen": "ครัว", "target_sales": "เป้าขาย", "target_prep": "เป้าเตรียม", "contribution_thb": "เงินเหลือหลังของเสีย", "fixed_overhead_thb": "ค่าใช้จ่ายคงที่ตามเป้า", "operating_before_central_implementation_thb": "ผลครัวก่อนงบส่วนกลาง"},
+            {"month": "Month", "kitchen": "Kitchen", "target_sales": "Sales target", "target_prep": "Prep target", "contribution_thb": "Contribution after waste", "fixed_overhead_thb": "Fixed overhead at target", "operating_before_central_implementation_thb": "Kitchen result before central budget"},
             date_columns=("month",), integer_columns=("target_sales", "target_prep"), money_columns=("contribution_thb", "fixed_overhead_thb", "operating_before_central_implementation_thb",),
         )
         display_table(
             recovery_sensitivity,
             ["scenario", "operating_result_thb", "gap_to_zero_thb"],
-            {"scenario": "ถ้าเกิดเงื่อนไขนี้", "operating_result_thb": "ผลดำเนินงานรวม 3 เดือน", "gap_to_zero_thb": "ช่องว่างถึงคุ้มทุน"},
+            {"scenario": "Scenario", "operating_result_thb": "Total 3-month operating result", "gap_to_zero_thb": "Gap to break-even"},
             money_columns=("operating_result_thb", "gap_to_zero_thb",),
         )
-        st.markdown("**สะพานปิดช่องว่างแบบคำนวณต่อเนื่อง**")
+        st.markdown("**Sequential gap-closing bridge**")
         display_table(
             recovery_bridge,
             ["step", "increment_thb", "result_thb"],
-            {"step": "ขั้นตอน", "increment_thb": "ผลเพิ่มจากขั้นก่อน", "result_thb": "ผลสะสมตามแบบจำลอง"},
+            {"step": "Step", "increment_thb": "Increment from prior step", "result_thb": "Cumulative modeled result"},
             money_columns=("increment_thb", "result_thb",),
         )
-        st.caption("ผลจากมาตรการแต่ละขั้นคำนวณต่อเนื่อง จึงไม่ควรนำผลประหยัดแต่ละแถวมาบวกซ้ำเป็นอิสระ")
+        st.caption("Each action is calculated sequentially, so row-level savings should not be added again as independent benefits.")
 
-    st.markdown("#### เป้าเตรียมสินค้า: มองตามสินค้าและเลือกดูครัว")
+    st.markdown("#### Preparation target: view by product and kitchen")
     sku_monthly = data["forecast_monthly_sku"].pivot(index="month", columns="sku", values="forecast_units")
     st.bar_chart(sku_monthly, height=280)
-    st.caption("โมเดลคาดการณ์ทำระดับครัว × สินค้า 20 คู่ กราฟนี้รวมขึ้นมาระดับสินค้าเพื่อให้ดูง่าย")
+    st.caption("The forecast model runs at 20 kitchen × SKU pairs; this chart aggregates to product level for readability.")
     col1, col2 = st.columns(2)
     kitchens = ["All"] + sorted(data["forecast"]["kitchen"].unique().tolist())
     skus = ["All"] + sorted(data["forecast"]["sku"].unique().tolist())
-    selected_kitchen = col1.selectbox("เลือกครัว", kitchens, format_func=lambda option: "ทุกครัว" if option == "All" else option)
-    selected_sku = col2.selectbox("เลือกสินค้า", skus, format_func=lambda option: "ทุกสินค้า" if option == "All" else option)
+    selected_kitchen = col1.selectbox("Select kitchen", kitchens, format_func=lambda option: "All kitchens" if option == "All" else option)
+    selected_sku = col2.selectbox("Select SKU", skus, format_func=lambda option: "All SKUs" if option == "All" else option)
     filtered = data["forecast"].copy()
     req = requirements.copy()
     if selected_kitchen != "All":
@@ -826,7 +824,7 @@ def forecast_inventory(data: dict) -> None:
     if selected_sku != "All":
         filtered = filtered.loc[filtered["sku"] == selected_sku]
         req = req.loc[req["sku"] == selected_sku]
-    daily = filtered.groupby("date", as_index=True)["forecast_units_base"].sum().to_frame("ยอดขายคาดการณ์ (แก้ว)")
+    daily = filtered.groupby("date", as_index=True)["forecast_units_base"].sum().to_frame("Forecast units (cups)")
     st.line_chart(daily, height=300)
     req["month"] = req["date"].dt.to_period("M").dt.to_timestamp()
     prep_monthly = req.groupby(["month", "kitchen", "sku"], as_index=False).agg(
@@ -835,56 +833,56 @@ def forecast_inventory(data: dict) -> None:
     display_table(
         prep_monthly,
         ["month", "kitchen", "sku", "forecast_lower_units", "forecast_units_base", "forecast_upper_units", "prep_target_cups_lower", "prep_target_cups_base", "prep_target_cups_upper", "expected_waste_units_base"],
-        {"month": "เดือน", "kitchen": "ครัว", "sku": "สินค้า", "forecast_lower_units": "ยอดขายขอบล่าง", "forecast_units_base": "ยอดขายกรณีฐาน", "forecast_upper_units": "ยอดขายขอบบน", "prep_target_cups_lower": "เตรียมขอบล่าง", "prep_target_cups_base": "เป้าเตรียมกรณีฐาน", "prep_target_cups_upper": "เตรียมขอบบน", "expected_waste_units_base": "ของเสียที่คาด"},
+        {"month": "Month", "kitchen": "Kitchen", "sku": "SKU", "forecast_lower_units": "Forecast lower bound", "forecast_units_base": "Base forecast units", "forecast_upper_units": "Forecast upper bound", "prep_target_cups_lower": "Lower prep target", "prep_target_cups_base": "Base prep target", "prep_target_cups_upper": "Upper prep target", "expected_waste_units_base": "Expected waste"},
         date_columns=("month",), integer_columns=("forecast_lower_units", "forecast_units_base", "forecast_upper_units", "prep_target_cups_lower", "prep_target_cups_base", "prep_target_cups_upper", "expected_waste_units_base"), height=360,
     )
 
-    st.markdown("#### นโยบายเตรียมและเติมสินค้า")
-    st.write("จัด ABC จากเงินเหลือหลังของเสียใน 3 เดือน และ XYZ จากความผันผวน Demand 12 สัปดาห์ Safety stock เป็นนโยบายเสนอที่ service level 95% (Z = 1.65) และทบทวนทุก 7 วัน ไม่ใช่ระยะเวลาจัดส่งจาก supplier")
-    alert_map = {"green": "ปกติ", "amber": "ของเสียสูง", "red": "เงินเหลือติดลบ + ของเสียสูง"}
-    policy["alert_th"] = policy["inventory_alert"].str.lower().map(alert_map).fillna(policy["inventory_alert"])
+    st.markdown("#### Preparation and replenishment policy")
+    st.write("ABC is based on 3-month post-waste contribution, and XYZ on 12-week demand volatility. Safety stock is a proposed policy at 95% service level (Z = 1.65), reviewed every 7 days; it is not supplier lead time.")
+    alert_map = {"green": "Normal", "amber": "High waste", "red": "Negative contribution + high waste"}
+    policy["alert_display"] = policy["inventory_alert"].str.lower().map(alert_map).fillna(policy["inventory_alert"])
     display_table(
         policy.sort_values(["inventory_alert", "waste_rate"], ascending=[True, False]),
-        ["kitchen", "sku", "forecast_3m_cups", "avg_weekly_demand_cups", "demand_cv", "waste_rate", "contribution_after_waste_per_cup_thb", "abc_class", "xyz_class", "safety_stock_cups_policy", "target_stock_next_7d_cups", "alert_th", "inventory_policy"],
-        {"kitchen": "ครัว", "sku": "สินค้า", "forecast_3m_cups": "คาดขาย 3 เดือน", "avg_weekly_demand_cups": "เฉลี่ย/สัปดาห์", "demand_cv": "ความผันผวน Demand", "waste_rate": "อัตราของเสีย", "contribution_after_waste_per_cup_thb": "เงินเหลือหลังของเสีย/แก้ว", "abc_class": "ABC", "xyz_class": "XYZ", "safety_stock_cups_policy": "Safety stock ที่เสนอ", "target_stock_next_7d_cups": "เป้าสต็อก 7 วัน", "alert_th": "สถานะ", "inventory_policy": "นโยบาย"},
+        ["kitchen", "sku", "forecast_3m_cups", "avg_weekly_demand_cups", "demand_cv", "waste_rate", "contribution_after_waste_per_cup_thb", "abc_class", "xyz_class", "safety_stock_cups_policy", "target_stock_next_7d_cups", "alert_display", "inventory_policy"],
+        {"kitchen": "Kitchen", "sku": "SKU", "forecast_3m_cups": "3-month forecast", "avg_weekly_demand_cups": "Average/week", "demand_cv": "Demand volatility", "waste_rate": "Waste rate", "contribution_after_waste_per_cup_thb": "Post-waste contribution/cup", "abc_class": "ABC", "xyz_class": "XYZ", "safety_stock_cups_policy": "Proposed safety stock", "target_stock_next_7d_cups": "7-day target stock", "alert_display": "Status", "inventory_policy": "Policy"},
         integer_columns=("forecast_3m_cups", "avg_weekly_demand_cups", "safety_stock_cups_policy", "target_stock_next_7d_cups"), percent_columns=("demand_cv", "waste_rate"), money_columns=("contribution_after_waste_per_cup_thb",), height=430,
     )
-    st.caption("คู่ครัว–สินค้าที่เป็น “ของเสียสูง” หรือ “เงินเหลือติดลบ + ของเสียสูง” ต้องเตรียมรอบเล็กและถี่ขึ้น นี่คือ alert การผลิต ไม่ใช่ใบสั่งซื้ออัตโนมัติ")
+    st.caption("Kitchen–SKU pairs marked “High waste” or “Negative contribution + high waste” should use smaller, more frequent batches. This is a production alert, not an automatic purchase order.")
 
-    with st.expander("วิธี Forecast, ความไวต้นทุน และขอบเขตการสั่งซื้อ"):
-        st.markdown("**เลือกวิธี Forecast อย่างไร?**")
-        st.write(f"เลือก `{data['metrics']['selected_method']}` เพราะ WAPE เฉลี่ยจาก rolling-origin backtest 4 จุดต่ำสุดที่ {pct(data['metrics']['selected_method_mean_wape'])} เทียบ 5 วิธี และใช้ข้อมูลก่อน 31 ส.ค. 2026 เท่านั้น")
+    with st.expander("Forecast method, cost sensitivity, and ordering scope"):
+        st.markdown("**How was the forecast method selected?**")
+        st.write(f"`{data['metrics']['selected_method']}` was selected because its mean WAPE across four rolling-origin backtest cutoffs was lowest at {pct(data['metrics']['selected_method_mean_wape'])} across five methods, using data only through 31 Aug 2026.")
         backtest_view = data["backtest"].copy()
         display_table(
             backtest_view, ["method", "cutoffs", "mae", "wape", "bias_pct"],
-            {"method": "วิธี", "cutoffs": "จำนวนช่วงทดสอบ", "mae": "MAE (แก้ว)", "wape": "WAPE", "bias_pct": "Bias"},
+            {"method": "Method", "cutoffs": "Test cutoffs", "mae": "MAE (cups)", "wape": "WAPE", "bias_pct": "Bias"},
             integer_columns=("cutoffs",), percent_columns=("wape", "bias_pct"), decimal_columns=("mae",),
         )
         st.caption(data["metrics"]["forecast_uncertainty_basis"])
-        st.markdown("**P&L รายเดือนของทุกสถานการณ์**")
+        st.markdown("**Monthly P&L for all scenarios**")
         display_table(
             scenario,
             ["scenario_display", "month", "forecast_units", "revenue_thb", "sold_fruit_cost_thb", "sold_packaging_cost_thb", "sold_labor_cost_thb", "commission_thb", "waste_cost_thb", "contribution_after_waste_thb", "fixed_overhead_thb", "modeled_operating_result_thb", "operating_margin_pct"],
-            {"scenario_display": "สถานการณ์", "month": "เดือน", "forecast_units": "ยอดขายคาดการณ์", "revenue_thb": "รายได้", "sold_fruit_cost_thb": "ต้นทุนผลไม้", "sold_packaging_cost_thb": "บรรจุภัณฑ์", "sold_labor_cost_thb": "แรงงาน", "commission_thb": "ค่าคอมมิชชัน", "waste_cost_thb": "ต้นทุนของเสีย", "contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "fixed_overhead_thb": "ค่าใช้จ่ายคงที่", "modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง", "operating_margin_pct": "สัดส่วนผลดำเนินงาน"},
+            {"scenario_display": "Scenario", "month": "Month", "forecast_units": "Forecast units", "revenue_thb": "Revenue", "sold_fruit_cost_thb": "Fruit cost", "sold_packaging_cost_thb": "Packaging", "sold_labor_cost_thb": "Labor", "commission_thb": "Commission", "waste_cost_thb": "Waste cost", "contribution_after_waste_thb": "Contribution after waste", "fixed_overhead_thb": "Fixed overhead", "modeled_operating_result_thb": "Modeled operating result", "operating_margin_pct": "Operating margin"},
             date_columns=("month",), integer_columns=("forecast_units",), money_columns=("revenue_thb", "sold_fruit_cost_thb", "sold_packaging_cost_thb", "sold_labor_cost_thb", "commission_thb", "waste_cost_thb", "contribution_after_waste_thb", "fixed_overhead_thb", "modeled_operating_result_thb"), percent_columns=("operating_margin_pct",), height=380,
         )
         st.caption(data["metrics"]["commission_basis"] + " " + data["metrics"]["mixedberry_note"])
-        st.markdown("**ถ้าต้นทุนผลไม้เพิ่ม ผลจะเป็นอย่างไร?**")
+        st.markdown("**What if fruit costs increase?**")
         stress = data["fruit_cost_stress"].copy()
         stress["uplift_label"] = stress["fruit_cost_uplift_pct"].map(lambda value: pct(value, 0))
-        st.line_chart(stress.set_index("uplift_label")[["modeled_operating_result_thb"]].rename(columns={"modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง (บาท)"}), height=240)
+        st.line_chart(stress.set_index("uplift_label")[["modeled_operating_result_thb"]].rename(columns={"modeled_operating_result_thb": "Modeled operating result (THB)"}), height=240)
         display_table(
             stress, ["fruit_cost_uplift_pct", "forecast_units", "revenue_thb", "fruit_cost_thb", "waste_cost_thb", "contribution_after_waste_thb", "fixed_overhead_thb", "modeled_operating_result_thb", "operating_margin_pct"],
-            {"fruit_cost_uplift_pct": "ต้นทุนผลไม้เพิ่ม", "forecast_units": "ยอดขายคาดการณ์", "revenue_thb": "รายได้", "fruit_cost_thb": "ต้นทุนผลไม้", "waste_cost_thb": "ต้นทุนของเสีย", "contribution_after_waste_thb": "เงินเหลือหลังของเสีย", "fixed_overhead_thb": "ค่าใช้จ่ายคงที่", "modeled_operating_result_thb": "ผลดำเนินงานตามแบบจำลอง", "operating_margin_pct": "สัดส่วนผลดำเนินงาน"},
+            {"fruit_cost_uplift_pct": "Fruit cost increase", "forecast_units": "Forecast units", "revenue_thb": "Revenue", "fruit_cost_thb": "Fruit cost", "waste_cost_thb": "Waste cost", "contribution_after_waste_thb": "Contribution after waste", "fixed_overhead_thb": "Fixed overhead", "modeled_operating_result_thb": "Modeled operating result", "operating_margin_pct": "Operating margin"},
             percent_columns=("fruit_cost_uplift_pct", "operating_margin_pct"), integer_columns=("forecast_units",), money_columns=("revenue_thb", "fruit_cost_thb", "waste_cost_thb", "contribution_after_waste_thb", "fixed_overhead_thb", "modeled_operating_result_thb"),
         )
-        st.markdown("**สูตรที่ใช้เมื่อมีข้อมูลสต็อกครบ**")
+        st.markdown("**Formula to use when inventory data is complete**")
         st.code("target_stock = forecast_during_review_period + safety_stock\norder_qty = max(0, target_stock - usable_on_hand - usable_inbound + committed_demand)", language="text")
-        st.info("ยังไม่คำนวณจำนวนสั่งซื้อจริง เพราะกรณีศึกษานี้ไม่มี stock on hand, inbound, supplier lead time, shelf life, BOM/recipe yield และ stockout flags จนกว่าจะมีข้อมูลเหล่านี้ ให้ใช้เป้าเตรียมเป็นแก้วและนโยบาย safety stock สำหรับการผลิตรายวัน ทบทวน Forecast เมื่อมี actual ใหม่ทุกสัปดาห์")
+        st.info("Actual order quantities are not calculated because this case lacks stock on hand, inbound, supplier lead time, shelf life, BOM/recipe yield, and stockout flags. Until those data are available, use cup-based prep targets and the safety-stock policy for daily production, and review the forecast weekly when new actuals arrive.")
 
 
 def data_quality(data: dict) -> None:
-    task_heading("Task 1 · Data quality", "ที่มาข้อมูลและข้อจำกัด", "ตรวจข้อมูลดิบก่อนใช้ตัดสินใจ เพื่อให้รายได้ Demand โปรโมชั่น และ P&L ไม่ถูกตีความจากแถวที่ซ้ำหรือรายการที่ไม่ใช่เมนู")
+    task_heading("Task 1 · Data quality", "Data quality & limitations", "Screen the raw data before making decisions so revenue, demand, promotions, and P&L are not distorted by duplicates or non-menu items.")
     readiness = data["readiness"]
     raw = readiness["raw_orders"]
     candidate = readiness["candidate_preparation"]
@@ -893,59 +891,59 @@ def data_quality(data: dict) -> None:
     audit = data["audit"]
     checks = audit["checks"]
     c1, c2, c3 = st.columns(3)
-    c1.metric("แถวคำสั่งซื้อดิบ", f"{checks['raw_order_rows']:,}")
-    c2.metric("แถวเมนูที่ใช้วิเคราะห์", f"{checks['retained_candidate_menu_rows']:,}")
-    c3.metric("รายได้หลังคัดกรอง", money(reconciliation["retained_menu_revenue_thb"]))
+    c1.metric("Raw order rows", f"{checks['raw_order_rows']:,}")
+    c2.metric("Retained menu rows", f"{checks['retained_candidate_menu_rows']:,}")
+    c3.metric("Revenue after screening", money(reconciliation["retained_menu_revenue_thb"]))
 
-    st.markdown("#### จากข้อมูลดิบสู่ข้อมูลที่ใช้วิเคราะห์")
+    st.markdown("#### From raw data to released analytical data")
     st.markdown(
-        f"<div class='callout'><strong>{reconciliation['raw_rows']:,} แถวข้อมูลดิบ</strong> → ตัดแถวซ้ำ {reconciliation['duplicate_excess_rows_removed']:,} แถว → ตัดรายการที่ไม่ใช่เมนู {reconciliation['non_menu_rows_excluded']:,} แถว → เหลือ <strong>{reconciliation['retained_menu_rows']:,} แถวเมนู</strong> สำหรับวิเคราะห์</div>",
+        f"<div class='callout'><strong>{reconciliation['raw_rows']:,} raw rows</strong> → removed {reconciliation['duplicate_excess_rows_removed']:,} duplicate rows → excluded {reconciliation['non_menu_rows_excluded']:,} non-menu rows → <strong>{reconciliation['retained_menu_rows']:,} menu rows</strong> retained for analysis</div>",
         unsafe_allow_html=True,
     )
-    st.caption(f"หากไม่ตัดแถวซ้ำ รายได้จะถูกนับสูงเกินประมาณ {money(reconciliation['duplicate_revenue_removed_thb'])}")
+    st.caption(f"Without duplicate removal, revenue would be overstated by approximately {money(reconciliation['duplicate_revenue_removed_thb'])}.")
 
-    st.markdown("#### สิ่งที่ตรวจและวิธีจัดการ")
+    st.markdown("#### Checks and handling")
     screening = pd.DataFrame([
-        ["ค่าว่าง", f"ไม่พบค่าว่างใน 9 ฟิลด์ของคำสั่งซื้อดิบ", "ไม่ต้องแทนค่าในฟิลด์คำสั่งซื้อ"],
-        ["แถวซ้ำแบบตรงกัน", f"เกิน {raw['exact_duplicate_excess_rows']:,} แถว และมีรายได้ {money(reconciliation['duplicate_revenue_removed_thb'])}", "ตัดแถวที่เกิน และเก็บการตรวจสอบย้อนกลับไว้"],
-        ["วัน เวลา และจำนวนขาย", f"วันผิดรูปแบบ {raw['invalid_dates']}; ชั่วโมงผิด {raw['invalid_hours']}; ยอดขายไม่เป็นบวก {raw['nonpositive_units']}", "ไม่มีรายการลักษณะนี้ผ่านเข้าสู่ชุดข้อมูลที่เผยแพร่"],
-        ["ราคาและรายได้", f"แถวที่ราคา × จำนวนไม่เท่ารายได้: {raw['revenue_identity_mismatch_rows_over_001_thb']}; สูตรส่วนลดไม่ตรง: {candidate['price_discount_formula_mismatch_rows_over_001_thb']}", "คงราคาหลังโปรโมชันที่พบจริง และไม่หักส่วนลดซ้ำ"],
-        ["การจับคู่สินค้า/รหัส", f"รหัสฐานที่ไม่รู้จัก {len(candidate['unknown_base_codes'])}; SKU suffix ไม่ตรง {candidate['sku_suffix_mismatch_rows']}", "ใช้เฉพาะ 5 สินค้าหลักที่จับคู่ได้; ตัดรายการไม่ใช่เมนู 370 แถว"],
-        ["ความครบต้นทุน", f"ยอดขาย {candidate['missing_exact_week_fruit_cost_rows']} แถว และของเสีย {waste['missing_estimated_waste_cost_rows']} แถว ต้องใช้ proxy", "แสดงสถานะสมมติฐานไว้ และไม่ตั้งต้นทุนที่ขาดเป็นศูนย์"],
-        ["ค่าที่สูงผิดปกติ", "ไม่ตัดรายการที่ถูกต้องเพียงเพราะยอดขายหรือราคาสูง", "เก็บ peak และฤดูกาลไว้; ตัดเฉพาะข้อมูลผิดรูปแบบหรือจับคู่ไม่ได้"],
-    ], columns=["สิ่งที่ตรวจ", "หลักฐาน", "วิธีจัดการ"])
+        ["Missing values", "No missing values found in 9 raw order fields", "No imputation required for order fields"],
+        ["Exact duplicate rows", f"{raw['exact_duplicate_excess_rows']:,} excess rows with {money(reconciliation['duplicate_revenue_removed_thb'])} revenue", "Removed excess rows and retained the audit trail"],
+        ["Date, time, and units", f"Invalid dates: {raw['invalid_dates']}; invalid hours: {raw['invalid_hours']}; non-positive units: {raw['nonpositive_units']}", "No such records enter the released dataset"],
+        ["Price and revenue", f"Price × units mismatches: {raw['revenue_identity_mismatch_rows_over_001_thb']}; discount formula mismatches: {candidate['price_discount_formula_mismatch_rows_over_001_thb']}", "Keep observed post-promotion prices and do not deduct discounts twice"],
+        ["Product/code mapping", f"Unknown base codes: {len(candidate['unknown_base_codes'])}; SKU suffix mismatches: {candidate['sku_suffix_mismatch_rows']}", "Use only the 5 mapped core products; exclude 370 non-menu rows"],
+        ["Cost completeness", f"{candidate['missing_exact_week_fruit_cost_rows']} sales rows and {waste['missing_estimated_waste_cost_rows']} waste rows require proxies", "Expose assumptions and never replace missing costs with zero"],
+        ["Extreme values", "Do not remove valid rows only because sales or prices are high", "Keep peaks and seasonality; remove only malformed or unmapped records"],
+    ], columns=["Check", "Evidence", "Handling"])
     st.dataframe(screening, width="stretch", hide_index=True)
 
-    st.markdown("#### กระทบยอดก่อน–หลังคัดกรอง")
+    st.markdown("#### Pre- and post-screening reconciliation")
     bridge = pd.DataFrame([
         ["Raw export", reconciliation["raw_rows"], reconciliation["raw_units"], reconciliation["raw_revenue_thb"]],
         ["Less duplicate excess", -reconciliation["duplicate_excess_rows_removed"], -reconciliation["duplicate_units_removed"], -reconciliation["duplicate_revenue_removed_thb"]],
         ["Less non-menu rows", -reconciliation["non_menu_rows_excluded"], -reconciliation["non_menu_units_excluded"], -reconciliation["non_menu_revenue_excluded_thb"]],
         ["Released menu data", reconciliation["retained_menu_rows"], reconciliation["retained_menu_units"], reconciliation["retained_menu_revenue_thb"]],
     ], columns=["Bridge", "Rows", "Units", "Revenue (THB)"])
-    bridge["Bridge"] = ["ข้อมูลดิบ", "ตัดแถวซ้ำที่เกิน", "ตัดรายการไม่ใช่เมนู", "ข้อมูลเมนูที่ใช้วิเคราะห์"]
+    bridge["Bridge"] = ["Raw data", "Less duplicate excess", "Less non-menu rows", "Released menu data"]
     display_table(
         bridge, ["Bridge", "Rows", "Units", "Revenue (THB)"],
-        {"Bridge": "ขั้นตอน", "Rows": "แถว", "Units": "จำนวนแก้ว", "Revenue (THB)": "รายได้"}, integer_columns=("Rows", "Units"), money_columns=("Revenue (THB)",),
+        {"Bridge": "Step", "Rows": "Rows", "Units": "Units", "Revenue (THB)": "Revenue"}, integer_columns=("Rows", "Units"), money_columns=("Revenue (THB)",),
     )
 
-    st.markdown("#### ประเด็นที่ยังต้องติดตาม")
+    st.markdown("#### Open issues to monitor")
     issues = data["issues"].copy()
-    issues["severity_th"] = issues["severity"].map({"high": "สูง", "medium": "กลาง", "low": "ต่ำ"}).fillna(issues["severity"])
-    issues["status_th"] = issues["status"].map({"released": "จัดการแล้ว", "assumed": "ใช้สมมติฐาน", "open": "ยังเปิดอยู่"}).fillna(issues["status"])
+    issues["severity_display"] = issues["severity"].map({"high": "High", "medium": "Medium", "low": "Low"}).fillna(issues["severity"])
+    issues["status_display"] = issues["status"].map({"released": "Released", "assumed": "Assumed", "open": "Open"}).fillna(issues["status"])
     display_table(
-        issues, ["issue_id", "severity_th", "status_th", "issue", "impact", "recommended_action", "evidence"],
-        {"issue_id": "รหัส", "severity_th": "ความสำคัญ", "status_th": "สถานะ", "issue": "ประเด็น", "impact": "ผลกระทบ", "recommended_action": "สิ่งที่ควรทำ", "evidence": "หลักฐาน"},
+        issues, ["issue_id", "severity_display", "status_display", "issue", "impact", "recommended_action", "evidence"],
+        {"issue_id": "ID", "severity_display": "Severity", "status_display": "Status", "issue": "Issue", "impact": "Impact", "recommended_action": "Recommended action", "evidence": "Evidence"},
         height=330,
     )
 
-    st.markdown("#### สถานะการตรวจสอบ")
+    st.markdown("#### Validation status")
     release_qa = data["data_qa"]
-    st.success(f"Data-release QA: {release_qa['status']} · ผ่าน {len(release_qa['checks']) - release_qa['failed_count']}/{len(release_qa['checks'])} จาก {len(release_qa['checks'])} รายการ")
+    st.success(f"Data-release QA: {release_qa['status']} · Passed {len(release_qa['checks']) - release_qa['failed_count']}/{len(release_qa['checks'])} checks")
     qa_df = pd.DataFrame(data["qa"]["checks"])
     qa_columns = [column for column in ["name", "result", "expected", "actual", "owner", "impact"] if column in qa_df]
-    st.dataframe(qa_df[qa_columns].astype(str).rename(columns={"name": "รายการตรวจ", "result": "ผล", "expected": "ค่าที่คาด", "actual": "ค่าที่พบ", "owner": "ผู้รับผิดชอบเดิม", "impact": "ผลกระทบ"}), width="stretch", hide_index=True, height=360)
-    st.caption("ไฟล์ต้นทางเป็นแบบอ่านอย่างเดียว Proxy ยังคงระบุสถานะไว้ชัดเจน ข้อจำกัดสำคัญที่เหลือคือขอบเขต GP ในงบ ความครอบคลุมของของเสีย และข้อมูลควบคุมสต็อกที่ยังไม่มี")
+    st.dataframe(qa_df[qa_columns].astype(str).rename(columns={"name": "Check", "result": "Result", "expected": "Expected", "actual": "Actual", "owner": "Original owner", "impact": "Impact"}), width="stretch", hide_index=True, height=360)
+    st.caption("Source files are read-only and proxies are explicitly identified. Remaining limitations include the budget GP boundary, waste coverage, and unavailable inventory-control data.")
 
 
 def main() -> None:
@@ -953,11 +951,11 @@ def main() -> None:
     apply_theme()
     data = load_data()
     st.title("FruitBlend24 · Decision Dashboard")
-    st.caption("แปลงข้อมูลยอดขาย ราคา โปรโมชั่น ต้นทุน และของเสีย ให้เป็นสิ่งที่ทีมตัดสินใจได้ · กรณีศึกษาข้อมูลจำลอง · เวอร์ชันข้อมูล " + DATA_VERSION)
-    st.sidebar.header("อ่านเว็บนี้อย่างไร")
-    st.sidebar.write("เริ่มที่ภาพรวมเพื่อเข้าใจปัญหา แล้วเปิดแท็บที่ตอบคำถามของคุณ ทุกตัวเลขเชื่อมกลับไปยัง artifact ที่ผ่าน QA")
-    st.sidebar.markdown("**เส้นทางแนะนำ**\n\n1. ภาพรวมและแผนแก้ไข\n2. สินค้า สาขา และผลเทียบงบ\n3. โปรโมชั่นคุ้มไหม\n4. ยอดขายและความเหมาะสมของราคา\n5. แผน 3 เดือนและการเตรียมสินค้า\n6. ที่มาข้อมูลและข้อจำกัด")
-    tabs = st.tabs(["ภาพรวมและแผนแก้ไข", "สินค้า สาขา และผลเทียบงบ", "โปรโมชั่นคุ้มไหม", "ยอดขายและความเหมาะสมของราคา", "แผน 3 เดือนและการเตรียมสินค้า", "ที่มาข้อมูลและข้อจำกัด"])
+    st.caption("Turn sales, pricing, promotion, cost, and waste data into decision support · Synthetic data case study · Data version " + DATA_VERSION)
+    st.sidebar.header("How to use this dashboard")
+    st.sidebar.write("Start with the overview to understand the problem, then open the tab that answers your question. Every number links back to a QA-passed artifact.")
+    st.sidebar.markdown("**Recommended path**\n\n1. Overview & recovery plan\n2. Portfolio, kitchens & budget performance\n3. Promotions & rate codes\n4. Demand & price fit\n5. 3-month outlook & preparation plan\n6. Data quality & limitations")
+    tabs = st.tabs(["Overview & recovery plan", "Portfolio, kitchens & budget performance", "Promotions & rate codes", "Demand & price fit", "3-month outlook & preparation plan", "Data quality & limitations"])
     with tabs[0]:
         overview(data)
     with tabs[1]:
@@ -971,7 +969,7 @@ def main() -> None:
     with tabs[5]:
         data_quality(data)
     st.divider()
-    st.caption("ขอบเขต: กรณีศึกษา FruitBlend24 ที่เป็นข้อมูลจำลอง รายละเอียด assumptions และ QA เก็บไว้ใต้ reports/fruitblend24_run_001 และ data/processed/fruitblend24_v1_c2869ce419bf")
+    st.caption("Scope: synthetic FruitBlend24 case study. Detailed assumptions and QA are stored under reports/fruitblend24_run_001 and data/processed/fruitblend24_v1_c2869ce419bf.")
 
 
 if __name__ == "__main__":
