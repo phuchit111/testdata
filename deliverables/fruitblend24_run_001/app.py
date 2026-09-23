@@ -58,6 +58,8 @@ def apply_theme() -> None:
         .eyebrow {font-size: .85rem; font-weight: 700; color: #047857; letter-spacing: .03em;}
         .callout {border-left: 4px solid #f59e0b; background: #fffbeb; padding: .8rem 1rem; border-radius: .4rem; margin: .6rem 0 1rem; color: #713f12;}
         div[data-testid="stMetric"] {background: #ffffff; border: 1px solid #e2e8f0; border-radius: .75rem; padding: .65rem;}
+        div[data-testid="stMetricValue"], div[data-testid="stMetricValue"] > div {font-size: clamp(1.2rem, 2.2vw, 1.9rem) !important; line-height: 1.15; white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere;}
+        div[data-testid="stMetricLabel"] {white-space: normal !important; overflow: visible !important; text-overflow: clip !important;}
         </style>
         """,
         unsafe_allow_html=True,
