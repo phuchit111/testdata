@@ -1039,7 +1039,7 @@ def main() -> None:
     with tabs[5]:
         overview(data)
     st.divider()
-    st.caption("ขอบเขต: กรณีศึกษา FruitBlend24 แบบข้อมูลจำลอง ไม่ใช่ข้อมูลสด รายละเอียดสมมติฐานและ QA อยู่ใน reports/fruitblend24_run_001 และ data/processed/fruitblend24_v1_c2869ce419bf")
+    st.caption("ขอบเขต: กรณีศึกษา FruitBlend24 แบบข้อมูลจำลอง")
 
 
 if __name__ == "__main__":
