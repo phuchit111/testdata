@@ -12,20 +12,20 @@
       "name": "App exposes all six required task tabs",
       "result": "PASS",
       "expected": [
-        "Overview & recovery plan",
-        "Portfolio, kitchens & budget performance",
-        "Promotions & rate codes",
-        "Demand & price fit",
-        "3-month outlook & preparation plan",
-        "Data quality & limitations"
+        "Task 1 · Data Trust & Definitions",
+        "Task 2 · Sales, Price & Menu",
+        "Task 3 · Platform & Campaign Control",
+        "Task 4 · Portfolio, Kitchen & Budget",
+        "Task 5 · Forecast-to-Kitchen Handoff",
+        "Task 6 · E-Commerce Action Center"
       ],
       "actual": [
-        "Overview & recovery plan",
-        "Portfolio, kitchens & budget performance",
-        "Promotions & rate codes",
-        "Demand & price fit",
-        "3-month outlook & preparation plan",
-        "Data quality & limitations"
+        "Task 1 · Data Trust & Definitions",
+        "Task 2 · Sales, Price & Menu",
+        "Task 3 · Platform & Campaign Control",
+        "Task 4 · Portfolio, Kitchen & Budget",
+        "Task 5 · Forecast-to-Kitchen Handoff",
+        "Task 6 · E-Commerce Action Center"
       ]
     },
     {
@@ -38,108 +38,112 @@
       "name": "Deployment entrypoint exposes all six task tabs",
       "result": "PASS",
       "expected": [
-        "Overview & recovery plan",
-        "Portfolio, kitchens & budget performance",
-        "Promotions & rate codes",
-        "Demand & price fit",
-        "3-month outlook & preparation plan",
-        "Data quality & limitations"
+        "Task 1 · Data Trust & Definitions",
+        "Task 2 · Sales, Price & Menu",
+        "Task 3 · Platform & Campaign Control",
+        "Task 4 · Portfolio, Kitchen & Budget",
+        "Task 5 · Forecast-to-Kitchen Handoff",
+        "Task 6 · E-Commerce Action Center"
       ],
       "actual": [
-        "Overview & recovery plan",
-        "Portfolio, kitchens & budget performance",
-        "Promotions & rate codes",
-        "Demand & price fit",
-        "3-month outlook & preparation plan",
-        "Data quality & limitations"
+        "Task 1 · Data Trust & Definitions",
+        "Task 2 · Sales, Price & Menu",
+        "Task 3 · Platform & Campaign Control",
+        "Task 4 · Portfolio, Kitchen & Budget",
+        "Task 5 · Forecast-to-Kitchen Handoff",
+        "Task 6 · E-Commerce Action Center"
       ]
     },
     {
       "name": "App exposes required metric cards",
       "result": "PASS",
       "expected": [
-        "Sales revenue",
-        "Revenue vs. budget",
-        "Modeled operating result",
-        "Raw order rows",
-        "Retained menu rows",
-        "Peak sales hour",
-        "Discount",
-        "Baseline forecast",
-        "Baseline forecast prep target"
+        "รายได้จากการขาย",
+        "รายได้เทียบงบ",
+        "ผลดำเนินงานตามแบบจำลอง",
+        "แถวรายการขายดิบ",
+        "แถวเมนูที่ใช้วิเคราะห์",
+        "ช่วงเวลาที่ขายสูงสุด",
+        "ส่วนลด",
+        "Forecast ฐาน · 3 เดือน",
+        "เป้าเตรียม · 3 เดือน"
       ],
       "actual": [
-        "Sales revenue",
-        "Revenue vs. budget",
-        "Modeled operating result",
-        "Base case",
-        "Optimized case",
-        "Downside case",
-        "Sales revenue",
-        "Revenue vs. target",
-        "Contribution before waste",
-        "Waste cost",
-        "Modeled operating result",
-        "Discount",
-        "Share of total sales",
-        "Discount cost",
-        "Contribution before waste/cup",
-        "Sales per hour",
-        "Peak sales hour",
-        "Peak sales day",
-        "Top revenue platform",
-        "Historical sales",
-        "Realized price",
-        "Pre-waste break-even headroom",
-        "Post-waste contribution/cup",
-        "Baseline forecast",
-        "Planning range",
-        "Baseline forecast prep target",
-        "Expected waste",
-        "Baseline forecast result",
-        "Raw order rows",
-        "Retained menu rows",
-        "Revenue after screening"
+        "แถวรายการขายดิบ",
+        "แถวเมนูที่ใช้วิเคราะห์",
+        "รายได้หลังคัดกรอง",
+        "ช่วงเวลาที่ขายสูงสุด",
+        "วันที่ขายสูงสุด",
+        "รายได้ในขอบเขตที่เลือก",
+        "จำนวนแก้วที่ขายย้อนหลัง",
+        "ราคาที่ลูกค้าจ่ายจริง",
+        "ส่วนต่างเหนือราคาคุ้มทุนก่อน Waste",
+        "เงินเหลือหลัง Waste/แก้ว",
+        "ส่วนลด",
+        "สัดส่วนแก้วจากโปรโมชัน",
+        "มูลค่าส่วนลด",
+        "เงินเหลือก่อน Waste/แก้ว",
+        "แก้วต่อชั่วโมงที่มีรายการขาย",
+        "รายได้จากการขาย",
+        "ส่วนต่างรายได้เทียบงบ",
+        "เงินเหลือก่อน Waste",
+        "ต้นทุน Waste ที่บันทึก",
+        "ผลดำเนินงานตามแบบจำลอง",
+        "Forecast ฐาน · 3 เดือน",
+        "เป้าเตรียม · 3 เดือน",
+        "Waste ที่คาด · 3 เดือน",
+        "ผลดำเนินงานฐาน · 3 เดือน",
+        "ขาดทุนฐาน · 3 เดือน",
+        "ดีขึ้นจากราคา + Waste",
+        "ช่องว่างคงเหลือถึงคุ้มทุน",
+        "รายได้จากการขาย",
+        "รายได้เทียบงบ",
+        "ผลดำเนินงานตามแบบจำลอง",
+        "กรณีฐาน",
+        "ราคา RC000 + Waste",
+        "กรณีแย่ลง"
       ]
     },
     {
       "name": "App includes readable decision sections for all six tasks",
       "result": "PASS",
       "expected": [
-        "5 decision-relevant findings",
-        "Action plan",
-        "From raw data to released analytical data",
-        "Current price fit by product",
-        "Scorecard: how much contribution remains after discounting?",
-        "Is the sales lift enough to cover the discount?",
-        "Actual revenue vs. monthly budget",
-        "What should we do by product?",
-        "Which kitchens should be fixed first?",
-        "Historical sales followed by forecast sales",
-        "This page shows two sets of numbers",
-        "Realistic cumulative break-even target",
-        "Modeled result across 3 scenarios",
-        "Preparation target after sales confirmation",
-        "Preparation and replenishment policy",
-        "Formula to use when inventory data is complete"
+        "5 ข้อค้นพบเพื่อเลือก Action",
+        "Action ที่เสนอสำหรับรอบถัดไป",
+        "Platform mix และเงินเหลือก่อน Waste",
+        "ราคาแต่ละ SKU เหมาะกับเงินเหลือหรือไม่?",
+        "เงินเหลือที่คงเหลือหลังส่วนลด (ก่อน Waste)",
+        "ยอดขายเพิ่มพอคุ้มส่วนลดหรือไม่?",
+        "รายได้จริงเทียบงบรายเดือน",
+        "SKU ใดควรแก้หรือคงไว้?",
+        "Kitchen × SKU ที่ต้องส่งต่อให้ Operations",
+        "ภาพรวม Forecast และเป้าเตรียมที่ปล่อย",
+        "Demand ต่อเนื่อง: ใช้ช่วงละ 7 วันเต็ม",
+        "เช็กฤดูกาลกับช่วงเดียวกันปีก่อน",
+        "ผลตามแบบจำลอง 3 สถานการณ์ที่ตรวจสอบได้",
+        "ช่องว่างสู่กำไร: แสดง hurdle ไม่สร้างเป้าขายย้อนกลับ",
+        "เป้าเตรียมที่ปล่อย: เลือกครัวและ SKU",
+        "นโยบายเตรียมและ buffer กำลังผลิต 7 วัน",
+        "จากข้อมูลดิบสู่ข้อมูลวิเคราะห์ที่เผยแพร่"
       ],
       "actual": [
-        "5 decision-relevant findings",
-        "Action plan",
-        "From raw data to released analytical data",
-        "Current price fit by product",
-        "Scorecard: how much contribution remains after discounting?",
-        "Is the sales lift enough to cover the discount?",
-        "Actual revenue vs. monthly budget",
-        "What should we do by product?",
-        "Which kitchens should be fixed first?",
-        "Historical sales followed by forecast sales",
-        "This page shows two sets of numbers",
-        "Realistic cumulative break-even target",
-        "Modeled result across 3 scenarios",
-        "Preparation target after sales confirmation",
-        "Preparation and replenishment policy",
-        "Formula to use when inventory data is complete"
+        "5 ข้อค้นพบเพื่อเลือก Action",
+        "Action ที่เสนอสำหรับรอบถัดไป",
+        "Platform mix และเงินเหลือก่อน Waste",
+        "ราคาแต่ละ SKU เหมาะกับเงินเหลือหรือไม่?",
+        "เงินเหลือที่คงเหลือหลังส่วนลด (ก่อน Waste)",
+        "ยอดขายเพิ่มพอคุ้มส่วนลดหรือไม่?",
+        "รายได้จริงเทียบงบรายเดือน",
+        "SKU ใดควรแก้หรือคงไว้?",
+        "Kitchen × SKU ที่ต้องส่งต่อให้ Operations",
+        "ภาพรวม Forecast และเป้าเตรียมที่ปล่อย",
+        "Demand ต่อเนื่อง: ใช้ช่วงละ 7 วันเต็ม",
+        "เช็กฤดูกาลกับช่วงเดียวกันปีก่อน",
+        "ผลตามแบบจำลอง 3 สถานการณ์ที่ตรวจสอบได้",
+        "ช่องว่างสู่กำไร: แสดง hurdle ไม่สร้างเป้าขายย้อนกลับ",
+        "เป้าเตรียมที่ปล่อย: เลือกครัวและ SKU",
+        "นโยบายเตรียมและ buffer กำลังผลิต 7 วัน",
+        "จากข้อมูลดิบสู่ข้อมูลวิเคราะห์ที่เผยแพร่"
       ]
     },
     {
@@ -151,7 +155,7 @@
         "Task 3 · Promotions & rate codes",
         "Task 4 · Portfolio & budget performance",
         "Task 5 · Inventory & 3-month outlook",
-        "Task 6 · Decision summary"
+        "Task 6 · Present findings"
       ],
       "actual": [
         "Task 1 · Data quality",
@@ -159,8 +163,74 @@
         "Task 3 · Promotions & rate codes",
         "Task 4 · Portfolio & budget performance",
         "Task 5 · Inventory & 3-month outlook",
-        "Task 6 · Decision summary"
+        "Task 6 · Present findings"
       ]
+    },
+    {
+      "name": "App exposes E-Commerce drill-down controls",
+      "result": "PASS",
+      "expected": [
+        "เลือก Platform สำหรับดู Demand",
+        "เลือก SKU",
+        "เลือก rate code",
+        "เลือกครัว",
+        "เลือก SKU สำหรับเป้าเตรียม"
+      ],
+      "actual": [
+        "เลือก Platform สำหรับดู Demand",
+        "เลือก SKU",
+        "เลือก rate code",
+        "ดูแยกตาม",
+        "เลือก SKU เพื่อดูระดับส่วนลด",
+        "ดูแนวโน้มรายเดือนของครัว",
+        "เลือกครัว",
+        "เลือก SKU สำหรับเป้าเตรียม"
+      ]
+    },
+    {
+      "name": "E-Commerce drill-down controls rerun without exceptions",
+      "result": "PASS",
+      "expected": {
+        "sales_platform": "LINE MAN",
+        "campaign_rate_code": "RC101",
+        "forecast_kitchen": "BKK_Ladprao"
+      },
+      "actual": {
+        "sales_platform": "LINE MAN",
+        "campaign_rate_code": "RC101",
+        "forecast_kitchen": "BKK_Ladprao"
+      }
+    },
+    {
+      "name": "App displays E-Commerce scope guardrails",
+      "result": "PASS",
+      "expected": [
+        "historical association",
+        "ไม่ใช่ causal",
+        "ของเสียไม่มี tag platform/rate code",
+        "ไม่ใช่ GP variance",
+        "ไม่ใช่ statistical confidence interval",
+        "ไม่ใช่จำนวนสั่งซื้อจริง"
+      ],
+      "actual": [
+        "historical association",
+        "ไม่ใช่ causal",
+        "ของเสียไม่มี tag platform/rate code",
+        "ไม่ใช่ GP variance",
+        "ไม่ใช่ statistical confidence interval",
+        "ไม่ใช่จำนวนสั่งซื้อจริง"
+      ]
+    },
+    {
+      "name": "App removes unsupported operational claims",
+      "result": "PASS",
+      "expected": [
+        "Protect availability",
+        "Discount ROI",
+        "service level when stockout data is available",
+        "Confirm with orders and intraday sales"
+      ],
+      "actual": []
     },
     {
       "name": "Issue log is valid CSV",
@@ -371,22 +441,24 @@
     {
       "name": "App bases outlook on released three-month scenario",
       "result": "PASS",
-      "expected": 126835.74337566507,
-      "actual": 126835.74337566507
+      "expected": 125804.87168783254,
+      "actual": 125804.87168783252
     },
     {
-      "name": "App discloses the remaining three-month profitability gap",
+      "name": "App discloses the remaining three-month profitability gap without fabricating a target",
       "result": "PASS",
       "expected": {
-        "optimized_result_rounded": -597324,
+        "optimized_result": -606685.6057872614,
         "required_copy": [
-          "still loses",
-          "gap"
-        ]
+          "ยังติดลบ",
+          "hurdle"
+        ],
+        "no_reverse_engineered_target_dependency": true
       },
       "actual": {
-        "optimized_result": -597323.931194813,
-        "has_required_copy": true
+        "optimized_result": -606685.6057872614,
+        "has_required_copy": true,
+        "has_reverse_engineered_target_dependency": false
       }
     },
     {
@@ -405,12 +477,13 @@
       }
     },
     {
-      "name": "Forecast benchmarks five methods with rolling-origin windows",
+      "name": "Forecast benchmarks six methods with pooled rolling-origin WAPE",
       "result": "PASS",
-      "expected": "5 methods / 4 cutoffs",
+      "expected": "6 methods / 4 cutoffs / weekday-shaped winner",
       "actual": {
         "methods": [
           "exp_smoothing_4w",
+          "level_weekday_blend",
           "moving_avg_4w",
           "naive_last_day",
           "seasonal_naive_7d",
@@ -418,8 +491,53 @@
         ],
         "cutoffs": [
           4
-        ]
+        ],
+        "selected": "level_weekday_blend"
       }
+    },
+    {
+      "name": "Forecast metadata distinguishes pooled and macro WAPE",
+      "result": "PASS",
+      "expected": "explicit pooled + macro keys; no ambiguous mean key",
+      "actual": {
+        "selected_method_pooled_wape": 0.2133652404123305,
+        "selected_method_macro_wape": 0.23761821945514744,
+        "selected_method_mean_wape": null
+      }
+    },
+    {
+      "name": "Task 5 charts do not stack non-additive series",
+      "result": "PASS",
+      "expected": ">=4 grouped chart calls",
+      "actual": 4
+    },
+    {
+      "name": "Weekly demand artifact labels incomplete weeks",
+      "result": "PASS",
+      "expected": "completeness fields + partial weeks visible",
+      "actual": {
+        "columns_present": [
+          "days_observed",
+          "is_complete_week"
+        ],
+        "partial_rows": 24
+      }
+    },
+    {
+      "name": "Task 5 uses stable scenario codes and like-for-like seasonality copy",
+      "result": "PASS",
+      "expected": true,
+      "actual": {
+        "stable_scenario_group": true,
+        "rc000_label": true,
+        "common_sku_copy": true
+      }
+    },
+    {
+      "name": "Retired reverse-engineered recovery artifacts are marked superseded",
+      "result": "PASS",
+      "expected": true,
+      "actual": true
     },
     {
       "name": "Forecast uncertainty range is present and ordered",
@@ -446,55 +564,29 @@
       }
     },
     {
-      "name": "Conditional profit-recovery plan reconciles",
+      "name": "Selected forecast preserves weekday shape",
       "result": "PASS",
-      "expected": "3 monthly rows + reconciled target",
+      "expected": "more than one daily value in every Kitchen x SKU series",
       "actual": {
-        "rows": 3,
-        "target": 354.26026234356686,
-        "checks_passed": true
+        "min_unique_daily_values": 4,
+        "max_unique_daily_values": 7
       }
     },
     {
-      "name": "Conditional prep plan covers all months, kitchens and SKUs",
+      "name": "Kitchen x SKU waste rates reconcile forecast, prep and policy",
       "result": "PASS",
-      "expected": "60 rows / 3 months / 4 kitchens / 5 SKUs",
-      "actual": {
-        "rows": 60,
-        "months": 3,
-        "kitchens": 4,
-        "skus": 5,
-        "prep_ge_sales": true
-      }
+      "expected": "max error < 1e-10",
+      "actual": 1.3877787807814457e-16
     },
     {
-      "name": "Profit-recovery sensitivity and kitchen plan are present",
+      "name": "Inventory policy covers 20 cells with trend-aware XYZ and capacity buffers",
       "result": "PASS",
-      "expected": "8 sensitivity / 9 bridge / 12 kitchen-month rows, including no-November-release case",
-      "actual": {
-        "sensitivity": 8,
-        "bridge": 9,
-        "kitchen_month": 12
-      }
-    },
-    {
-      "name": "November candidate target carries seasonal and capacity gates",
-      "result": "PASS",
-      "expected": "3-month autumn evidence + 4 kitchen capacity gates",
-      "actual": {
-        "historical_oct_to_nov_growth": 0.1346106486726099,
-        "conditional_oct_to_nov_growth": 0.0869233341134576,
-        "capacity_kitchens": 4,
-        "net_extra_cups_per_day": 212.18031392661283
-      }
-    },
-    {
-      "name": "Inventory policy covers 20 Kitchen x SKU cells with ABC/XYZ and safety stock",
-      "result": "PASS",
-      "expected": "20 cells + policy fields",
+      "expected": "20 cells + trend-aware policy fields + MixedBerry=Z",
       "actual": {
         "rows": 20,
-        "has_policy_fields": true
+        "mixedberry_xyz": [
+          "Z"
+        ]
       }
     },
     {

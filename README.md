@@ -25,24 +25,24 @@ streamlit run app.py
 | รายได้ย้อนหลัง | ฿31,146,933 จาก 618,123 cups |
 | งบรายได้รวม | ฿32,400,000; ต่ำกว่างบ ฿1,253,067 |
 | ผลดำเนินงานตามแบบจำลอง | -฿403,231 |
-| วิธี Forecast ที่เลือก | `exp_smoothing_4w` (mean WAPE 24.2%) |
-| Forecast ฐาน 3 เดือน | 126,836 cups |
+| วิธี Forecast ที่เลือก | `level_weekday_blend` (pooled WAPE 21.3%) |
+| Forecast ฐาน 3 เดือน | 125,805 cups; เป้าเตรียม 133,400 cups |
 | Final QA | ผ่าน; `failed_count: 0` |
 
 ตัวเลขข้างต้นอ้างอิง artifacts ที่ผ่าน QA แล้ว ไม่ใช่การคำนวณใหม่ใน README
 
 ## Dashboard มีอะไรบ้าง
 
-แอปภาษาไทยมี 6 แท็บ ซึ่งผูกกับ Tasks ใน `question/test.md` โดยตรง:
+แอปภาษาไทยจัดเป็นเส้นทางตัดสินใจสำหรับทีม E-Commerce มี 6 แท็บ ซึ่งเรียงตาม Tasks 1–6 ใน `question/test.md` โดยตรง:
 
-| แท็บ | เนื้อหา |
-|---|---|
-| ภาพรวมและแผนแก้ไข | 5 insights, 4 recommendations และภาพรวมช่องว่างกำไร |
-| สินค้า สาขา และผลเทียบงบ | P&L, variance เทียบงบ, portfolio, Kitchen และ Waste |
-| โปรโมชั่นคุ้มไหม | Contribution, matched demand lift และ break-even guardrail ของ rate code |
-| ยอดขายและความเหมาะสมของราคา | Demand ตามเวลา, price ladder และ directional price simulation |
-| แผน 3 เดือนและการเตรียมสินค้า | Forecast, scenario P&L, prep target และ ABC/XYZ inventory policy |
-| ที่มาข้อมูลและข้อจำกัด | Data screening, reconciliation, issue log, assumptions และ QA |
+| Task | แท็บ | เนื้อหา |
+|---:|---|---|
+| 1 | Data Trust & Definitions | Data screening, reconciliation, issue log, assumptions และ QA |
+| 2 | Sales, Price & Menu | Demand ตามเวลา/Platform, price ladder และ directional price test ครบ 5 SKU |
+| 3 | Platform & Campaign Control | Platform mix, contribution ก่อน Waste, matched historical lift และ break-even guardrail ของ rate code |
+| 4 | Portfolio, Kitchen & Budget | P&L, revenue variance เทียบงบ, portfolio, Kitchen × SKU และ Waste |
+| 5 | Forecast-to-Kitchen Handoff | Forecast ที่รักษารูปแบบวัน, seasonality watch, scenario P&L, prep target และ capacity buffer ระดับ Kitchen × SKU |
+| 6 | E-Commerce Action Center | 3 action สำคัญ, 5 insights และภาพรวม Platform/ช่องว่างกำไร |
 
 ประเด็นหลักที่ Dashboard ช่วยตัดสินใจคือควบคุมโปรโมชั่นด้วย contribution, แก้ `MixedBerryPremium` ก่อนขยาย volume และจัดลำดับการลด Waste ใน `BKK_Ladprao` กับ `BKK_Sukhumvit`
 
@@ -58,7 +58,6 @@ python src/pricing_depth.py
 python src/promotion_depth.py
 python src/finance.py
 python src/forecast_inventory.py
-python planning/profit_recovery_analysis.py
 python src/presentation.py
 python src/qa_final.py
 python src/qa_streamlit.py
@@ -80,8 +79,6 @@ src/prepare.py → data/processed/<data_version>/
 src/qa_data.py
     ↓
 commercial / pricing / promotion / finance / forecast
-    ↓
-planning/profit_recovery_analysis.py
     ↓
 src/presentation.py → deliverables/fruitblend24_run_001/
     ↓
@@ -128,7 +125,7 @@ src/qa_final.py → src/qa_streamlit.py
 - ยังออก Purchase Order จริงไม่ได้ เพราะไม่มี stock on hand, inbound, supplier lead time, shelf life, BOM/recipe yield และ stockout flags
 - Future platform mix ถูกถือคงที่ตาม recent mix; ยังไม่ได้จำลองการเปลี่ยนสัดส่วนช่องทางขาย
 
-รายละเอียดสมมติฐานและข้อจำกัดอยู่ในแท็บ `ที่มาข้อมูลและข้อจำกัด`, `docs/report.md` และไฟล์ metrics ใน `reports/fruitblend24_run_001/`
+รายละเอียดสมมติฐานและข้อจำกัดอยู่ในแท็บ `Data Trust & Definitions`, `docs/report.md` และไฟล์ metrics ใน `reports/fruitblend24_run_001/`
 
 ## ตรวจสอบความถูกต้อง
 

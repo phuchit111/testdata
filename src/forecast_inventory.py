@@ -55,6 +55,16 @@ def forecast_series(history: pd.DataFrame, future_dates: pd.DatetimeIndex, metho
     if method == "exp_smoothing_4w":
         level = float(h["units_sold"].tail(28).ewm(span=14, adjust=False).mean().iloc[-1])
         return np.repeat(level, len(future_dates))
+    if method == "level_weekday_blend":
+        # Blend the stable exponentially weighted level with the last complete
+        # weekday profile. The forecast starts on the weekday immediately after
+        # the cutoff, so resizing the final seven observations stays aligned.
+        level = float(h["units_sold"].tail(28).ewm(span=14, adjust=False).mean().iloc[-1])
+        weekday_profile = h["units_sold"].tail(7).to_numpy(dtype=float)
+        if len(weekday_profile) < 7:
+            weekday_profile = np.resize(weekday_profile, 7)
+        seasonal = np.resize(weekday_profile, len(future_dates))
+        return np.maximum(0.5 * level + 0.5 * seasonal, 0)
     if method == "weekday_median_8w":
         recent = h.loc[h["date"] >= h["date"].max() - pd.Timedelta(days=55)]
         values = []
@@ -69,7 +79,7 @@ def forecast_series(history: pd.DataFrame, future_dates: pd.DatetimeIndex, metho
 
 def evaluate_methods(daily: pd.DataFrame) -> pd.DataFrame:
     cutoffs = [pd.Timestamp("2026-04-30"), pd.Timestamp("2026-05-31"), pd.Timestamp("2026-06-30"), pd.Timestamp("2026-07-31")]
-    methods = ["naive_last_day", "moving_avg_4w", "exp_smoothing_4w", "seasonal_naive_7d", "weekday_median_8w"]
+    methods = ["naive_last_day", "moving_avg_4w", "exp_smoothing_4w", "seasonal_naive_7d", "weekday_median_8w", "level_weekday_blend"]
     rows = []
     series = daily[["kitchen", "sku", "date"]].drop_duplicates(["kitchen", "sku"]).to_dict("records")
     for cutoff in cutoffs:
@@ -91,6 +101,7 @@ def evaluate_methods(daily: pd.DataFrame) -> pd.DataFrame:
                 rows.append({
                     "cutoff": cutoff.strftime("%Y-%m-%d"), "method": method, "kitchen": s["kitchen"], "sku": s["sku"],
                     "horizon_days": len(future_dates), "mae": float(error.abs().mean()),
+                    "absolute_error_units": float(error.abs().sum()), "signed_error_units": float(error.sum()),
                     "wape": float(error.abs().sum() / actual.abs().sum()) if actual.abs().sum() else np.nan,
                     "bias_pct": float(error.sum() / actual.sum()) if actual.sum() else np.nan,
                     "actual_units": float(actual.sum()), "forecast_units": float(pred.sum()),
@@ -108,20 +119,50 @@ def build() -> dict:
 
     weekly = daily.groupby(["week_start", "kitchen", "sku"], as_index=False).agg(
         units_sold=("units_sold", "sum"), units_wasted=("units_wasted", "sum"),
-        waste_cost_thb=("waste_cost_thb", "sum"),
+        waste_cost_thb=("waste_cost_thb", "sum"), days_observed=("date", "nunique"),
     )
     weekly["waste_rate"] = weekly["units_wasted"] / (weekly["units_sold"] + weekly["units_wasted"])
+    weekly["is_complete_week"] = weekly["days_observed"] == 7
     weekly["series_active"] = True
     write(weekly, "weekly_demand.csv")
 
     backtest = evaluate_methods(daily)
+    # Select the company planning method with pooled error. Averaging the WAPE
+    # of each Kitchen x SKU cell gives a low-volume cell the same weight as a
+    # high-volume cell and can select a different method from the one that
+    # minimizes total cup error.
     method_summary = backtest.groupby("method", as_index=False).agg(
-        cutoffs=("cutoff", "nunique"), series_cutoff_windows=("wape", "size"), mae=("mae", "mean"), wape=("wape", "mean"), bias_pct=("bias_pct", "mean"),
+        cutoffs=("cutoff", "nunique"),
+        series_cutoff_windows=("wape", "size"),
+        observation_days=("horizon_days", "sum"),
+        absolute_error_units=("absolute_error_units", "sum"),
+        signed_error_units=("signed_error_units", "sum"),
+        actual_units=("actual_units", "sum"),
+        forecast_units=("forecast_units", "sum"),
     )
+    method_summary["mae"] = method_summary["absolute_error_units"] / method_summary["observation_days"]
+    method_summary["wape"] = method_summary["absolute_error_units"] / method_summary["actual_units"]
+    method_summary["macro_wape"] = method_summary["method"].map(
+        backtest.groupby("method")["wape"].mean()
+    )
+    method_summary["bias_pct"] = method_summary["signed_error_units"] / method_summary["actual_units"]
+    method_summary = method_summary[[
+        "method", "cutoffs", "series_cutoff_windows", "mae", "wape", "macro_wape", "bias_pct",
+        "actual_units", "forecast_units",
+    ]]
     write(backtest, "backtest_detail.csv")
     write(method_summary, "backtest_summary.csv")
     selected_method = str(method_summary.sort_values("wape").iloc[0]["method"])
     selected_wape = float(method_summary.sort_values("wape").iloc[0]["wape"])
+    selected_macro_wape = float(method_summary.loc[method_summary["method"] == selected_method, "macro_wape"].iloc[0])
+    selected_detail = backtest.loc[backtest["method"] == selected_method]
+    sku_error = selected_detail.groupby("sku", as_index=False).agg(
+        absolute_error_units=("absolute_error_units", "sum"),
+        actual_units=("actual_units", "sum"),
+    )
+    sku_error["planning_error_pct"] = (
+        sku_error["absolute_error_units"] / sku_error["actual_units"].replace(0, np.nan)
+    ).fillna(selected_wape).clip(lower=0.05, upper=0.60)
 
     cutoff = pd.Timestamp("2026-08-31")
     future_dates = pd.date_range("2026-09-01", "2026-11-30", freq="D")
@@ -139,6 +180,10 @@ def build() -> dict:
     forecast = pd.DataFrame(forecast_rows)
     forecast["date"] = pd.to_datetime(forecast["date"])
     forecast["month"] = pd.to_datetime(forecast["month"])
+    forecast = forecast.merge(
+        sku_error[["sku", "planning_error_pct"]], on="sku", how="left", validate="many_to_one"
+    )
+    forecast["planning_error_pct"] = forecast["planning_error_pct"].fillna(selected_wape)
 
     sales = pd.read_csv(DATA_DIR / "sales_clean.csv", encoding="utf-8-sig")
     sales["date"] = pd.to_datetime(sales["date"])
@@ -158,24 +203,34 @@ def build() -> dict:
     costs["week_start"] = pd.to_datetime(costs["week_start"])
     recent_cost = costs.loc[costs["week_start"] > pd.Timestamp("2026-08-31") - pd.Timedelta(days=56)].groupby("sku")["fruit_cost_per_cup_thb"].agg(cost_median="median", cost_p90=lambda s: s.quantile(0.9)).reset_index()
     sku_meta = sku_meta.merge(recent_cost, on="sku", how="left")
-    sku_meta = sku_meta.merge(daily.loc[daily["date"] > cutoff - pd.Timedelta(days=56)].groupby("sku").agg(recent_waste_units=("units_wasted", "sum"), recent_sold_units=("units_sold", "sum"), recent_waste_cost=("waste_cost_thb", "sum")).reset_index(), on="sku", how="left")
-    sku_meta["waste_rate_base"] = sku_meta["recent_waste_units"] / (sku_meta["recent_waste_units"] + sku_meta["recent_sold_units"])
-    sku_meta["waste_rate_low"] = sku_meta.groupby("sku")["waste_rate_base"].transform(lambda s: s)
-    sku_meta["waste_rate_action"] = sku_meta["waste_rate_base"] * 0.75
     sku_meta["cost_up_pct"] = sku_meta["cost_p90"] / sku_meta["cost_median"] - 1
     assumptions = pd.read_csv(DATA_DIR / "sku_cost_assumptions.csv", encoding="utf-8-sig")
     assumptions = assumptions.loc[assumptions["sku"].isin(series["sku"].unique()), ["sku", "packaging_cost_per_cup_thb", "labor_cost_per_cup_thb"]]
     assumptions["packaging_cost_per_cup_thb"] = pd.to_numeric(assumptions["packaging_cost_per_cup_thb"], errors="coerce")
     assumptions["labor_cost_per_cup_thb"] = pd.to_numeric(assumptions["labor_cost_per_cup_thb"], errors="coerce")
     sku_meta = sku_meta.merge(assumptions, on="sku", how="left")
-    forecast = forecast.merge(sku_meta[["sku", "recent_realized_price_thb", "standard_price_thb", "commission_rate_weighted", "cost_median", "cost_p90", "waste_rate_base", "waste_rate_action", "packaging_cost_per_cup_thb", "labor_cost_per_cup_thb"]], on="sku", how="left", validate="many_to_one")
+    forecast = forecast.merge(sku_meta[["sku", "recent_realized_price_thb", "standard_price_thb", "commission_rate_weighted", "cost_median", "cost_p90", "packaging_cost_per_cup_thb", "labor_cost_per_cup_thb"]], on="sku", how="left", validate="many_to_one")
+    # Waste is observed at Kitchen x SKU grain. Applying one SKU-wide waste
+    # rate made the prep target disagree with the policy table for individual
+    # kitchens, especially MixedBerryPremium.
+    recent_cell_waste = daily.loc[daily["date"] > cutoff - pd.Timedelta(days=56)].groupby(["kitchen", "sku"], as_index=False).agg(
+        recent_waste_units=("units_wasted", "sum"),
+        recent_sold_units=("units_sold", "sum"),
+    )
+    recent_cell_waste["waste_rate_base"] = recent_cell_waste["recent_waste_units"] / (
+        recent_cell_waste["recent_waste_units"] + recent_cell_waste["recent_sold_units"]
+    )
+    forecast = forecast.merge(
+        recent_cell_waste[["kitchen", "sku", "waste_rate_base"]],
+        on=["kitchen", "sku"], how="left", validate="many_to_one",
+    )
     forecast["standard_price_thb"] = forecast["standard_price_thb"].fillna(forecast["recent_realized_price_thb"])
     forecast["waste_rate_base"] = forecast["waste_rate_base"].fillna(0)
-    forecast["waste_rate_action"] = forecast["waste_rate_action"].fillna(forecast["waste_rate_base"] * 0.75)
+    forecast["waste_rate_action"] = forecast["waste_rate_base"] * 0.75
     forecast["cost_up_pct"] = forecast["cost_p90"] / forecast["cost_median"] - 1
     forecast["cost_up_pct"] = forecast["cost_up_pct"].replace([np.inf, -np.inf], np.nan).fillna(0)
-    forecast["forecast_lower_units"] = (forecast["forecast_units_base"] * (1 - selected_wape)).clip(lower=0)
-    forecast["forecast_upper_units"] = forecast["forecast_units_base"] * (1 + selected_wape)
+    forecast["forecast_lower_units"] = (forecast["forecast_units_base"] * (1 - forecast["planning_error_pct"])).clip(lower=0)
+    forecast["forecast_upper_units"] = forecast["forecast_units_base"] * (1 + forecast["planning_error_pct"])
     forecast["prep_target_cups_base"] = forecast["forecast_units_base"] / (1 - forecast["waste_rate_base"].clip(upper=0.95))
     forecast["prep_target_cups_lower"] = forecast["forecast_lower_units"] / (1 - forecast["waste_rate_base"].clip(upper=0.95))
     forecast["prep_target_cups_upper"] = forecast["forecast_upper_units"] / (1 - forecast["waste_rate_base"].clip(upper=0.95))
@@ -188,7 +243,7 @@ def build() -> dict:
     for label in ["base", "downside", "price_and_waste_action"]:
         f = forecast.copy()
         if label == "downside":
-            f["units"] = f["forecast_units_base"] * max(0, 1 - selected_wape)
+            f["units"] = f["forecast_lower_units"]
             f["price"] = f["recent_realized_price_thb"]
             f["fruit_cost"] = f["cost_p90"]
             f["waste_rate"] = (f["waste_rate_base"] * 1.25).clip(upper=0.95)
@@ -230,8 +285,22 @@ def build() -> dict:
     scenario_monthly["modeled_operating_result_thb"] = scenario_monthly["contribution_after_waste_thb"] - scenario_monthly["fixed_overhead_thb"]
     scenario_monthly["contribution_after_waste_margin_pct"] = scenario_monthly["contribution_after_waste_thb"] / scenario_monthly["revenue_thb"]
     scenario_monthly["operating_margin_pct"] = scenario_monthly["modeled_operating_result_thb"] / scenario_monthly["revenue_thb"]
-    scenario_monthly["scenario_display"] = scenario_monthly["scenario"].map({"base": "Base case", "downside": "Downside case", "price_and_waste_action": "Optimized case"})
+    scenario_monthly["scenario_display"] = scenario_monthly["scenario"].map({"base": "Base case", "downside": "Downside case", "price_and_waste_action": "RC000-price + Waste action case"})
     write(scenario_monthly, "scenario_monthly_pnl.csv")
+
+    scenario_totals = scenario_monthly.groupby("scenario", as_index=False).agg(
+        forecast_units=("forecast_units", "sum"),
+        contribution_after_waste_thb=("contribution_after_waste_thb", "sum"),
+        fixed_overhead_thb=("fixed_overhead_thb", "sum"),
+        modeled_operating_result_thb=("modeled_operating_result_thb", "sum"),
+    ).set_index("scenario")
+    base_result = float(scenario_totals.loc["base", "modeled_operating_result_thb"])
+    action_result = float(scenario_totals.loc["price_and_waste_action", "modeled_operating_result_thb"])
+    action_units = float(scenario_totals.loc["price_and_waste_action", "forecast_units"])
+    action_contribution = float(scenario_totals.loc["price_and_waste_action", "contribution_after_waste_thb"])
+    action_contribution_per_cup = action_contribution / action_units if action_units else np.nan
+    remaining_gap = max(0.0, -action_result)
+    extra_cups_equivalent = remaining_gap / action_contribution_per_cup if action_contribution_per_cup > 0 else np.nan
 
     forecast_monthly_sku = forecast.groupby(["month", "sku"], as_index=False).agg(
         forecast_units=("forecast_units_base", "sum"), lower_units=("forecast_lower_units", "sum"),
@@ -240,14 +309,33 @@ def build() -> dict:
     )
     write(forecast_monthly_sku, "forecast_monthly_by_sku.csv")
 
-    # Kitchen x SKU inventory policy. The 95% service level and seven-day
-    # review window are operating assumptions, not facts from the workbook.
+    # Kitchen x SKU preparation policy. Z=1.65 is an illustrative variability
+    # buffer for seven-day capacity planning, not a validated service level or
+    # physical-stock recommendation because lead time and stockouts are absent.
     recent_weekly = weekly.loc[weekly["week_start"] <= cutoff - pd.Timedelta(days=1)].copy()
+    history_profile = recent_weekly.groupby(["kitchen", "sku"], as_index=False).agg(
+        history_weeks_observed=("week_start", "nunique"),
+        first_observed_week=("week_start", "min"),
+    )
     recent_weekly = recent_weekly.sort_values("week_start").groupby(["kitchen", "sku"], group_keys=False).tail(12)
     policy = recent_weekly.groupby(["kitchen", "sku"], as_index=False).agg(
         avg_weekly_demand_cups=("units_sold", "mean"), weekly_std_cups=("units_sold", "std"),
         weeks_observed=("units_sold", "size"),
     )
+    trend_rows = []
+    for (kitchen, sku), group in recent_weekly.groupby(["kitchen", "sku"], sort=False):
+        ordered = group.sort_values("week_start")
+        first_4w = float(ordered["units_sold"].head(4).mean())
+        last_4w = float(ordered["units_sold"].tail(4).mean())
+        trend_rows.append({
+            "kitchen": kitchen,
+            "sku": sku,
+            "first_4w_avg_cups": first_4w,
+            "last_4w_avg_cups": last_4w,
+            "recent_12w_trend_pct": last_4w / first_4w - 1 if first_4w else np.nan,
+        })
+    policy = policy.merge(pd.DataFrame(trend_rows), on=["kitchen", "sku"], how="left", validate="one_to_one")
+    policy = policy.merge(history_profile, on=["kitchen", "sku"], how="left", validate="one_to_one")
     policy["weekly_std_cups"] = policy["weekly_std_cups"].fillna(0)
     policy["demand_cv"] = policy["weekly_std_cups"] / policy["avg_weekly_demand_cups"].replace(0, np.nan)
     policy["demand_cv"] = policy["demand_cv"].fillna(0)
@@ -274,13 +362,28 @@ def build() -> dict:
     for idx, share in cumulative.items():
         abc_map[idx] = "A" if share <= 0.80 or len(abc_map) == 0 else ("B" if share <= 0.95 else "C")
     policy["abc_class"] = policy.index.map(abc_map).fillna("C")
-    policy["xyz_class"] = np.select([policy["demand_cv"] <= 0.25, policy["demand_cv"] <= 0.50], ["X", "Y"], default="Z")
-    policy["service_level_assumption"] = 0.95
+    # CV alone labels a smooth decline as stable. Treat a recent launch or a
+    # material 12-week trend as planning risk even when weekly CV is low.
+    recent_launch = policy["history_weeks_observed"] < 40
+    trend_magnitude = policy["recent_12w_trend_pct"].abs()
+    policy["xyz_class"] = np.select(
+        [recent_launch | (trend_magnitude > 0.20) | (policy["demand_cv"] > 0.50),
+         (trend_magnitude > 0.10) | (policy["demand_cv"] > 0.25)],
+        ["Z", "Y"],
+        default="X",
+    )
+    policy["demand_pattern"] = np.select(
+        [recent_launch, trend_magnitude > 0.20, trend_magnitude > 0.10],
+        ["recent launch", "material trend", "trend watch"],
+        default="stable",
+    )
+    policy["planning_coverage_reference"] = 0.95
     policy["z_value_assumption"] = 1.65
     policy["review_period_days_assumption"] = 7
-    policy["safety_stock_cups_policy"] = policy["z_value_assumption"] * policy["weekly_std_cups"]
-    policy["target_stock_next_7d_cups"] = policy["next_7d_forecast_cups"] + policy["safety_stock_cups_policy"]
-    company_waste_rate = float(daily["units_wasted"].sum() / (daily["units_sold"].sum() + daily["units_wasted"].sum()))
+    policy["demand_buffer_7d_cups_policy"] = policy["z_value_assumption"] * policy["weekly_std_cups"]
+    policy["planning_ceiling_next_7d_cups"] = policy["next_7d_forecast_cups"] + policy["demand_buffer_7d_cups_policy"]
+    recent_company = daily.loc[daily["date"] > cutoff - pd.Timedelta(days=56)]
+    company_waste_rate = float(recent_company["units_wasted"].sum() / (recent_company["units_sold"].sum() + recent_company["units_wasted"].sum()))
     policy["waste_flag"] = np.where(policy["waste_rate"] > company_waste_rate, "above company average", "at/below company average")
     policy["inventory_alert"] = np.select(
         [
@@ -296,9 +399,15 @@ def build() -> dict:
         ["High availability; weekly rolling forecast", "Smaller/more frequent prep; tighten waste controls", "Frequent review; conservative safety stock"],
         default="Weekly rolling forecast with standard buffer",
     )
+    policy["inventory_alert_rank"] = policy["inventory_alert"].map({
+        "RED: loss + high waste": 0,
+        "AMBER: high waste": 1,
+        "AMBER: volatile demand": 1,
+        "GREEN: stable policy": 2,
+    }).fillna(3).astype(int)
     policy["order_qty_status"] = "not calculable: on-hand, inbound, supplier lead time, shelf life and BOM/yield not provided"
-    policy["policy_basis"] = "95% service-level scenario; 7-day review; Z=1.65; use for prep target, not purchase order"
-    write(policy.sort_values(["inventory_alert", "contribution_after_waste_thb"], ascending=[True, False]), "inventory_policy.csv")
+    policy["policy_basis"] = "7-day ready-to-sell demand plus Z=1.65 variability buffer; capacity reference only, not physical stock, prep target or purchase order"
+    write(policy.sort_values(["inventory_alert_rank", "contribution_after_waste_thb"], ascending=[True, False]), "inventory_policy.csv")
 
     # Fruit-cost stress test: hold base-case demand, prices, waste rate and
     # overhead constant while increasing fruit cost by explicit percentages.
@@ -322,7 +431,7 @@ def build() -> dict:
     # Requirements are intentionally cup-based. Purchase quantity remains
     # unavailable because on-hand, inbound, BOM/yield, lead time and shelf life
     # are absent from the case.
-    requirements = forecast[["date", "month", "kitchen", "sku", "forecast_units_base", "forecast_lower_units", "forecast_upper_units", "waste_rate_base", "prep_target_cups_lower", "prep_target_cups_base", "prep_target_cups_upper", "expected_waste_units_base"]].copy()
+    requirements = forecast[["date", "month", "kitchen", "sku", "forecast_units_base", "forecast_lower_units", "forecast_upper_units", "planning_error_pct", "waste_rate_base", "prep_target_cups_lower", "prep_target_cups_base", "prep_target_cups_upper", "expected_waste_units_base"]].copy()
     requirements["usable_on_hand_cups"] = np.nan
     requirements["usable_inbound_cups"] = np.nan
     requirements["lead_time_days"] = np.nan
@@ -338,25 +447,59 @@ def build() -> dict:
         "cutoff": "2026-08-31",
         "forecast_period": ["2026-09-01", "2026-11-30"],
         "selected_method": selected_method,
-        "selected_method_mean_wape": selected_wape,
+        "selected_method_macro_wape": selected_macro_wape,
+        "selected_method_pooled_wape": selected_wape,
+        "method_selection_basis": "Pooled WAPE across all eligible Kitchen x SKU rolling-origin windows; lower is better.",
         "methods_evaluated": sorted(backtest["method"].unique().tolist()),
         "backtest_cutoffs": sorted(backtest["cutoff"].unique().tolist()),
         "coverage_rule": "Fill zero only within each SKU x kitchen active window; observed daily rows cover every date in those active windows. Do not create pre-launch MixedBerryPremium zeros.",
-        "forecast_uncertainty_basis": "Lower/upper cup range uses selected-method mean rolling-origin WAPE around each point forecast; it is a planning range, not a statistical confidence interval.",
+        "forecast_uncertainty_basis": "Lower/upper cup range uses selected-method pooled rolling-origin WAPE by SKU around each point forecast (5%-60% guardrails); it is a planning range, not a statistical confidence interval.",
         "commission_basis": "Recent 56-day SKU-weighted platform commission mix; future platform mix shift is not modeled.",
         "mixedberry_note": "MixedBerryPremium is a recent launch with a shorter active history; no pre-launch zero fill is used, and its forecast carries higher decision risk despite the same error-range framework.",
-        "inventory_policy_assumptions": {"service_level": 0.95, "z_value": 1.65, "review_period_days": 7, "abc_basis": "positive contribution after waste", "xyz_basis": "recent 12-week demand CV; X <=25%, Y <=50%, Z >50%"},
+        "inventory_policy_assumptions": {"planning_coverage_reference": 0.95, "z_value": 1.65, "review_period_days": 7, "abc_basis": "positive contribution after waste", "xyz_basis": "recent 12-week CV plus trend and launch-history risk; recent launches are Z"},
         "base_forecast_units": float(forecast["forecast_units_base"].sum()),
         "base_forecast_lower_units": float(forecast["forecast_lower_units"].sum()),
         "base_forecast_upper_units": float(forecast["forecast_upper_units"].sum()),
         "scenario_basis": {
             "base": "selected forecast, recent realized price, recent median fruit cost, recent waste rate",
-            "downside": "demand reduced by mean backtest WAPE, fruit cost at recent p90, waste rate 1.25x recent",
+            "downside": "demand at the SKU-specific WAPE planning lower bound, fruit cost at recent p90, waste rate 1.25x recent",
             "price_and_waste_action": "same demand, standard-code realized price, recent median cost, waste rate reduced by 25%; no causal demand uplift assumed",
+        },
+        "profitability_gap": {
+            "base_result_thb": base_result,
+            "price_waste_action_result_thb": action_result,
+            "price_waste_action_improvement_thb": action_result - base_result,
+            "remaining_gap_to_break_even_thb": remaining_gap,
+            "action_contribution_per_cup_thb": action_contribution_per_cup,
+            "incremental_cups_equivalent": extra_cups_equivalent,
+            "incremental_cups_pct_of_base": extra_cups_equivalent / float(forecast["forecast_units_base"].sum()) if pd.notna(extra_cups_equivalent) else np.nan,
+            "incremental_cups_per_day": extra_cups_equivalent / len(future_dates) if pd.notna(extra_cups_equivalent) else np.nan,
+            "fixed_overhead_reduction_equivalent_pct": remaining_gap / (sum(OVERHEAD.values()) * 3),
+            "interpretation": "Break-even equivalents are hurdles, not simultaneous recommendations or a demand forecast.",
         },
         "inventory_limitations": ["No on-hand", "No inbound", "No lead time", "No shelf life", "No BOM/yield", "No stockout flags"],
     }
     (OUT / "forecast_metrics.json").write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
+    handoff = {
+        "agent_id": "A5",
+        "status": "ready_for_review",
+        "input_versions": {"data_version": metrics["data_version"], "metric_version": "metric_contract_v1", "assumption_version": "assumption_ledger_v1"},
+        "artifacts": [
+            "backtest_detail.csv", "backtest_summary.csv", "forecast_daily.csv",
+            "scenario_daily_finance_inputs.csv", "scenario_monthly_pnl.csv",
+            "forecast_monthly_by_sku.csv", "inventory_policy.csv",
+            "fruit_cost_stress_test.csv", "cup_requirements.csv", "forecast_metrics.json",
+        ],
+        "checks": [
+            f"{selected_method} selected by pooled rolling-origin WAPE",
+            "Forecast horizon is after 2026-08-31 cutoff",
+            "Kitchen x SKU waste rates reconcile forecast, prep and policy",
+            "Seven-day demand buffer is capacity guidance, not physical stock or a purchase order",
+            "Purchase quantities intentionally not calculable from missing inventory controls",
+        ],
+        "next_owner": "A6",
+    }
+    (OUT / "handoff_manifest.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2), encoding="utf-8")
     return metrics
 
 

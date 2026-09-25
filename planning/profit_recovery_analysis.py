@@ -1,6 +1,8 @@
-"""Conditional management targets, kept separate from the released forecasts.
+"""SUPERSEDED break-even target experiment; not part of the released workflow.
 
-Run: python planning/profit_recovery_analysis.py
+Do not use its outputs as a forecast, prep target, or current management plan.
+The released Task 5 now reports the remaining profitability gap as a hurdle
+without reverse-engineering demand. This script remains only for audit history.
 All percentage changes below are proposed effective monthly targets, not estimates
 of causal effects. Core growth is NET achieved demand after price/promo changes.
 """

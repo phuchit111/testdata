@@ -125,9 +125,10 @@ def build() -> dict:
     # 4. Forecast scenarios
     scenarios["month_label"] = pd.to_datetime(scenarios["month"]).dt.strftime("%b-%y")
     forecast_series = []
+    scenario_labels = {"base": "Base", "downside": "Downside", "price_and_waste_action": "RC000 price + Waste action"}
     for label, color in [("base", "#0f766e"), ("downside", "#b91c1c"), ("price_and_waste_action", "#2563eb")]:
         d = scenarios.loc[scenarios["scenario"] == label]
-        forecast_series.append((label.replace("_", " ").title(), (d["modeled_operating_result_thb"] / 1e3).tolist(), color))
+        forecast_series.append((scenario_labels[label], (d["modeled_operating_result_thb"] / 1e3).tolist(), color))
     forecast_chart = save_chart(
         svg_line(scenarios.loc[scenarios["scenario"] == "base", "month_label"].tolist(), forecast_series, "The base outlook remains loss-making after fixed kitchen overhead", "THB thousands"),
         "04_forecast_scenarios.svg",
@@ -159,7 +160,8 @@ def build() -> dict:
     action_total = forecast_action["modeled_operating_result_thb"].sum()
     base_cups = forecast["forecast_units_base"].sum()
     base_prep = forecast["prep_target_cups_base"].sum()
-    seasonal = backtest.loc[backtest["method"] == fmetrics["selected_method"]].iloc[0]
+    selected = backtest.loc[backtest["method"] == fmetrics["selected_method"]].iloc[0]
+    profitability_gap = fmetrics["profitability_gap"]
 
     recommendations = [
         {
@@ -180,11 +182,11 @@ def build() -> dict:
         },
         {
             "title": "Run a weekly cup-based prep control",
-            "action": "Use the selected seasonal-naive baseline by kitchen and SKU. Set daily prep to forecast cups plus expected waste, then monitor actual vs forecast. Keep purchase quantity blank until on-hand, inbound, lead time, shelf life, and recipe yield are captured.",
+            "action": "Use the selected level-and-weekday blend by kitchen and SKU. Set daily prep to forecast cups plus expected waste at Kitchen x SKU grain, review actuals every seven days, and treat the variability buffer as capacity guidance rather than prepared stock. Keep purchase quantity blank until on-hand, inbound, lead time, shelf life, and recipe yield are captured.",
             "owner": "Operations / Supply",
             "timing": "Daily prep; weekly review",
-            "kpi": f"WAPE target at or below {pct(float(seasonal['wape']))}; waste rate; forecast bias; service level after stockout data exists",
-            "evidence": f"Selected method is {fmetrics['selected_method']} with mean backtest WAPE {pct(float(fmetrics['selected_method_mean_wape']))}. Base outlook is {base_cups:,.0f} sold cups and {base_prep:,.0f} prep cups for Sep-Nov.",
+            "kpi": f"Pooled WAPE target at or below {pct(float(selected['wape']))}; waste rate; forecast bias; service level only after lead-time and stockout data exist",
+            "evidence": f"Selected method is {fmetrics['selected_method']} with pooled backtest WAPE {pct(float(fmetrics['selected_method_pooled_wape']))}. Base outlook is {base_cups:,.0f} sold cups and {base_prep:,.0f} prep cups for Sep-Nov.",
         },
     ]
 
@@ -199,7 +201,7 @@ FruitBlend24 needs a contribution-first operating plan. The retained menu datase
 1. **MixedBerryPremium is not profitable after waste at the observed mix.** It produces {money(mixed['contribution_after_waste_thb'])} after waste, or {money(mixed['contribution_after_waste_per_cup_thb'], 2)}/cup, with {pct(mixed['waste_rate'])} waste rate. The action is to fix price/portion and prep controls before scaling.
 2. **Discounts trade contribution for observed volume.** Standard rate code contribution is {money(float(promo.loc[promo.base_code == 'RC000', 'contribution_before_waste_per_cup_thb'].iloc[0]), 2)}/cup. RC101, RC102, and RC103 are {money(float(promo.loc[promo.base_code == 'RC101', 'contribution_before_waste_per_cup_thb'].iloc[0]), 2)}, {money(float(promo.loc[promo.base_code == 'RC102', 'contribution_before_waste_per_cup_thb'].iloc[0]), 2)}, and {money(float(promo.loc[promo.base_code == 'RC103', 'contribution_before_waste_per_cup_thb'].iloc[0]), 2)}/cup. Matched rows show association, not causal uplift.
 3. **The historical business is close to revenue plan but not to operating break-even.** Revenue is below budget by {money(abs(rev_var))}, while modeled operating result is negative after {money(finance['fixed_monthly_overhead_thb'].sum())} fixed overhead. Product decisions should use variable contribution; allocated overhead alone is not a shutdown test.
-4. **The next three months remain loss-making under the base forecast.** The selected seasonal-naive method has mean backtest WAPE {pct(float(fmetrics['selected_method_mean_wape']))}. Base Sep-Nov modeled operating result totals {money(base_total)}. The illustrative price-and-waste action improves this to {money(action_total)}, but does not by itself close the loss.
+4. **The original Sep-Nov case horizon remains loss-making under the base forecast.** The selected level-and-weekday blend has pooled backtest WAPE {pct(float(fmetrics['selected_method_pooled_wape']))}. Base modeled operating result totals {money(base_total)}. The price-and-waste test improves this to {money(action_total)}, but leaves a {money(profitability_gap['remaining_gap_to_break_even_thb'])} gap; its volume equivalent is a hurdle, not a demand target.
 
 ## Recommendations
 
@@ -209,7 +211,7 @@ FruitBlend24 needs a contribution-first operating plan. The retained menu datase
 - Raw-to-release bridge: 124,397 raw rows → 372 exact duplicate excess rows removed → 370 non-menu rows excluded → 123,655 retained menu rows. Retained revenue is {money(31146932.57)} and all row/unit/revenue bridges reconcile.
 - Revenue uses observed price already net of the applied promotion. No second discount is deducted.
 - Cost uses weekly fruit cost, packaging, labor, platform commission, daily recorded waste, and monthly kitchen overhead. MixedBerry launch-day cost and four waste costs are explicit proxies, not observed values.
-- Forecast uses a rolling-origin comparison of seasonal-naive 7-day and 8-week weekday-median methods. The future view is cup-based. Purchase quantity is not calculable from the provided case because on-hand, inbound, lead time, shelf life, BOM/yield, and stockout inputs are missing.
+- Forecast uses a rolling-origin comparison of six methods, including a blend of the recent exponential level and seven-day weekday profile. The future view is cup-based at Kitchen x SKU grain. The seven-day variability buffer is capacity guidance, not physical stock. Purchase quantity is not calculable because on-hand, inbound, lead time, shelf life, BOM/yield, and stockout inputs are missing.
 - Promotion comparisons are matched associations by SKU, platform, weekday, and month. No customer IDs or randomized assignment evidence support retention, CAC, LTV, or causal promo uplift claims.
 
 ## Tools and further work
@@ -247,7 +249,7 @@ img{{max-width:100%;height:auto;margin-top:12px}} li{{margin:8px 0;line-height:1
         assoc_text = "standard" if row["base_code"] == "RC000" or assoc.empty else f"avg volume association {pct(float(assoc['association_units_lift_pct'].iloc[0]))}"
         html += f"<tr><td>{row['base_code']} {row['rate_code_name']}</td><td>{pct(row['discount_pct'])}</td><td>{row['units_sold']:,.0f}</td><td>{money(row['contribution_before_waste_per_cup_thb'], 2)}</td><td>{assoc_text}</td></tr>"
     html += f"""</table><p>RC101/102/103 contribution per cup is lower than standard. Use the matched rows as a test design input, not as causal uplift. Require incremental cups to exceed the break-even lift before scaling.</p></section>
-<section><h2>4. Three-month outlook and prep plan</h2><img src="{forecast_chart}"><p>The selected baseline is {fmetrics['selected_method']} with mean backtest WAPE {pct(float(fmetrics['selected_method_mean_wape']))}. The base scenario forecasts {base_cups:,.0f} sold cups and {base_prep:,.0f} prep cups for Sep-Nov. The illustrative price-and-waste action improves the modeled result but still does not close the loss.</p><table><tr><th>Scenario</th><th>Sep-Nov revenue</th><th>Sep-Nov post-waste contribution</th><th>Sep-Nov modeled operating result</th></tr>"""
+<section><h2>4. Three-month outlook and prep plan</h2><img src="{forecast_chart}"><p>The selected baseline is {fmetrics['selected_method']} with pooled backtest WAPE {pct(float(fmetrics['selected_method_pooled_wape']))}. The base scenario forecasts {base_cups:,.0f} sold cups and {base_prep:,.0f} prep cups for Sep-Nov. The price-and-waste test improves the modeled result but leaves a {money(profitability_gap['remaining_gap_to_break_even_thb'])} gap. Its break-even volume equivalent is a hurdle, not an approved sales or prep target.</p><table><tr><th>Scenario</th><th>Sep-Nov revenue</th><th>Sep-Nov post-waste contribution</th><th>Sep-Nov modeled operating result</th></tr>"""
     for label in ["base", "downside", "price_and_waste_action"]:
         d = scenarios.loc[scenarios["scenario"] == label]
         html += f"<tr><td>{label.replace('_',' ').title()}</td><td>{money(d['revenue_thb'].sum())}</td><td>{money(d['contribution_after_waste_thb'].sum())}</td><td>{money(d['modeled_operating_result_thb'].sum())}</td></tr>"
@@ -258,7 +260,15 @@ img{{max-width:100%;height:auto;margin-top:12px}} li{{margin:8px 0;line-height:1
     html += f"""<h3>What to add next</h3><p>Capture stock on hand, inbound orders, lead time, shelf life, recipe yield, stockouts, customer/order IDs, and management's gross-profit boundary. These are prerequisites for real purchase quantities, service-level claims, retention, LTV, and a confirmed budget GP variance.</p><p class="footer">Source data version: fruitblend24_v1_c2869ce419bf · metric contract: metric_contract_v1 · final QA status: {qa['status']}</p></section>
 </main></body></html>"""
     (OUT / "presentation.html").write_text(html, encoding="utf-8")
-    (OUT / "README.md").write_text("# FruitBlend24 decision dashboard\n\nRun `streamlit run app.py` from the repository root. The Thai dashboard presents: ภาพรวมและแผนแก้ไข, สินค้า สาขา และผลเทียบงบ, โปรโมชั่นคุ้มไหม, ยอดขายและความเหมาะสมของราคา, แผน 3 เดือนและการเตรียมสินค้า, และที่มาข้อมูลและข้อจำกัด. It maps directly to Tasks 1–6 in `question/test.md`; supporting data and QA-passed artifacts remain under `data/processed/` and `reports/fruitblend24_run_001/`.\n", encoding="utf-8")
+    readme = f"""# FruitBlend24 decision dashboard
+
+Run `streamlit run app.py` from the repository root.
+
+The Thai dashboard maps directly to Tasks 1–6 in `question/test.md`. Task 5 separates the released forecast, Kitchen x SKU prep target, scenario P&L, seasonality watch, and profitability hurdle. Its selected `{fmetrics['selected_method']}` forecast has pooled WAPE {pct(float(fmetrics['selected_method_pooled_wape']))}; the seven-day variability buffer is capacity guidance, not physical stock or a purchase order.
+
+Rebuild Task 5 artifacts with `python src/forecast_inventory.py`. Supporting data and QA-passed artifacts remain under `data/processed/` and `reports/fruitblend24_run_001/`.
+"""
+    (OUT / "README.md").write_text(readme, encoding="utf-8")
     return {"output": str(OUT), "charts": [revenue_chart, sku_chart, promo_chart, forecast_chart], "memo": str(OUT / "memo.md"), "presentation": str(OUT / "presentation.html")}
 
 

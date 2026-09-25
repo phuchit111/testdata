@@ -44,22 +44,27 @@
       "impact": "Leakage would make forecast performance optimistic"
     },
     {
-      "name": "backtest benchmarks five methods",
+      "name": "backtest benchmarks six methods",
       "result": "PASS",
       "expected": [
-        "naive_last_day",
-        "moving_avg_4w",
         "exp_smoothing_4w",
-        "seasonal_naive_7d",
-        "weekday_median_8w"
-      ],
-      "actual": [
-        "exp_smoothing_4w",
+        "level_weekday_blend",
         "moving_avg_4w",
         "naive_last_day",
         "seasonal_naive_7d",
         "weekday_median_8w"
       ],
+      "actual": {
+        "methods": [
+          "exp_smoothing_4w",
+          "level_weekday_blend",
+          "moving_avg_4w",
+          "naive_last_day",
+          "seasonal_naive_7d",
+          "weekday_median_8w"
+        ],
+        "selected": "level_weekday_blend"
+      },
       "owner": "A5",
       "impact": ""
     },
@@ -82,6 +87,14 @@
         "kitchens": 4,
         "skus": 5
       },
+      "owner": "A5",
+      "impact": ""
+    },
+    {
+      "name": "Kitchen x SKU prep reconciles to displayed waste rate",
+      "result": "PASS",
+      "expected": "max error < 1e-10",
+      "actual": 1.3877787807814457e-16,
       "owner": "A5",
       "impact": ""
     },
@@ -139,7 +152,7 @@
       "name": "scenario monthly contribution rebuild",
       "result": "PASS",
       "expected": 0,
-      "actual": 5.820766091346741e-11,
+      "actual": 0.0,
       "owner": "A5/A4",
       "impact": ""
     },
@@ -191,7 +204,7 @@
       "name": "memo includes three action sections",
       "result": "PASS",
       "expected": ">=3",
-      "actual": 4,
+      "actual": 3,
       "owner": "A7",
       "impact": ""
     }

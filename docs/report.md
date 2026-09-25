@@ -117,49 +117,47 @@ Kitchen ที่ควรได้รับการแก้ไขเร่ง
 
 ### 7.1 วิธี Forecast
 
-เปรียบเทียบ 5 วิธีด้วย rolling-origin backtest 4 cutoffs:
+เปรียบเทียบ 6 วิธีด้วย rolling-origin backtest 4 cutoffs:
 
 - Last-day naive
 - Four-week moving average
 - Four-week exponential smoothing
 - Seasonal naive 7-day
 - Eight-week weekday median
+- 50/50 blend ระหว่าง exponential level และ weekday profile 7 วัน
 
-วิธีที่เลือกคือ `exp_smoothing_4w` เพราะมี mean WAPE ต่ำสุดที่ **24.2%** โดย forecast ใช้ข้อมูลก่อน cutoff วันที่ **2026-08-31** เท่านั้น จึงไม่ใช้ actual หลังช่วง forecast มาปนกัน
+วิธีที่เลือกคือ `level_weekday_blend` เพราะมี pooled WAPE ต่ำสุดที่ **21.3%** วิธีนี้รักษาทั้งระดับ Demand ล่าสุดและรูปแบบวันในสัปดาห์ โดย forecast ใช้ข้อมูลก่อน cutoff วันที่ **2026-08-31** เท่านั้น จึงไม่ใช้ actual หลังช่วง forecast มาปนกัน
 
 ### 7.2 Base forecast Sep–Nov 2026
 
 | ตัวชี้วัด | ผลลัพธ์ |
 |---|---:|
-| Forecast demand | 126,836 cups |
-| Planning range | 96,124–157,548 cups |
-| Base prep target รวม expected waste | 134,497 cups |
-| Expected waste | 7,662 cups |
+| Forecast demand | 125,805 cups |
+| Planning range | 99,136–152,474 cups |
+| Base prep target รวม expected waste | 133,400 cups |
+| Expected waste | 7,595 cups |
 | Three-month fixed overhead | ฿2,010,000 |
-| Base modeled operating result | -฿777,293 |
+| Base modeled operating result | -฿785,233 |
 
-Planning range นี้คำนวณจาก WAPE ของวิธีที่เลือก จึงเป็น **ช่วงสำหรับวางแผน** ไม่ใช่ statistical confidence interval
+Planning range นี้คำนวณจาก pooled WAPE ราย SKU ของวิธีที่เลือก จึงเป็น **ช่วงสำหรับวางแผน** ไม่ใช่ statistical confidence interval ส่วนรูปแบบ ก.ย.–พ.ย. 2025 ถูกแสดงเป็น seasonality watch แยกต่างหาก เพราะมีประวัติเพียงหนึ่งรอบและยังไม่พอให้บังคับเป็น point forecast
 
 ### 7.3 Scenario P&L
 
 | Scenario | ผลประกอบการ Sep–Nov โดยประมาณ | สมมติฐานหลัก |
 |---|---:|---|
-| Base case | -฿777,293 | ราคาและ Waste ล่าสุด, fruit cost median ล่าสุด |
-| Downside case | -฿1,195,606 | Demand ลดตาม WAPE, fruit cost p90, Waste 1.25 เท่า |
-| Optimized case | -฿597,324 | ใช้ standard realized price และลด Waste rate 25% |
+| Base case | -฿785,233 | ราคาและ Waste ล่าสุด, fruit cost median ล่าสุด |
+| Downside case | -฿1,143,445 | Demand ที่ขอบล่างราย SKU, fruit cost p90, Waste 1.25 เท่า |
+| Price + Waste test | -฿606,686 | ใช้ standard realized price และลด Waste rate 25% โดย Demand เท่าฐาน |
 
-Optimized case เป็น planning scenario ไม่ใช่การรับประกันผลลัพธ์ และไม่ได้สมมติ causal demand uplift จากการขึ้นราคา
+Price + Waste test เป็น planning scenario ไม่ใช่การรับประกันผลลัพธ์ และไม่ได้สมมติ causal demand uplift จากการขึ้นราคา ช่วยดีขึ้นประมาณ **฿178,547** แต่ยังมีช่องว่างสู่คุ้มทุน **฿606,686** หากปิดด้วย volume เพียงทางเดียวจะเทียบเท่า 54,388 cups หรือ 43.2% เหนือ Forecast ฐาน ตัวเลขนี้เป็น hurdle เพื่อบอกขนาดปัญหา ไม่ใช่เป้ายอดขายที่อนุมัติ
 
 ## 8. Inventory policy ที่ Dashboard เสนอ
 
 ระบบคำนวณนโยบายในระดับ **20 Kitchen × SKU cells** โดยใช้:
 
 - **ABC:** จัดกลุ่มจาก contribution หลัง Waste ที่คาดการณ์ใน 3 เดือน
-- **XYZ:** จัดกลุ่มจาก demand CV ย้อนหลัง 12 สัปดาห์
-  - X: CV ≤ 25%
-  - Y: CV ≤ 50%
-  - Z: CV > 50%
-- Safety stock: เสนอระดับ service level **95%**, `Z = 1.65`
+- **XYZ:** จัดกลุ่มจาก demand CV, แนวโน้ม first 4W เทียบ last 4W และความเสี่ยงของสินค้าเปิดตัวใหม่; `MixedBerryPremium` จัดเป็น Z ทั้ง 4 ครัว
+- **Demand buffer:** ใช้ `Z = 1.65 × weekly demand SD` เป็น cup-equivalent สำหรับวางกำลังผลิตเท่านั้น ไม่อ้างว่าเป็น service level ที่ยืนยันแล้ว
 - Review period: **7 วัน**
 
 ผล alert ปัจจุบัน:
@@ -170,11 +168,11 @@ Optimized case เป็น planning scenario ไม่ใช่การรั�
 
 แนวทางปฏิบัติคือใช้ forecast cups + expected waste เป็น prep target และเปลี่ยนเป็น batch เล็กลง/ถี่ขึ้นใน Amber/Red cells โดยเฉพาะ MixedBerryPremium
 
-สูตรเชิงแนวคิดที่ใช้ใน Dashboard:
+เมื่อข้อมูล Inventory ครบ ให้ใช้สูตรเชิงแนวคิด:
 
 ```text
-target_stock = forecast_during_review_period + safety_stock
-order_qty = max(0, target_stock - usable_on_hand - usable_inbound + committed_demand)
+target_stock_ingredient_units = forecast_during_(lead_time + review_period) + safety_stock
+order_qty = max(0, target_stock_ingredient_units - usable_on_hand - usable_inbound + committed_demand)
 ```
 
 อย่างไรก็ตาม Dashboard **ยังไม่ออก Purchase Order จริง** เพราะ workbook ไม่มีข้อมูล on-hand, inbound, supplier lead time, shelf life, BOM/recipe yield และ stockout flags การเว้น purchase quantity ไว้จึงเป็นการควบคุมความเสี่ยง ไม่ใช่ข้อมูลขาดหายโดยไม่ตั้งใจ
@@ -185,10 +183,10 @@ order_qty = max(0, target_stock - usable_on_hand - usable_inbound + committed_de
 
 | Fruit cost uplift | Modeled operating result |
 |---:|---:|
-| 0% | -฿777,293 |
-| +5% | -฿873,599 |
-| +10% | -฿969,906 |
-| +20% | -฿1,162,518 |
+| 0% | -฿785,233 |
+| +5% | -฿880,554 |
+| +10% | -฿975,875 |
+| +20% | -฿1,166,518 |
 
 ผลนี้ชี้ว่า Waste reduction และการควบคุม fruit cost มีผลต่อกำไรโดยตรง และควรติดตามเป็น KPI รายสัปดาห์ ไม่ใช่รอให้เห็นผลใน P&L รายเดือนเท่านั้น
 
@@ -212,11 +210,11 @@ order_qty = max(0, target_stock - usable_on_hand - usable_inbound + committed_de
 
 ### Recommendation 3 — Operate a weekly Kitchen × SKU prep control
 
-**การทำงาน:** ใช้ `exp_smoothing_4w` เป็น baseline ราย Kitchen × SKU, ตั้ง prep target เป็น forecast + expected waste, review policy ทุก 7 วัน และเริ่มจาก Amber/Red cells
+**การทำงาน:** ใช้ `level_weekday_blend` เป็น baseline ราย Kitchen × SKU, ตั้ง prep target เป็น forecast + expected waste ของแต่ละครัว, review policy ทุก 7 วัน และเริ่มจาก Amber/Red cells
 
-**เหตุผล:** Base outlook มี 126,836 sold cups แต่ต้องเตรียมประมาณ 134,497 cups เมื่อรวม Waste
+**เหตุผล:** Base outlook มี 125,805 sold cups แต่ต้องเตรียมประมาณ 133,400 cups เมื่อรวม Waste
 
-**KPI:** WAPE ≤ 24.2%, waste rate, forecast bias, service level เมื่อมี stockout data
+**KPI:** pooled WAPE ≤ 21.3%, waste rate และ forecast bias; ยังไม่อ้าง service level จนกว่าจะมี lead time และ stockout data
 
 ### Recommendation 4 — Focus recovery on high-impact Kitchen cells
 
@@ -245,11 +243,11 @@ order_qty = max(0, target_stock - usable_on_hand - usable_inbound + committed_de
 
 > “ภาพรวมคือเรามี Demand แต่กำไรยังติดลบ เพราะส่วนลดบางตัวลด contribution, MixedBerryPremium ขาดทุนหลัง Waste และบาง Kitchen มี Waste สูง”
 
-> “ในช่วง 3 เดือนข้างหน้า Base forecast อยู่ที่ 126,836 cups และ modeled operating result อยู่ที่ -฿777,293 ดังนั้นเป้าหมายไม่ใช่เพิ่มยอดขายทุกวิธี แต่ต้องเพิ่มยอดขายที่สร้าง contribution”
+> “ในกรอบ 3 เดือนของ case Base forecast อยู่ที่ 125,805 cups และ modeled operating result อยู่ที่ -฿785,233 แม้ทดสอบราคาเฉลี่ยที่รับจริงของ RC000 ร่วมกับลด Waste 25% ก็ยังขาด ฿606,686 จึงต้องยืนยันแต่ละคันโยกแทนการสร้างเป้ายอดขายย้อนจากจุดคุ้มทุน”
 
 > “ข้อเสนอคือจำกัดโปรโมชั่นที่ contribution ต่ำ, แก้ MixedBerryPremium ก่อน scale และใช้ forecast ราย Kitchen × SKU เพื่อเตรียมวัตถุดิบแบบ smaller and more frequent batches”
 
-> “Inventory policy ในเว็บเป็น prep planning และ safety-stock framework ยังไม่ใช่ purchase order เพราะข้อมูล stock จริงและ supplier lead time ยังไม่มี”
+> “Buffer ในเว็บเป็น cup-equivalent สำหรับวางกำลังผลิต ไม่ใช่ physical stock, เป้าเตรียมล่วงหน้า หรือ purchase order เพราะข้อมูล stock จริงและ supplier lead time ยังไม่มี”
 
 ## 13. การตรวจสอบและไฟล์ที่เกี่ยวข้อง
 
@@ -306,7 +304,7 @@ streamlit run app.py
 - ใช้ **matplotlib/SVG** สำหรับสร้างกราฟ Revenue vs Budget, contribution, promotion และ forecast scenarios
 - ใช้ **Streamlit** สำหรับสร้าง Dashboard ภาษาไทยและสรุปผลเพื่อการตัดสินใจ
 - คัดกรองข้อมูลจาก 124,397 raw rows เหลือ 123,655 retained menu rows หลังลบ duplicate และ non-menu rows
-- เปรียบเทียบ Forecast 5 วิธีด้วย rolling-origin backtest และเลือก `exp_smoothing_4w` ที่มี mean WAPE ต่ำสุด 24.2%
+- เปรียบเทียบ Forecast 6 วิธีด้วย rolling-origin backtest และเลือก `level_weekday_blend` ที่มี pooled WAPE ต่ำสุด 21.3%
 - วิเคราะห์โปรโมชั่นแบบ matched association ไม่สรุปเป็น causal uplift เนื่องจากไม่มี customer ID หรือ randomized assignment
 
 ### สิ่งที่อยากวิเคราะห์เพิ่มเติมหากมีเวลามากกว่านี้

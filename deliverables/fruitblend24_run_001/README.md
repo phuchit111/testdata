@@ -1,38 +1,7 @@
 # FruitBlend24 decision dashboard
 
-เปิดแอปจากโฟลเดอร์หลักด้วยคำสั่ง:
+Run `streamlit run app.py` from the repository root.
 
-```powershell
-streamlit run app.py
-```
+The Thai dashboard maps directly to Tasks 1–6 in `question/test.md`. Task 5 separates the released forecast, Kitchen x SKU prep target, scenario P&L, seasonality watch, and profitability hurdle. Its selected `level_weekday_blend` forecast has pooled WAPE 21.3%; the seven-day variability buffer is capacity guidance, not physical stock or a purchase order.
 
-เว็บอ่านเป็นภาษาไทยและใช้ข้อมูลจำลองที่ผ่าน QA จาก `fruitblend24_v1_c2869ce419bf` เริ่มที่หน้า **ภาพรวมและแผนแก้ไข**: ผู้ชมจะเห็นว่ารายได้ 31.15 ล้านบาทยังแปลงเป็นผลดำเนินงานตามแบบจำลอง -403,231 บาทไม่สำเร็จ เพราะส่วนลด สินค้าที่เงินเหลือติดลบ ของเสีย และค่าใช้จ่ายคงที่
-
-แท็บ **แผน 3 เดือนและการเตรียมสินค้า** มีแผนเป้าคุ้มทุนสะสมที่คำนวณต่อจาก Forecast เดิม พร้อม P&L รายเดือน เป้าขายและเป้าเตรียมรายครัว–สินค้า สะพานปิดช่องว่าง และ sensitivity เมื่อทำเป้าราคา ของเสีย จัดซื้อ ค่าใช้จ่ายคงที่ หรือยอดขายไม่ได้ตามแผน แผนนี้เป็นเป้าบริหารแบบมีเงื่อนไข ไม่ใช่ Forecast ใหม่หรือการรับประกันกำไร สร้าง artifacts ใหม่ได้ด้วย:
-
-```powershell
-python planning\profit_recovery_analysis.py
-```
-
-ยังไม่คำนวณจำนวนสั่งซื้อจริง เพราะข้อมูลไม่มี stock on hand, inbound, lead time, shelf life และ BOM/yield
-
-ทั้ง 6 Tasks ในโจทย์ตรวจสอบได้จากแต่ละแท็บ:
-
-| แท็บ | Task ที่ตรวจได้ |
-|---|---|
-| ภาพรวมและแผนแก้ไข | 6 — สรุป 5 insights และ 4 recommendations เพื่อใช้ตัดสินใจ |
-| สินค้า สาขา และผลเทียบงบ | 4 — P&L จากต้นทุนจริง, งบรายเดือน, สินค้าและครัวที่ต้องแก้ |
-| โปรโมชั่นคุ้มไหม | 3 — ความคุ้มค่าของ rate code และกติกาทดสอบก่อนขยาย |
-| ยอดขายและความเหมาะสมของราคา | 2 — Demand ตามเวลาและข้อเสนอทดสอบราคาครบ 5 สินค้า |
-| แผน 3 เดือนและการเตรียมสินค้า | 5 — Forecast, P&L, เป้าเตรียมรายครัว–สินค้า และนโยบายสต็อก |
-| ที่มาข้อมูลและข้อจำกัด | 1 — การคัดกรองข้อมูล, reconciliation, issue log และ QA |
-
-ตัวเลขสำคัญทุกหน้าดึงจาก artifacts ที่เผยแพร่แล้วใต้ `reports/fruitblend24_run_001` และ `data/processed/fruitblend24_v1_c2869ce419bf` หน้าแรกใช้กราฟและข้อความสั้น ส่วนสมมติฐาน สูตร ตารางละเอียด และผล sensitivity อยู่ในส่วนเปิดดูเพิ่มของแท็บที่เกี่ยวข้อง
-
-ผลโปรโมชั่นเป็นความสัมพันธ์จากข้อมูล ไม่ใช่ causal uplift; ขอบเขต GP ในงบยังไม่ชัด; และจำนวนสั่งซื้อจริงยังคำนวณไม่ได้จนกว่าจะมี on-hand, inbound, lead time, shelf life, BOM/yield และ stockout flags ดูรายละเอียดได้ในแท็บที่มาข้อมูลและข้อจำกัด
-
-ไฟล์ประกอบ:
-
-- `memo.md` — สรุปผลเชิงธุรกิจและแนวทางทำต่อ
-- `charts/` — กราฟประกอบ
-- `reports/fruitblend24_run_001/qa/streamlit_checks.json` — ผลตรวจแอปล่าสุด
+Rebuild Task 5 artifacts with `python src/forecast_inventory.py`. Supporting data and QA-passed artifacts remain under `data/processed/` and `reports/fruitblend24_run_001/`.

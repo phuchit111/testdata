@@ -1,8 +1,29 @@
 {
   "agent_id": "A5",
   "status": "ready_for_review",
-  "input_versions": {"data_version": "fruitblend24_v1_c2869ce419bf", "metric_version": "metric_contract_v1", "assumption_version": "assumption_ledger_v1"},
-  "artifacts": ["backtest_detail.csv", "backtest_summary.csv", "forecast_daily.csv", "scenario_daily_finance_inputs.csv", "scenario_monthly_pnl.csv", "cup_requirements.csv", "forecast_metrics.json"],
-  "checks": ["Seasonal-naive 7-day selected by rolling backtest", "Forecast horizon is after 2026-08-31 cutoff", "Purchase quantities intentionally not calculable from missing inventory controls"],
+  "input_versions": {
+    "data_version": "fruitblend24_v1_c2869ce419bf",
+    "metric_version": "metric_contract_v1",
+    "assumption_version": "assumption_ledger_v1"
+  },
+  "artifacts": [
+    "backtest_detail.csv",
+    "backtest_summary.csv",
+    "forecast_daily.csv",
+    "scenario_daily_finance_inputs.csv",
+    "scenario_monthly_pnl.csv",
+    "forecast_monthly_by_sku.csv",
+    "inventory_policy.csv",
+    "fruit_cost_stress_test.csv",
+    "cup_requirements.csv",
+    "forecast_metrics.json"
+  ],
+  "checks": [
+    "level_weekday_blend selected by pooled rolling-origin WAPE",
+    "Forecast horizon is after 2026-08-31 cutoff",
+    "Kitchen x SKU waste rates reconcile forecast, prep and policy",
+    "Seven-day demand buffer is capacity guidance, not physical stock or a purchase order",
+    "Purchase quantities intentionally not calculable from missing inventory controls"
+  ],
   "next_owner": "A6"
 }

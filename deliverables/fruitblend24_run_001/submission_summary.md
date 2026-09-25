@@ -25,7 +25,7 @@ streamlit run app.py
 3. โปรโมชั่นทำให้ contribution ต่อแก้วลดลงเมื่อเทียบกับ standard: RC000 **฿14.48/cup**, RC101 **฿8.02**, RC102 **฿6.90**, RC103 **฿9.14** จึงควรใช้โปรโมชั่นแบบมีเงื่อนไขและทดสอบกับ control
 4. `Watermelon` และ `Pineapple` เป็นตัวขับเคลื่อนหลักของพอร์ต คิดเป็นประมาณ **59.8% ของรายได้** และ **71.0% ของ contribution หลัง Waste**
 5. จุดที่ควรเร่งแก้คือ `BKK_Ladprao` ซึ่งมี modeled operating result **-฿620,840** และ Waste rate สูงสุดประมาณ **8.3%**; `BKK_Sukhumvit` เป็นอีกจุดที่ต้องติดตาม
-6. Forecast Sep–Nov 2026 แบบฐานคาดการณ์ **126,836 cups** และ modeled operating result **-฿777,293** จึงควรเน้น contribution, waste control และ prep planning มากกว่าการเร่งยอดขายอย่างเดียว
+6. Forecast Sep–Nov 2026 แบบฐานคาดการณ์ **125,805 cups** และ modeled operating result **-฿785,233**; price + Waste test ยังมีช่องว่างสู่คุ้มทุน **฿606,686** จึงควรพิสูจน์ contribution, Waste และต้นทุนทีละคันโยกแทนการสร้างเป้ายอดขายย้อนกลับ
 
 ## 3. Tools / Approach
 
@@ -34,10 +34,10 @@ streamlit run app.py
 - **matplotlib / SVG charts** สำหรับสร้างกราฟสรุป Revenue vs Budget, contribution, promotion และ forecast scenarios
 - **Streamlit** สำหรับสร้าง decision dashboard ภาษาไทยแบบหลายแท็บ
 - คัดกรองข้อมูลจาก raw workbook: 124,397 rows → ลบ exact duplicate excess 372 rows → ตัด non-menu 370 rows → เหลือ retained menu rows 123,655 rows
-- เปรียบเทียบ Forecast 5 วิธีด้วย rolling-origin backtest 4 cutoffs และเลือก `exp_smoothing_4w` ซึ่งมี mean WAPE ต่ำสุด **24.2%**
+- เปรียบเทียบ Forecast 6 วิธีด้วย rolling-origin backtest 4 cutoffs และเลือก `level_weekday_blend` ซึ่งมี pooled WAPE ต่ำสุด **21.3%**
 - ทำ P&L ในระดับบริษัท, Kitchen และ SKU โดยแยก product cost, packaging/labor, platform commission, waste และ fixed overhead
 - วิเคราะห์โปรโมชั่นแบบ matched association ตาม SKU, platform, weekday และ month; ไม่ตีความเป็น causal uplift
-- ทำ inventory policy ในระดับ Kitchen × SKU 20 cells โดยใช้ ABC/XYZ, 95% service-level framework และ 7-day review period
+- ทำ prep policy ในระดับ Kitchen × SKU 20 cells โดยใช้ ABC, trend-aware XYZ และ 7-day capacity buffer; ไม่อ้าง service level หรือ Purchase Order เมื่อยังไม่มี lead time/stockout data
 
 ## 4. ข้อจำกัดสำคัญ
 

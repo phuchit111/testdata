@@ -14,7 +14,6 @@ APP = ROOT / "deliverables/fruitblend24_run_001/app.py"
 ROOT_APP = ROOT / "app.py"
 DATA = ROOT / "data/processed/fruitblend24_v1_c2869ce419bf"
 REPORTS = ROOT / "reports/fruitblend24_run_001"
-PLANNING = ROOT / "planning/profit_recovery"
 
 
 def check(name: str, passed: bool, expected, actual) -> dict:
@@ -54,22 +53,14 @@ def run() -> dict:
     forecast_monthly_sku = pd.read_csv(REPORTS / "inventory/forecast_monthly_by_sku.csv", encoding="utf-8-sig")
     inventory_policy = pd.read_csv(REPORTS / "inventory/inventory_policy.csv", encoding="utf-8-sig")
     fruit_cost_stress = pd.read_csv(REPORTS / "inventory/fruit_cost_stress_test.csv", encoding="utf-8-sig")
-    recovery_summary = json.loads((PLANNING / "summary.json").read_text(encoding="utf-8"))
-    recovery_monthly = pd.read_csv(PLANNING / "monthly_pnl.csv", encoding="utf-8-sig")
-    recovery_prep = pd.read_csv(PLANNING / "prep_targets.csv", encoding="utf-8-sig")
-    recovery_kitchen = pd.read_csv(PLANNING / "kitchen_pnl.csv", encoding="utf-8-sig")
-    recovery_sensitivity = pd.read_csv(PLANNING / "sensitivity.csv", encoding="utf-8-sig")
-    recovery_bridge = pd.read_csv(PLANNING / "profit_bridge.csv", encoding="utf-8-sig")
-    recovery_nov_evidence = pd.read_csv(PLANNING / "november_growth_evidence.csv", encoding="utf-8-sig")
-    recovery_nov_capacity = pd.read_csv(PLANNING / "november_capacity_gate.csv", encoding="utf-8-sig")
     checks = []
     expected_tabs = [
-        "Overview & recovery plan",
-        "Portfolio, kitchens & budget performance",
-        "Promotions & rate codes",
-        "Demand & price fit",
-        "3-month outlook & preparation plan",
-        "Data quality & limitations",
+        "Task 1 · Data Trust & Definitions",
+        "Task 2 · Sales, Price & Menu",
+        "Task 3 · Platform & Campaign Control",
+        "Task 4 · Portfolio, Kitchen & Budget",
+        "Task 5 · Forecast-to-Kitchen Handoff",
+        "Task 6 · E-Commerce Action Center",
     ]
 
     app_test = AppTest.from_file(str(APP)).run(timeout=60)
@@ -80,22 +71,50 @@ def run() -> dict:
     checks.append(check("Deployment entrypoint exposes all six task tabs", [tab.label for tab in root_app_test.tabs] == expected_tabs, expected_tabs, [tab.label for tab in root_app_test.tabs]))
     labels = [metric.label for metric in app_test.metric]
     required_labels = [
-        "Sales revenue", "Revenue vs. budget", "Modeled operating result",
-        "Raw order rows", "Retained menu rows", "Peak sales hour",
-        "Discount", "Baseline forecast", "Baseline forecast prep target",
+        "รายได้จากการขาย", "รายได้เทียบงบ", "ผลดำเนินงานตามแบบจำลอง",
+        "แถวรายการขายดิบ", "แถวเมนูที่ใช้วิเคราะห์", "ช่วงเวลาที่ขายสูงสุด",
+        "ส่วนลด", "Forecast ฐาน · 3 เดือน", "เป้าเตรียม · 3 เดือน",
     ]
     checks.append(check("App exposes required metric cards", all(label in labels for label in required_labels), required_labels, labels))
     required_sections = [
-        "5 decision-relevant findings", "Action plan", "From raw data to released analytical data",
-        "Current price fit by product", "Scorecard: how much contribution remains after discounting?",
-        "Is the sales lift enough to cover the discount?", "Actual revenue vs. monthly budget",
-        "What should we do by product?", "Which kitchens should be fixed first?", "Historical sales followed by forecast sales",
-        "This page shows two sets of numbers", "Realistic cumulative break-even target", "Modeled result across 3 scenarios", "Preparation target after sales confirmation", "Preparation and replenishment policy",
-        "Formula to use when inventory data is complete",
+        "5 ข้อค้นพบเพื่อเลือก Action", "Action ที่เสนอสำหรับรอบถัดไป", "Platform mix และเงินเหลือก่อน Waste",
+        "ราคาแต่ละ SKU เหมาะกับเงินเหลือหรือไม่?", "เงินเหลือที่คงเหลือหลังส่วนลด (ก่อน Waste)",
+        "ยอดขายเพิ่มพอคุ้มส่วนลดหรือไม่?", "รายได้จริงเทียบงบรายเดือน",
+        "SKU ใดควรแก้หรือคงไว้?", "Kitchen × SKU ที่ต้องส่งต่อให้ Operations", "ภาพรวม Forecast และเป้าเตรียมที่ปล่อย",
+        "Demand ต่อเนื่อง: ใช้ช่วงละ 7 วันเต็ม", "เช็กฤดูกาลกับช่วงเดียวกันปีก่อน", "ผลตามแบบจำลอง 3 สถานการณ์ที่ตรวจสอบได้",
+        "ช่องว่างสู่กำไร: แสดง hurdle ไม่สร้างเป้าขายย้อนกลับ", "เป้าเตรียมที่ปล่อย: เลือกครัวและ SKU", "นโยบายเตรียมและ buffer กำลังผลิต 7 วัน",
+        "จากข้อมูลดิบสู่ข้อมูลวิเคราะห์ที่เผยแพร่",
     ]
     checks.append(check("App includes readable decision sections for all six tasks", all(section in app_text for section in required_sections), required_sections, [section for section in required_sections if section in app_text]))
-    task_markers = ["Task 1 · Data quality", "Task 2 · Demand & pricing", "Task 3 · Promotions & rate codes", "Task 4 · Portfolio & budget performance", "Task 5 · Inventory & 3-month outlook", "Task 6 · Decision summary"]
+    task_markers = ["Task 1 · Data quality", "Task 2 · Demand & pricing", "Task 3 · Promotions & rate codes", "Task 4 · Portfolio & budget performance", "Task 5 · Inventory & 3-month outlook", "Task 6 · Present findings"]
     checks.append(check("App keeps every assessment task traceable", all(marker in app_text for marker in task_markers), task_markers, [marker for marker in task_markers if marker in app_text]))
+    required_selectboxes = ["เลือก Platform สำหรับดู Demand", "เลือก SKU", "เลือก rate code", "เลือกครัว", "เลือก SKU สำหรับเป้าเตรียม"]
+    selectbox_labels = [widget.label for widget in app_test.selectbox]
+    checks.append(check("App exposes E-Commerce drill-down controls", all(label in selectbox_labels for label in required_selectboxes), required_selectboxes, selectbox_labels))
+    interactive_results: dict[str, object]
+    try:
+        interactive_app = AppTest.from_file(str(APP)).run(timeout=60)
+        for key, value in [("sales_platform", "LINE MAN"), ("campaign_rate_code", "RC101"), ("forecast_kitchen", "BKK_Ladprao")]:
+            widget = next(item for item in interactive_app.selectbox if item.key == key)
+            widget.set_value(value).run(timeout=60)
+        interactive_results = {
+            key: next(item for item in interactive_app.selectbox if item.key == key).value
+            for key in ["sales_platform", "campaign_rate_code", "forecast_kitchen"]
+        }
+        interactive_passed = len(interactive_app.exception) == 0 and interactive_results == {
+            "sales_platform": "LINE MAN", "campaign_rate_code": "RC101", "forecast_kitchen": "BKK_Ladprao",
+        }
+    except Exception as error:  # pragma: no cover - preserves a QA result when UI interaction breaks.
+        interactive_results = {"error": str(error)}
+        interactive_passed = False
+    checks.append(check("E-Commerce drill-down controls rerun without exceptions", interactive_passed, {"sales_platform": "LINE MAN", "campaign_rate_code": "RC101", "forecast_kitchen": "BKK_Ladprao"}, interactive_results))
+    scope_copy = [
+        "historical association", "ไม่ใช่ causal", "ของเสียไม่มี tag platform/rate code",
+        "ไม่ใช่ GP variance", "ไม่ใช่ statistical confidence interval", "ไม่ใช่จำนวนสั่งซื้อจริง",
+    ]
+    checks.append(check("App displays E-Commerce scope guardrails", all(text in app_text for text in scope_copy), scope_copy, [text for text in scope_copy if text in app_text]))
+    removed_scope_conflicts = ["Protect availability", "Discount ROI", "service level when stockout data is available", "Confirm with orders and intraday sales"]
+    checks.append(check("App removes unsupported operational claims", not any(text in app_text for text in removed_scope_conflicts), removed_scope_conflicts, [text for text in removed_scope_conflicts if text in app_text]))
     checks.append(check("Issue log is valid CSV", len(issues) == 6, 6, int(len(issues))))
     checks.append(check("Price ladder covers all five SKUs", price_ladder["sku"].nunique() == 5, 5, int(price_ladder["sku"].nunique())))
     checks.append(check("Price simulation covers five SKUs and six price scenarios", len(price_simulation) == 30 and price_simulation["sku"].nunique() == 5, "30 rows / 5 SKUs", f"{len(price_simulation)} rows / {price_simulation['sku'].nunique()} SKUs"))
@@ -126,18 +145,25 @@ def run() -> dict:
     base_forecast_units = float(scenario.loc[scenario["scenario"] == "base", "forecast_units"].sum())
     checks.append(check("App bases outlook on released three-month scenario", abs(base_forecast_units - forecast_metrics["base_forecast_units"]) < 0.01, forecast_metrics["base_forecast_units"], base_forecast_units))
     optimized_result = float(scenario.loc[scenario["scenario"] == "price_and_waste_action", "modeled_operating_result_thb"].sum())
-    checks.append(check("App discloses the remaining three-month profitability gap", abs(optimized_result + 597324) < 1 and "still loses" in app_text and "gap" in app_text, {"optimized_result_rounded": -597324, "required_copy": ["still loses", "gap"]}, {"optimized_result": optimized_result, "has_required_copy": all(text in app_text for text in ["still loses", "gap"])}))
-    checks.append(check("Price page gives a test recommendation for every core SKU", all(sku_name in app_text for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"]) and "Test recommendation" in app_text, "5 SKUs + test recommendation", {"sku_mentions": [sku_name for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"] if sku_name in app_text], "has_test_label": "Test recommendation" in app_text}))
-    checks.append(check("Forecast benchmarks five methods with rolling-origin windows", set(backtest["method"]) == {"naive_last_day", "moving_avg_4w", "exp_smoothing_4w", "seasonal_naive_7d", "weekday_median_8w"} and (backtest["cutoffs"] == 4).all(), "5 methods / 4 cutoffs", {"methods": sorted(backtest["method"].unique().tolist()), "cutoffs": sorted(backtest["cutoffs"].unique().tolist())}))
+    expected_gap = float(forecast_metrics["profitability_gap"]["remaining_gap_to_break_even_thb"])
+    checks.append(check("App discloses the remaining three-month profitability gap without fabricating a target", abs(optimized_result + expected_gap) < 0.01 and "ยังติดลบ" in app_text and "hurdle" in app_text and "planning/profit_recovery" not in app_text, {"optimized_result": -expected_gap, "required_copy": ["ยังติดลบ", "hurdle"], "no_reverse_engineered_target_dependency": True}, {"optimized_result": optimized_result, "has_required_copy": all(text in app_text for text in ["ยังติดลบ", "hurdle"]), "has_reverse_engineered_target_dependency": "planning/profit_recovery" in app_text}))
+    checks.append(check("Price page gives a test recommendation for every core SKU", all(sku_name in app_text for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"]) and "ข้อเสนอการทดสอบ" in app_text, "5 SKUs + test recommendation", {"sku_mentions": [sku_name for sku_name in ["Watermelon", "Pineapple", "Guava", "PassionFruit", "MixedBerryPremium"] if sku_name in app_text], "has_test_label": "ข้อเสนอการทดสอบ" in app_text}))
+    checks.append(check("Forecast benchmarks six methods with pooled rolling-origin WAPE", set(backtest["method"]) == {"naive_last_day", "moving_avg_4w", "exp_smoothing_4w", "seasonal_naive_7d", "weekday_median_8w", "level_weekday_blend"} and (backtest["cutoffs"] == 4).all() and forecast_metrics["selected_method"] == "level_weekday_blend", "6 methods / 4 cutoffs / weekday-shaped winner", {"methods": sorted(backtest["method"].unique().tolist()), "cutoffs": sorted(backtest["cutoffs"].unique().tolist()), "selected": forecast_metrics["selected_method"]}))
+    checks.append(check("Forecast metadata distinguishes pooled and macro WAPE", "selected_method_pooled_wape" in forecast_metrics and "selected_method_macro_wape" in forecast_metrics and "selected_method_mean_wape" not in forecast_metrics, "explicit pooled + macro keys; no ambiguous mean key", {key: forecast_metrics.get(key) for key in ["selected_method_pooled_wape", "selected_method_macro_wape", "selected_method_mean_wape"]}))
+    checks.append(check("Task 5 charts do not stack non-additive series", app_text.count("stack=False") >= 4, ">=4 grouped chart calls", app_text.count("stack=False")))
+    checks.append(check("Weekly demand artifact labels incomplete weeks", {"days_observed", "is_complete_week"}.issubset(weekly_demand.columns) and (~weekly_demand["is_complete_week"]).any(), "completeness fields + partial weeks visible", {"columns_present": sorted({"days_observed", "is_complete_week"} & set(weekly_demand.columns)), "partial_rows": int((~weekly_demand["is_complete_week"]).sum()) if "is_complete_week" in weekly_demand else None}))
+    checks.append(check("Task 5 uses stable scenario codes and like-for-like seasonality copy", 'groupby("scenario", as_index=False)' in app_text and "ราคา RC000 + ลด Waste 25%" in app_text and "เทียบเฉพาะ SKU ที่มีทั้งสองช่วง" in app_text, True, {"stable_scenario_group": 'groupby("scenario", as_index=False)' in app_text, "rc000_label": "ราคา RC000 + ลด Waste 25%" in app_text, "common_sku_copy": "เทียบเฉพาะ SKU ที่มีทั้งสองช่วง" in app_text}))
+    superseded_note = (ROOT / "planning/profit_recovery/README.md").read_text(encoding="utf-8")
+    checks.append(check("Retired reverse-engineered recovery artifacts are marked superseded", "Superseded" in superseded_note and "Do not use" in superseded_note, True, "Superseded" in superseded_note and "Do not use" in superseded_note))
     checks.append(check("Forecast uncertainty range is present and ordered", all(col in forecast.columns for col in ["forecast_lower_units", "forecast_units_base", "forecast_upper_units"]) and bool((forecast["forecast_lower_units"] <= forecast["forecast_units_base"]).all()) and bool((forecast["forecast_units_base"] <= forecast["forecast_upper_units"]).all()), True, {"rows": int(len(forecast)), "range_ordered": bool((forecast["forecast_lower_units"] <= forecast["forecast_units_base"]).all() and (forecast["forecast_units_base"] <= forecast["forecast_upper_units"]).all())}))
     checks.append(check("Forecast is at Kitchen x SKU level", forecast[["kitchen", "sku"]].drop_duplicates().shape[0] == 20, 20, int(forecast[["kitchen", "sku"]].drop_duplicates().shape[0])))
     checks.append(check("Monthly SKU forecast covers three months and five SKUs", forecast_monthly_sku["month"].nunique() == 3 and forecast_monthly_sku["sku"].nunique() == 5, "3 months / 5 SKUs", {"months": int(forecast_monthly_sku["month"].nunique()), "skus": int(forecast_monthly_sku["sku"].nunique())}))
-    checks.append(check("Conditional profit-recovery plan reconciles", recovery_summary["checks_passed"] is True and abs(recovery_summary["proposed_target_result_thb"] - recovery_monthly["operating_result_thb"].sum()) < 0.01 and len(recovery_monthly) == 3, "3 monthly rows + reconciled target", {"rows": int(len(recovery_monthly)), "target": float(recovery_monthly["operating_result_thb"].sum()), "checks_passed": recovery_summary["checks_passed"]}))
-    checks.append(check("Conditional prep plan covers all months, kitchens and SKUs", recovery_prep["month"].nunique() == 3 and recovery_prep["kitchen"].nunique() == 4 and recovery_prep["sku"].nunique() == 5 and len(recovery_prep) == 60 and (recovery_prep["target_prep"] >= recovery_prep["target_sales"]).all(), "60 rows / 3 months / 4 kitchens / 5 SKUs", {"rows": int(len(recovery_prep)), "months": int(recovery_prep["month"].nunique()), "kitchens": int(recovery_prep["kitchen"].nunique()), "skus": int(recovery_prep["sku"].nunique()), "prep_ge_sales": bool((recovery_prep["target_prep"] >= recovery_prep["target_sales"]).all())}))
-    checks.append(check("Profit-recovery sensitivity and kitchen plan are present", len(recovery_sensitivity) == 8 and len(recovery_bridge) == 9 and len(recovery_kitchen) == 12 and "No November core-growth release; other targets achieved" in set(recovery_sensitivity["scenario"]), "8 sensitivity / 9 bridge / 12 kitchen-month rows, including no-November-release case", {"sensitivity": int(len(recovery_sensitivity)), "bridge": int(len(recovery_bridge)), "kitchen_month": int(len(recovery_kitchen))}))
-    historical_nov = recovery_nov_evidence.loc[recovery_nov_evidence["month"] == 11].iloc[0]
-    checks.append(check("November candidate target carries seasonal and capacity gates", len(recovery_nov_evidence) == 3 and abs(float(historical_nov["historical_total_mom_growth"]) - 0.1346106487) < 1e-6 and abs(float(historical_nov["conditional_target_total_mom_growth"]) - 0.0869233341) < 1e-6 and len(recovery_nov_capacity) == 4 and abs(float(recovery_nov_capacity["net_extra_cups_per_day"].sum()) - recovery_summary["november_capacity_gate"]["net_extra_cups_per_day"]) < 0.01, "3-month autumn evidence + 4 kitchen capacity gates", {"historical_oct_to_nov_growth": float(historical_nov["historical_total_mom_growth"]), "conditional_oct_to_nov_growth": float(historical_nov["conditional_target_total_mom_growth"]), "capacity_kitchens": int(len(recovery_nov_capacity)), "net_extra_cups_per_day": float(recovery_nov_capacity["net_extra_cups_per_day"].sum())}))
-    checks.append(check("Inventory policy covers 20 Kitchen x SKU cells with ABC/XYZ and safety stock", len(inventory_policy) == 20 and all(col in inventory_policy.columns for col in ["abc_class", "xyz_class", "safety_stock_cups_policy", "inventory_alert", "target_stock_next_7d_cups"]), "20 cells + policy fields", {"rows": int(len(inventory_policy)), "has_policy_fields": all(col in inventory_policy.columns for col in ["abc_class", "xyz_class", "safety_stock_cups_policy", "inventory_alert", "target_stock_next_7d_cups"])}))
+    daily_shape = forecast.groupby(["kitchen", "sku"])["forecast_units_base"].nunique()
+    checks.append(check("Selected forecast preserves weekday shape", int(daily_shape.min()) > 1, "more than one daily value in every Kitchen x SKU series", {"min_unique_daily_values": int(daily_shape.min()), "max_unique_daily_values": int(daily_shape.max())}))
+    implied_waste_rate = inventory_policy["expected_waste_3m_cups"] / (inventory_policy["forecast_3m_cups"] + inventory_policy["expected_waste_3m_cups"])
+    waste_reconciliation_error = float((implied_waste_rate - inventory_policy["waste_rate"]).abs().max())
+    checks.append(check("Kitchen x SKU waste rates reconcile forecast, prep and policy", waste_reconciliation_error < 1e-10, "max error < 1e-10", waste_reconciliation_error))
+    checks.append(check("Inventory policy covers 20 cells with trend-aware XYZ and capacity buffers", len(inventory_policy) == 20 and all(col in inventory_policy.columns for col in ["abc_class", "xyz_class", "recent_12w_trend_pct", "demand_pattern", "demand_buffer_7d_cups_policy", "planning_ceiling_next_7d_cups", "inventory_alert_rank"]) and set(inventory_policy.loc[inventory_policy["sku"] == "MixedBerryPremium", "xyz_class"]) == {"Z"}, "20 cells + trend-aware policy fields + MixedBerry=Z", {"rows": int(len(inventory_policy)), "mixedberry_xyz": sorted(inventory_policy.loc[inventory_policy["sku"] == "MixedBerryPremium", "xyz_class"].unique().tolist())}))
     checks.append(check("Purchase-order boundary is explicitly preserved", inventory_policy["order_qty_status"].str.contains("not calculable", case=False).all() and "No on-hand" in forecast_metrics["inventory_limitations"], True, {"all_not_calculable": bool(inventory_policy["order_qty_status"].str.contains("not calculable", case=False).all()), "limitations": forecast_metrics["inventory_limitations"]}))
     checks.append(check("Fruit-cost stress test covers 0/5/10/20 percent", set((fruit_cost_stress["fruit_cost_uplift_pct"] * 100).round(0)) == {0, 5, 10, 20} and (fruit_cost_stress["modeled_operating_result_thb"].diff().dropna() < 0).all(), "4 stress points / operating result declines", {"points": sorted((fruit_cost_stress["fruit_cost_uplift_pct"] * 100).round(0).tolist()), "declines": bool((fruit_cost_stress["modeled_operating_result_thb"].diff().dropna() < 0).all())}))
 
